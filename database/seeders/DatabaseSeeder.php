@@ -4,6 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\LikeSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\ReplySeeder;
+use Database\Seeders\ThreadSeeder;
+use Database\Seeders\ChannelSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            ChannelSeeder::class,
+            UserSeeder::class,
+            ThreadSeeder::class,
+            ReplySeeder::class,
+            LikeSeeder::class,
+        ]);
     }
 }
