@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Settings\Settings;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
+
+Route::get('settings', Settings::class)->name('settings');
+
+require __DIR__ . '/auth.php';
