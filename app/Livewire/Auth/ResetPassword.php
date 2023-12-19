@@ -7,13 +7,15 @@ use Livewire\Component;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Livewire\Attributes\Locked;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class ResetPassword extends Component
 {
+    use WireToast;
+
     #[Locked]
     public string $token = '';
     public string $email = '';
@@ -59,7 +61,7 @@ class ResetPassword extends Component
             return;
         }
 
-        Session::flash('status', __($status));
+        toast()->success(__($status))->pushOnNextPage();
 
         $this->redirectRoute('login', navigate: true);
     }

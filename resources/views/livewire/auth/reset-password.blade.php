@@ -1,35 +1,33 @@
-<div>
-    <form wire:submit="resetPassword">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input class="mt-1 block w-full" id="email" name="email" type="email" wire:model="email" required
-                autofocus autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input class="mt-1 block w-full" id="password" name="password" type="password" wire:model="password"
-                required autocomplete="new-password" />
-            <x-input-error class="mt-2" :messages="$errors->get('password')" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input class="mt-1 block w-full" id="password_confirmation" name="password_confirmation"
-                type="password" wire:model="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error class="mt-2" :messages="$errors->get('password_confirmation')" />
-        </div>
-
-        <div class="mt-4 flex items-center justify-end">
-            <x-primary-button>
+<div class="flex h-full items-center lg:py-16">
+    <div class="mx-auto w-full max-w-md p-6">
+        <x-card>
+            <h1
+                class="mb-6 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
                 {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
+            </h1>
+
+            <form wire:submit="resetPassword">
+                {{--  Email --}}
+                <div class="mb-6">
+                    <x-forms.input id="email" name="email" type="email" label="Email" wire:model="email" required />
+                </div>
+
+                {{--  Password --}}
+                <div class="mb-6">
+                    <x-forms.input id="password" name="password" type="password" label="Password" wire:model="password"
+                        required />
+                </div>
+
+                {{--  Confirm Password --}}
+                <div class="mb-8">
+                    <x-forms.input id="password_confirmation" name="password_confirmation" type="password"
+                        label="Confirm password" wire:model="password_confirmation" />
+                </div>
+
+                <x-buttons.primary class="w-full">
+                    {{ __('Update') }}
+                </x-buttons.primary>
+            </form>
+        </x-card>
+    </div>
 </div>

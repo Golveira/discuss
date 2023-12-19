@@ -1,4 +1,4 @@
-<div class="flex h-full items-center py-16">
+<div class="flex h-full items-center lg:py-16">
     <div class="mx-auto w-full max-w-md p-6">
         <x-card>
             <h1
@@ -6,20 +6,17 @@
                 {{ __('Sign in to your account') }}
             </h1>
 
-            <!-- Session Status -->
-            <x-auth-session-status class="mb-4" :status="session('status')" />
-
             <form wire:submit="login">
                 {{-- Email --}}
                 <div class="mb-6">
-                    <x-forms.input id="form.email" name="form.email" type="email" label="Email"
-                        wire:model="form.email" />
+                    <x-forms.input id="form.email" name="form.email" type="email" label="Email" wire:model="form.email"
+                        required />
                 </div>
 
                 {{-- Password --}}
                 <div class="mb-6">
                     <x-forms.input id="form.password" name="form.password" type="password" label="Password"
-                        wire:model="form.password" />
+                        wire:model="form.password" required />
                 </div>
 
                 {{-- Remember me --}}

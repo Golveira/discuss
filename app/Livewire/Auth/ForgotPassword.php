@@ -4,9 +4,12 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Password;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class ForgotPassword extends Component
 {
+    use WireToast;
+
     public string $email = '';
 
     public function sendPasswordResetLink(): void
@@ -30,7 +33,7 @@ class ForgotPassword extends Component
 
         $this->reset('email');
 
-        session()->flash('status', __($status));
+        toast()->success(__($status))->push();
     }
 
     public function render()

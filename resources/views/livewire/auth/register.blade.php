@@ -1,4 +1,4 @@
-<div class="flex h-full items-center py-16">
+<div class="flex h-full items-center lg:py-16">
     <div class="mx-auto w-full max-w-md p-6">
         <x-card>
             <h1
@@ -9,25 +9,25 @@
             <form wire:submit="register">
                 {{-- Name --}}
                 <div class="mb-6">
-                    <x-forms.input id="name" name="name" type="text" label="Name" wire:model="name" />
+                    <x-forms.input id="name" name="name" type="text" label="Name" wire:model="name" required />
                 </div>
 
                 {{-- Username --}}
                 <div class="mb-6">
-                    <x-forms.input id="username" name="username" type="text" label="Username"
-                        wire:model="username" />
+                    <x-forms.input id="username" name="username" type="text" label="Username" wire:model="username"
+                        required />
                 </div>
 
                 {{-- Email --}}
                 <div class="mb-6">
-                    <x-forms.input id="email" name="email" type="email" label="Email" :value="old('email')"
-                        wire:model="email" />
+                    <x-forms.input id="email" name="email" type="email" label="Email" wire:model="email"
+                        required />
                 </div>
 
                 {{-- Password --}}
                 <div class="mb-6">
-                    <x-forms.input id="password" name="password" type="password" label="Password"
-                        wire:model="password" />
+                    <x-forms.input id="password" name="password" type="password" label="Password" wire:model="password"
+                        required />
                 </div>
 
                 <div class="my-8">

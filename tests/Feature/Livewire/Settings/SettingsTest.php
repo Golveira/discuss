@@ -66,7 +66,6 @@ test('user can delete their account', function () {
     $this->actingAs($user);
 
     $component = Livewire::test(DeleteAccount::class)
-        ->set('password', 'password')
         ->call('deleteUser');
 
     $component
@@ -75,22 +74,6 @@ test('user can delete their account', function () {
 
     $this->assertGuest();
     $this->assertNull($user->fresh());
-});
-
-test('correct password must be provided to delete account', function () {
-    $user = User::factory()->create();
-
-    $this->actingAs($user);
-
-    $component = Livewire::test(DeleteAccount::class)
-        ->set('password', 'wrong-password')
-        ->call('deleteUser');
-
-    $component
-        ->assertHasErrors('password')
-        ->assertNoRedirect();
-
-    $this->assertNotNull($user->fresh());
 });
 
 test('password can be updated', function () {

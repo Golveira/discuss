@@ -1,29 +1,25 @@
-<div>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+<x-section maxWidth="lg">
+    <div class="grid gap-8 lg:grid-cols-4">
+        <div class="lg:col-span-1">
+            <x-list-group>
+                <x-list-group-item href="#profile" label="Profile" />
+                <x-list-group-item href="#password" label="Password" />
+                <x-list-group-item href="#remove-account" label="Remove Account" />
+            </x-list-group>
+        </div>
 
-    <div class="py-12">
-        <div class="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-            <div class="bg-white p-4 shadow dark:bg-gray-800 sm:rounded-lg sm:p-8">
-                <div class="max-w-xl">
-                    <livewire:settings.update-profile />
-                </div>
-            </div>
+        <div class="space-y-6 lg:col-span-3 lg:space-y-10">
+            <x-card>
+                <livewire:settings.update-profile />
+            </x-card>
 
-            <div class="bg-white p-4 shadow dark:bg-gray-800 sm:rounded-lg sm:p-8">
-                <div class="max-w-xl">
-                    <livewire:settings.update-password />
-                </div>
-            </div>
+            <x-card>
+                <livewire:settings.update-password />
+            </x-card>
 
-            <div class="bg-white p-4 shadow dark:bg-gray-800 sm:rounded-lg sm:p-8">
-                <div class="max-w-xl">
-                    <livewire:settings.delete-account />
-                </div>
-            </div>
+            <x-card>
+                <livewire:settings.delete-account />
+            </x-card>
         </div>
     </div>
-</div>
+</x-section>

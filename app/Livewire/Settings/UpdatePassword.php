@@ -6,10 +6,13 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Usernotnull\Toast\Concerns\WireToast;
 use Illuminate\Validation\ValidationException;
 
 class UpdatePassword extends Component
 {
+    use WireToast;
+
     public string $current_password = '';
     public string $password = '';
     public string $password_confirmation = '';
@@ -32,6 +35,8 @@ class UpdatePassword extends Component
         ]);
 
         $this->reset('current_password', 'password', 'password_confirmation');
+
+        toast()->success('Password updated successfully')->push();
 
         $this->dispatch('password-updated');
     }

@@ -2,15 +2,17 @@
 
 namespace App\Livewire\Settings;
 
-use Livewire\Component;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Livewire\Component;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class UpdateProfile extends Component
 {
+    use WireToast;
+
     public string $name = '';
     public string $username = '';
     public string $email = '';
@@ -40,7 +42,7 @@ class UpdateProfile extends Component
 
         $user->save();
 
-        $this->dispatch('profile-updated', name: $user->name);
+        toast()->success('Profile updated successfully')->push();
     }
 
     public function sendVerification(): void
@@ -57,7 +59,7 @@ class UpdateProfile extends Component
 
         $user->sendEmailVerificationNotification();
 
-        Session::flash('status', 'verification-link-sent');
+        toast()->success('Verification link sent')->push();
     }
 
     public function render()
