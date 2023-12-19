@@ -18,6 +18,13 @@
         </div>
 
         <div>
+            <x-input-label for="name" :value="__('Username')" />
+            <x-text-input class="mt-1 block w-full" id="username" name="username" type="text" wire:model="username"
+                required autofocus autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('username')" />
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input class="mt-1 block w-full" id="email" name="email" type="email" wire:model="email"
                 required autocomplete="username" />

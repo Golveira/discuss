@@ -27,6 +27,7 @@ test('profile can be updated', function () {
 
     $component = Livewire::test(UpdateProfile::class)
         ->set('name', 'Test User')
+        ->set('username', 'testuser')
         ->set('email', 'test@example.com')
         ->call('updateProfileInformation');
 
@@ -48,6 +49,7 @@ test('email verification status is unchanged when the email address is unchanged
 
     $component = Livewire::test(UpdateProfile::class)
         ->set('name', 'Test User')
+        ->set('username', 'testuser')
         ->set('email', $user->email)
         ->call('updateProfileInformation');
 

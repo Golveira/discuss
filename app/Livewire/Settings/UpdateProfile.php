@@ -12,11 +12,13 @@ use Illuminate\Validation\Rule;
 class UpdateProfile extends Component
 {
     public string $name = '';
+    public string $username = '';
     public string $email = '';
 
     public function mount(): void
     {
         $this->name = Auth::user()->name;
+        $this->username = Auth::user()->username;
         $this->email = Auth::user()->email;
     }
 
@@ -26,6 +28,7 @@ class UpdateProfile extends Component
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'alpha_dash', 'max:40', Rule::unique(User::class)->ignore($user->id)],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
