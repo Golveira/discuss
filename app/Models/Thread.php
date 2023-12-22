@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Concerns\HasPopularity;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Thread extends Model
 {
-    use HasFactory;
+    use HasFactory, HasPopularity;
 
     protected $fillable = [
         'user_id',
@@ -20,6 +23,8 @@ class Thread extends Model
         'slug',
         'best_reply_id',
     ];
+
+    protected $with = ['author', 'channel'];
 
     public function channel(): BelongsTo
     {
@@ -44,5 +49,34 @@ class Thread extends Model
     public function likes(): MorphMany
     {
         return $this->morphMany(Like::class, 'likeable');
+    }
+
+    public function dateForHumans(): Attribute
+    {
+        return Attribute::make(function ($value) {
+            return $this->created_at->diffForHumans();
+        });
+    }
+
+    public function scopeSearch(Builder $query, string $search): void
+    {
+        $query->when($search, function ($query, $search) {
+            $query->where('title', 'LIKE', "%{$search}%")
+                ->orWhere('body', 'LIKE', "%{$search}%");
+        });
+    }
+
+    public function scopeFilter(Builder $query, string $filter): void
+    {
+        $query->when($filter === 'recent', fn ($query) => $query->recent());
+        $query->when($filter === 'resolved', fn ($query) => $query->has('bestReply'));
+        $query->when($filter === 'unresolved', fn ($query) => $query->doesntHave('bestReply'));
+        $query->when($filter === 'popular_all', fn ($query) => $query->popular());
+        $query->when($filter === 'popular_week', fn ($query) => $query->popularThisWeek());
+    }
+
+    public function markAsBestReply(Reply $reply): void
+    {
+        $this->update(['best_reply_id' => $reply->id]);
     }
 }

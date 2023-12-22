@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Like;
 use App\Models\Reply;
 use App\Models\Thread;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,5 +50,30 @@ class User extends Authenticatable implements MustVerifyEmail
     public function likes(): HasMany
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function avatarPath(): Attribute
+    {
+        return Attribute::make(function () {
+            return 'https://i.pravatar.cc/200?u=' . $this->email;
+        });
+    }
+
+    public function userNameInitials(): Attribute
+    {
+        return Attribute::make(function () {
+            return strtoupper(substr($this->username, 0, 2));
+        });
+    }
+
+    public function scopeByMostSolutions($query)
+    {
+        return $query->withCount([
+            "replies as solutions_count" => function ($query) {
+                $query->whereHas("thread", function ($query) {
+                    $query->whereColumn("best_reply_id", "replies.id");
+                });
+            }
+        ])->orderByDesc("solutions_count");
     }
 }

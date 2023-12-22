@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Reply;
+use App\Models\Like;
 use App\Models\User;
+use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class ReplySeeder extends Seeder
 {
@@ -14,16 +16,21 @@ class ReplySeeder extends Seeder
      */
     public function run(): void
     {
-        $userIds = User::pluck('id');
+        $users = User::all();
         $threads = Thread::all()->random(100);
 
         foreach ($threads as $thread) {
             Reply::factory()
-                ->count(5)
-                ->create([
-                    'user_id' => $userIds->random(),
-                    'thread_id' => $thread->id,
-                ]);
+                ->count(rand(1, 10))
+                ->for($thread, 'thread')
+                ->state(new Sequence(fn () => ['user_id' => $users->random()->id]))
+                ->create();
+        }
+
+        foreach ($threads->random(20) as $thread) {
+            $reply = $thread->replies->random();
+
+            $thread->markAsBestReply($reply);
         }
     }
 }

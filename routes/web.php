@@ -2,6 +2,7 @@
 
 use App\Livewire\Settings\Settings;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Threads\ThreadsIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+// Threads
+Route::get('/discuss', ThreadsIndex::class)->name('discuss');
+Route::get('/discuss/channels/{channel:slug}', ThreadsIndex::class)->name('discuss.channels');
 
+// Settings
 Route::get('settings', Settings::class)->name('settings')->middleware('auth');
 
 require __DIR__ . '/auth.php';

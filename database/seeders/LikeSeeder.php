@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Like;
+use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class LikeSeeder extends Seeder
 {
@@ -19,20 +21,16 @@ class LikeSeeder extends Seeder
 
         foreach ($threads as $thread) {
             Like::factory()
-                ->count(5)
-                ->create([
-                    'likeable_id' => $thread->id,
-                    'likeable_type' => 'App\Models\Thread',
-                ]);
+                ->count(rand(1, 10))
+                ->for($thread, 'likeable')
+                ->create();
         }
 
         foreach ($replies as $reply) {
             Like::factory()
-                ->count(5)
-                ->create([
-                    'likeable_id' => $reply->id,
-                    'likeable_type' => 'App\Models\Reply',
-                ]);
+                ->count(rand(1, 10))
+                ->for($reply, 'likeable')
+                ->create();
         }
     }
 }

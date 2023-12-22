@@ -19,6 +19,8 @@ class Reply extends Model
         'body',
     ];
 
+    protected $touches = ['thread'];
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

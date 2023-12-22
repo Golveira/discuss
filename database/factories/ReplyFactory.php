@@ -24,4 +24,13 @@ class ReplyFactory extends Factory
             'body' => fake()->paragraph(),
         ];
     }
+
+    public function hasExistingUser(): static
+    {
+        $user = User::inRandomOrder()->first();
+
+        return $this->state([
+            'user_id' => $user->id,
+        ]);
+    }
 }

@@ -7,7 +7,7 @@
 
             <div class="flex items-center lg:order-2">
                 {{-- Dark mode button --}}
-                <div class="me-3">
+                <div class="me-1">
                     <x-dark-mode />
                 </div>
 
@@ -26,12 +26,17 @@
                 @endguest
 
                 @auth
+                    {{-- Notifications --}}
+                    <div class="me-3">
+                        <x-buttons.notification-button />
+                    </div>
+
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button
-                                class="mx-3 flex rounded-full text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0">
-                                <x-icons.user-circle class="h-8 w-8" />
-                            </button>
+                            {{-- Avatar --}}
+                            <span class="cursor-pointer">
+                                <x-avatar :image="auth()->user()->avatar_path" :placeholder="auth()->user()->username_initials" />
+                            </span>
                         </x-slot>
 
                         <x-slot name="content">
