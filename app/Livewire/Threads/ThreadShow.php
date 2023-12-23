@@ -6,7 +6,7 @@ use App\Models\Thread;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class ThreadsShow extends Component
+class ThreadShow extends Component
 {
     public Thread $thread;
 
@@ -17,6 +17,6 @@ class ThreadsShow extends Component
 
     public function render(): View
     {
-        return view('livewire.threads.threads-show');
+        return view('livewire.threads.thread-show');
     }
 }

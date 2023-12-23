@@ -5,19 +5,19 @@ use App\Models\Reply;
 use App\Models\Thread;
 use Livewire\Livewire;
 use App\Models\Channel;
-use App\Livewire\Threads\ThreadsIndex;
+use App\Livewire\Threads\ThreadIndex;
 
 test('discuss page is displayed', function () {
     $this->get('/discuss')
         ->assertSuccessful()
-        ->assertSeeLivewire(ThreadsIndex::class);
+        ->assertSeeLivewire(ThreadIndex::class);
 });
 
 test('threads are displayed', function () {
     Thread::factory()->create(['title' => 'First Thread']);
     Thread::factory()->create(['title' => 'Second Thread']);
 
-    Livewire::test(ThreadsIndex::class)
+    Livewire::test(ThreadIndex::class)
         ->assertSee('First Thread')
         ->assertSee('Second Thread');
 });
@@ -35,7 +35,7 @@ test('threads can be sorted by recent activity', function () {
             'updated_at' => now()->subDays(2)
         ]);
 
-    Livewire::test(ThreadsIndex::class)
+    Livewire::test(ThreadIndex::class)
         ->set('filter', 'recent')
         ->assertSeeInOrder([
             'Recent Active Thread',
@@ -75,7 +75,7 @@ test('threads can be sorted by all time popularity', function () {
             'updated_at' => now()->subDays(2)
         ]);
 
-    Livewire::test(ThreadsIndex::class)
+    Livewire::test(ThreadIndex::class)
         ->set('filter', 'popular_all')
         ->assertSeeInOrder([
             'Most Popular Thread',
@@ -103,7 +103,7 @@ test('threads can be filtered by weekly popularity', function () {
             'created_at' => now()->subDays(6)
         ]);
 
-    Livewire::test(ThreadsIndex::class)
+    Livewire::test(ThreadIndex::class)
         ->set('filter', 'popular_week')
         ->assertSee('New Popular Thread')
         ->assertDontSee('Old Popular Thread');
@@ -124,7 +124,7 @@ test('threads can be filtered by resolved', function () {
             'best_reply_id' => null,
         ]);
 
-    Livewire::test(ThreadsIndex::class)
+    Livewire::test(ThreadIndex::class)
         ->set('filter', 'resolved')
         ->assertSee('Resolved Thread')
         ->assertDontSee('Unresolved Thread');
@@ -146,7 +146,7 @@ test('threads can be filtered by unresolved', function () {
             'best_reply_id' => null,
         ]);
 
-    Livewire::test(ThreadsIndex::class)
+    Livewire::test(ThreadIndex::class)
         ->set('filter', 'unresolved')
         ->assertSee('Unresolved Thread')
         ->assertDontSee('Resolved Thread');
@@ -168,7 +168,7 @@ test('threads can be filtered by channel', function () {
             'channel_id' => $helpChannel->id,
         ]);
 
-    Livewire::test(ThreadsIndex::class, ['channel' => $generalChannel])
+    Livewire::test(ThreadIndex::class, ['channel' => $generalChannel])
         ->assertSee('General Thread')
         ->assertDontSee('Help Thread');
 });
@@ -189,7 +189,7 @@ test('threads can be searched', function () {
         'body' => 'The third thread body is cool'
     ]);
 
-    Livewire::test(ThreadsIndex::class)
+    Livewire::test(ThreadIndex::class)
         ->set('query', 'cool')
         ->assertSee('The second thread is cool')
         ->assertSee('The third thread');

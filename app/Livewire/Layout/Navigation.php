@@ -4,6 +4,7 @@ namespace App\Livewire\Layout;
 
 use Livewire\Component;
 use App\Livewire\Actions\Logout;
+use App\Providers\RouteServiceProvider;
 
 class Navigation extends Component
 {
@@ -11,7 +12,7 @@ class Navigation extends Component
     {
         $logout();
 
-        $this->redirect('/', navigate: true);
+        $this->redirect(RouteServiceProvider::HOME, navigate: true);
     }
 
     public function render()

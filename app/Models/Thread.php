@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasSlug;
 use App\Concerns\SortsByPopularity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Thread extends Model
 {
-    use HasFactory, SortsByPopularity;
+    use HasFactory, HasSlug, SortsByPopularity;
 
     protected $fillable = [
         'user_id',

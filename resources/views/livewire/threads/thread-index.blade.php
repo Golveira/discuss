@@ -18,7 +18,7 @@
 
             {{-- Create thread --}}
             <div class="col-span-1 flex items-center">
-                <x-buttons.primary class="w-full" href="#" wire:navigate>
+                <x-buttons.primary class="w-full" href="{{ route('discuss.create') }}" wire:navigate>
                     {{ __('New Discussion') }}
                 </x-buttons.primary>
             </div>

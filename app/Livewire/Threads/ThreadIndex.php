@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class ThreadsIndex extends Component
+class ThreadIndex extends Component
 {
     use WithPagination;
 
@@ -52,6 +52,6 @@ class ThreadsIndex extends Component
 
     public function render(): View
     {
-        return view('livewire.threads.threads-index');
+        return view('livewire.threads.thread-index');
     }
 }
