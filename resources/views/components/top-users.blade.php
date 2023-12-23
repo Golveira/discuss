@@ -14,7 +14,7 @@
     @foreach ($users as $user)
         <x-list-item>
             <x-slot name="avatar">
-                <x-avatar :image="$user->avatar_path" width="sm" :placeholder="$user->username_initials" />
+                <x-user-avatar :user="$user" width="sm" />
             </x-slot>
 
             <x-slot name="value">

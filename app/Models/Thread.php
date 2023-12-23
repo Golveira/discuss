@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Concerns\HasPopularity;
+use App\Concerns\SortsByPopularity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Thread extends Model
 {
-    use HasFactory, HasPopularity;
+    use HasFactory, SortsByPopularity;
 
     protected $fillable = [
         'user_id',
@@ -25,6 +25,8 @@ class Thread extends Model
     ];
 
     protected $with = ['author', 'channel'];
+
+    protected $withCount = ['replies', 'likes'];
 
     public function channel(): BelongsTo
     {
@@ -55,6 +57,13 @@ class Thread extends Model
     {
         return Attribute::make(function ($value) {
             return $this->created_at->diffForHumans();
+        });
+    }
+
+    public function path(): Attribute
+    {
+        return Attribute::make(function ($value) {
+            return "/discuss/{$this->slug}";
         });
     }
 

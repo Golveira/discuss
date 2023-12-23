@@ -1,4 +1,4 @@
-@props(['thread'])
+@props(['reply'])
 
 <x-dropdown align="right" width="32">
     <x-slot name="trigger">
@@ -6,10 +6,12 @@
     </x-slot>
 
     <x-slot name="content">
-        <x-dropdown-button href="#" wire:navigate>
+        <x-dropdown-button @click="$wire.editing = true">
             {{ __('Edit') }}
         </x-dropdown-button>
 
-        {{-- <livewire:discussion.delete :discussion="$discussion" /> --}}
+        <x-dropdown-button wire:click="delete">
+            {{ __('Delete') }}
+        </x-dropdown-button>
     </x-slot>
 </x-dropdown>

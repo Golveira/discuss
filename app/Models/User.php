@@ -66,6 +66,13 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
+    public function joinedDate(): Attribute
+    {
+        return Attribute::make(function () {
+            return $this->created_at->format('M Y');
+        });
+    }
+
     public function scopeByMostSolutions($query)
     {
         return $query->withCount([
@@ -75,5 +82,10 @@ class User extends Authenticatable implements MustVerifyEmail
                 });
             }
         ])->orderByDesc("solutions_count");
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
     }
 }

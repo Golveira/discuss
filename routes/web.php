@@ -3,6 +3,7 @@
 use App\Livewire\Settings\Settings;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Threads\ThreadsIndex;
+use App\Livewire\Threads\ThreadsShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ use App\Livewire\Threads\ThreadsIndex;
 // Threads
 Route::get('/discuss', ThreadsIndex::class)->name('discuss');
 Route::get('/discuss/channels/{channel:slug}', ThreadsIndex::class)->name('discuss.channels');
+Route::get('/discuss/{thread:slug}', ThreadsShow::class)->name('discuss.show');
 
 // Settings
 Route::get('settings', Settings::class)->name('settings')->middleware('auth');

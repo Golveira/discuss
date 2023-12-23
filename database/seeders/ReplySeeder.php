@@ -23,7 +23,12 @@ class ReplySeeder extends Seeder
             Reply::factory()
                 ->count(rand(1, 10))
                 ->for($thread, 'thread')
-                ->state(new Sequence(fn () => ['user_id' => $users->random()->id]))
+                ->state(new Sequence(function () use ($users) {
+                    return [
+                        'user_id' =>  $users->random()->id,
+                        'created_at' => fake()->dateTimeBetween('-2 days', 'now'),
+                    ];
+                }))
                 ->create();
         }
 

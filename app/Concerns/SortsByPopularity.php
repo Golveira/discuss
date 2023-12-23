@@ -2,7 +2,7 @@
 
 namespace App\Concerns;
 
-trait HasPopularity
+trait SortsByPopularity
 {
     public function scopeRecent($query)
     {

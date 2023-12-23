@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class LikeSeeder extends Seeder
 {

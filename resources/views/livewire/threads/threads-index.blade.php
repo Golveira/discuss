@@ -28,7 +28,7 @@
             {{-- Thread List --}}
             <x-list>
                 @foreach ($this->threads as $thread)
-                    <x-threads.item :thread="$thread" />
+                    <x-threads.item :$thread />
                 @endforeach
             </x-list>
 

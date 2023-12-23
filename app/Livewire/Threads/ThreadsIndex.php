@@ -32,7 +32,6 @@ class ThreadsIndex extends Component
             ->when($this->channel->exists, function ($query) {
                 $query->whereBelongsTo($this->channel);
             })
-            ->withCount(['replies', 'likes'])
             ->paginate();
     }
 

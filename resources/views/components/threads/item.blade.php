@@ -1,11 +1,11 @@
 @props(['thread'])
 
 <div class="flex gap-3 border-b border-gray-200 p-4 last:border-b-0 dark:border-gray-700">
-    <x-avatar :image="$thread->author->avatar_path" :placeholder="$thread->author->username_initials" />
+    <x-user-avatar :user="$thread->author" />
 
     <div class="flex flex-1 flex-col justify-between gap-4 lg:flex-row lg:items-center">
         <div class="font-medium dark:text-white">
-            <a class="font-medium text-gray-900 hover:underline dark:text-white" href="{{ $thread->slug }}" wire:navigate>
+            <a class="font-medium text-gray-900 hover:underline dark:text-white" href="{{ $thread->path }}" wire:navigate>
                 {{ $thread->title }}
             </a>
 

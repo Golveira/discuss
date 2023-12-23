@@ -1,6 +1,5 @@
 <?php
 
-use Tests\TestCase;
 use App\Models\Like;
 use App\Models\Reply;
 use App\Models\Thread;
@@ -93,7 +92,7 @@ test('threads can be filtered by weekly popularity', function () {
         ->has(Like::factory(3))
         ->create([
             'title' => 'Old Popular Thread',
-            'created_at' => now()->subWeeks(2)
+            'created_at' => now()->subDays(8)
         ]);
 
     Thread::factory()
@@ -101,7 +100,7 @@ test('threads can be filtered by weekly popularity', function () {
         ->has(Like::factory(2))
         ->create([
             'title' => 'New Popular Thread',
-            'created_at' => now()->subWeek()
+            'created_at' => now()->subDays(6)
         ]);
 
     Livewire::test(ThreadsIndex::class)

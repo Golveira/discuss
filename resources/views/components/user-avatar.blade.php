@@ -1,4 +1,4 @@
-@props(['image' => '', 'placeholder' => '', 'width' => 'md'])
+@props(['user' => '', 'width' => 'md'])
 
 @php
     $width = [
@@ -8,13 +8,13 @@
     ][$width];
 @endphp
 
-@if ($image)
-    <img class="{{ $width }} rounded-full" src="{{ $image }}">
+@if ($user->avatar_path)
+    <img class="{{ $width }} rounded-full" src="{{ $user->avatar_path }}">
 @else
     <div
         class="{{ $width }} relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-gray-500 bg-gray-100 dark:bg-gray-600">
         <span class="font-medium text-gray-600 dark:text-gray-300">
-            {{ $placeholder }}
+            {{ $user->username_initials }}
         </span>
     </div>
 @endif
