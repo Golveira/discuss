@@ -5,15 +5,15 @@ use Livewire\Livewire;
 use App\Models\Channel;
 use App\Livewire\Threads\ThreadCreate;
 
-test('create discussion page is displayed for authenticated users', function () {
-    $this->actingAs($user = User::factory()->create())
-        ->get("/discuss/create")
+test('create thread page is displayed for authenticated users', function () {
+    $this->actingAs(User::factory()->create())
+        ->get(route('threads.create'))
         ->assertSuccessful()
         ->assertSeeLivewire(ThreadCreate::class);
 });
 
-test('create discussion page is not displayed for guests', function () {
-    $this->get("/discuss/create")
+test('create thread page is not displayed for guests', function () {
+    $this->get(route('threads.create'))
         ->assertRedirect('/login');
 });
 
@@ -26,7 +26,7 @@ test('users can create a thread', function () {
         ->set('form.channel_id', $channel->id)
         ->set('form.body', 'This is my first thread')
         ->call('save')
-        ->assertRedirect('/discuss/my-first-thread');
+        ->assertRedirect(route('threads.show', 'my-first-thread'));
 
     $this->assertDatabaseHas('threads', [
         'title' => 'My First Thread',

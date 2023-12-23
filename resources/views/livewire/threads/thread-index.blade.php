@@ -8,7 +8,7 @@
 
             {{-- Channel Select --}}
             <div class="col-span-1">
-                <livewire:channel-select />
+                <livewire:channel-filter />
             </div>
 
             {{-- Search --}}
@@ -18,8 +18,8 @@
 
             {{-- Create thread --}}
             <div class="col-span-1 flex items-center">
-                <x-buttons.primary class="w-full" href="{{ route('discuss.create') }}" wire:navigate>
-                    {{ __('New Discussion') }}
+                <x-buttons.primary class="w-full text-center" href="{{ route('threads.create') }}" wire:navigate>
+                    {{ __('Create Thread') }}
                 </x-buttons.primary>
             </div>
         </div>

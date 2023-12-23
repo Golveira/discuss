@@ -2,13 +2,18 @@
 
 namespace App\Concerns;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 trait HasSlug
 {
     public static function bootHasSlug()
     {
-        static::creating(function ($model) {
+        static::creating(function (Model $model) {
+            $model->slug = $model->generateUniqueSlug();
+        });
+
+        static::updating(function (Model $model) {
             $model->slug = $model->generateUniqueSlug();
         });
     }

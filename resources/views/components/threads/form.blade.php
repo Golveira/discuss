@@ -22,7 +22,7 @@
             </div>
 
             <div class="flex justify-end gap-4">
-                <x-buttons.secondary href="{{ route('discuss.index') }}" wire:navigate>
+                <x-buttons.secondary href="{{ route('threads.index') }}" wire:navigate>
                     {{ __('Cancel') }}
                 </x-buttons.secondary>
 

@@ -64,7 +64,7 @@ class Thread extends Model
     public function path(): Attribute
     {
         return Attribute::make(function ($value) {
-            return "/discuss/{$this->slug}";
+            return "/discussions/{$this->slug}";
         });
     }
 

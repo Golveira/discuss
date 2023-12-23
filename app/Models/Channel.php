@@ -25,7 +25,7 @@ class Channel extends Model
     public function path(): Attribute
     {
         return Attribute::make(function () {
-            return "/discuss/channels/{$this->slug}";
+            return "/discussions/channels/{$this->slug}";
         });
     }
 }

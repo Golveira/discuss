@@ -1,6 +1,6 @@
 <div wire:ignore>
     <x-forms.select class="w-full" wire:model.live="channelPath">
-        <option value="/discuss">
+        <option value="/discussions">
             {{ __('All') }}
         </option>
 

@@ -6,7 +6,7 @@ use App\Models\Channel;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
-class ChannelSelect extends Component
+class ChannelFilter extends Component
 {
     public string $channelPath = '';
 
@@ -24,6 +24,6 @@ class ChannelSelect extends Component
     {
         $channels = Channel::orderBy('name')->get();
 
-        return view('livewire.channel-select', compact('channels'));
+        return view('livewire.channel-filter', compact('channels'));
     }
 }

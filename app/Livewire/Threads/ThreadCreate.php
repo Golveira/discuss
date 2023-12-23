@@ -28,7 +28,7 @@ class ThreadCreate extends Component
         toast()->success('Thread created!')->pushOnNextPage();
 
         return $this->redirect(
-            route('discuss.show', $thread->slug),
+            route('threads.show', $thread->slug),
             navigate: true
         );
     }

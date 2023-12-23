@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Attributes\Validate;
 use Livewire\Form;
+use App\Models\Thread;
+use Livewire\Attributes\Validate;
 
 class ThreadForm extends Form
 {
@@ -15,4 +16,11 @@ class ThreadForm extends Form
 
     #[Validate('required|exists:channels,id', as: 'channel')]
     public string $channel_id = '';
+
+    public function setProperties(Thread $thread)
+    {
+        $this->title = $thread->title;
+        $this->body = $thread->body;
+        $this->channel_id = $thread->channel_id;
+    }
 }

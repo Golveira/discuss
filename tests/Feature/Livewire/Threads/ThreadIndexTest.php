@@ -7,8 +7,8 @@ use Livewire\Livewire;
 use App\Models\Channel;
 use App\Livewire\Threads\ThreadIndex;
 
-test('discuss page is displayed', function () {
-    $this->get('/discuss')
+test('threads page is displayed', function () {
+    $this->get(route('threads.index'))
         ->assertSuccessful()
         ->assertSeeLivewire(ThreadIndex::class);
 });
