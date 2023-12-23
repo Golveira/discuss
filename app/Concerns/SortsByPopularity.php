@@ -4,11 +4,6 @@ namespace App\Concerns;
 
 trait SortsByPopularity
 {
-    public function scopeRecent($query)
-    {
-        $query->orderBy('updated_at', 'desc');
-    }
-
     public function scopePopular($query)
     {
         $query->orderByRaw('(likes_count + replies_count) DESC')

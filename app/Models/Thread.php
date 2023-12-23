@@ -3,18 +3,18 @@
 namespace App\Models;
 
 use App\Concerns\HasSlug;
+use App\Concerns\Replyable;
 use App\Concerns\SortsByPopularity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Thread extends Model
 {
-    use HasFactory, HasSlug, SortsByPopularity;
+    use HasFactory, HasSlug, SortsByPopularity, Replyable;
 
     protected $fillable = [
         'user_id',
@@ -39,11 +39,6 @@ class Thread extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function replies(): HasMany
-    {
-        return $this->hasMany(Reply::class);
-    }
-
     public function bestReply(): BelongsTo
     {
         return $this->belongsTo(Reply::class, 'best_reply_id');
@@ -66,6 +61,11 @@ class Thread extends Model
         return Attribute::make(function ($value) {
             return "/discussions/{$this->slug}";
         });
+    }
+
+    public function scopeRecent($query)
+    {
+        $query->orderBy('updated_at', 'desc');
     }
 
     public function scopeSearch(Builder $query, string $search): void

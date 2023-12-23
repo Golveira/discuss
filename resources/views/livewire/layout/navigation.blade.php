@@ -47,7 +47,7 @@
 
                             {{-- Logout --}}
                             <x-dropdown-button wire:click="logout">
-                                {{ __('Logut') }}
+                                {{ __('Logout') }}
                             </x-dropdown-button>
                         </x-slot>
                     </x-dropdown>

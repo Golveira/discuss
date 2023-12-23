@@ -57,3 +57,49 @@ test('a guest cannot see the actions dropdown of any thread', function () {
         ->assertDontSee('Edit')
         ->assertDontSee('Delete');
 });
+
+test('a user can delete they own thread', function () {
+    $user = User::factory()->create();
+    $thread = Thread::factory()->create(['user_id' => $user->id]);
+
+    Livewire::actingAs($user)
+        ->test(ThreadShow::class, ['thread' => $thread])
+        ->call('delete')
+        ->assertRedirect(route('threads.index'));
+
+    $this->assertDatabaseMissing('threads', ['id' => $thread->id]);
+});
+
+test('an admin can delete any thread', function () {
+    $user = User::factory()->admin()->create();
+    $thread = Thread::factory()->create();
+
+    Livewire::actingAs($user)
+        ->test(ThreadShow::class, ['thread' => $thread])
+        ->call('delete')
+        ->assertRedirect(route('threads.index'));
+
+    $this->assertDatabaseMissing('threads', ['id' => $thread->id]);
+});
+
+test('a user cannot delete a thread they do not own', function () {
+    $user = User::factory()->create();
+    $thread = Thread::factory()->create();
+
+    Livewire::actingAs($user)
+        ->test(ThreadShow::class, ['thread' => $thread])
+        ->call('delete')
+        ->assertForbidden();
+
+    $this->assertDatabaseHas('threads', ['id' => $thread->id]);
+});
+
+test('a guest cannot delete a thread', function () {
+    $thread = Thread::factory()->create();
+
+    Livewire::test(ThreadShow::class, ['thread' => $thread])
+        ->call('delete')
+        ->assertForbidden();
+
+    $this->assertDatabaseHas('threads', ['id' => $thread->id]);
+});
