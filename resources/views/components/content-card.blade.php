@@ -1,4 +1,4 @@
-<x-card class="relative mb-8">
+<x-card {{ $attributes->merge(['class' => 'relative mb-8']) }}>
     <div class="absolute right-5">
         {{ $actions }}
     </div>

@@ -16,7 +16,7 @@
                 {{-- Password --}}
                 <div class="mb-6">
                     <x-forms.input id="form.password" name="form.password" type="password" label="Password"
-                        wire:model="form.password" required />
+                        wire:model="form.password" />
                 </div>
 
                 {{-- Remember me --}}

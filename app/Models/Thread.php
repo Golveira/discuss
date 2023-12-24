@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasAuthor;
 use App\Concerns\HasSlug;
 use App\Concerns\Replyable;
 use App\Concerns\SortsByPopularity;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Thread extends Model
 {
-    use HasFactory, HasSlug, SortsByPopularity, Replyable;
+    use HasFactory, HasAuthor, HasSlug, SortsByPopularity, Replyable;
 
     protected $fillable = [
         'user_id',
@@ -32,11 +33,6 @@ class Thread extends Model
     public function channel(): BelongsTo
     {
         return $this->belongsTo(Channel::class);
-    }
-
-    public function author(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function bestReply(): BelongsTo
