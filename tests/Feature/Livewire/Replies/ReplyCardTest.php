@@ -64,7 +64,7 @@ test('admins can edit any reply', function () {
         ->assertSee('Updated reply');
 });
 
-test('users cannot edit a reply they not own', function () {
+test('users cannot edit a reply they do not own', function () {
     $user = User::factory()->create();
     $reply = Reply::factory()->create();
 

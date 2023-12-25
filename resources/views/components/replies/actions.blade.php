@@ -10,7 +10,7 @@
             {{ __('Edit') }}
         </x-dropdown-button>
 
-        <x-dropdown-button wire:click="delete">
+        <x-dropdown-button wire:click="$parent.delete({{ $reply->id }})">
             {{ __('Delete') }}
         </x-dropdown-button>
     </x-slot>
