@@ -1,5 +1,4 @@
 <div class="space-y-8">
-    {{-- Create reply --}}
     @guest
         <x-card class="text-center">
             <x-links.secondary class="!text-base" href="{{ route('login') }}" wire:navigate>
@@ -7,6 +6,7 @@
             </x-links.secondary>
         </x-card>
     @else
+        {{-- Create Reply Form --}}
         <x-replies.create />
     @endauth
 

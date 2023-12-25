@@ -20,13 +20,11 @@
     </x-slot>
 
     <x-slot name="body">
-        {{-- Title --}}
-        <h1 class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
-            {{ $reply->title }}
-        </h1>
+        {{-- Edit Form --}}
+        <x-replies.edit />
 
         {{-- Body --}}
-        <p class="text-base leading-relaxed text-gray-900 dark:text-gray-300">
+        <p class="text-base leading-relaxed text-gray-900 dark:text-gray-300" x-show="!$wire.isEditing">
             {!! nl2br($reply->body) !!}
         </p>
     </x-slot>

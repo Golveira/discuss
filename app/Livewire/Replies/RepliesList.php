@@ -2,12 +2,11 @@
 
 namespace App\Livewire\Replies;
 
-use App\Models\Reply;
 use App\Models\Thread;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Forms\ReplyForm;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\Validate;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -18,8 +17,7 @@ class RepliesList extends Component
 
     public Thread $thread;
 
-    #[Validate('required|min:5|max:5000')]
-    public string $body;
+    public ReplyForm $form;
 
     #[Computed]
     public function replies(): LengthAwarePaginator
@@ -30,19 +28,18 @@ class RepliesList extends Component
             ->paginate();
     }
 
-    public function create()
+    public function create(): void
     {
-        $this->validate();
+        $this->form->validate();
 
-        Reply::create([
+        $this->thread->replies()->create([
             'user_id' => Auth::id(),
-            'thread_id' => $this->thread->id,
-            'body' => $this->body,
+            'body' => $this->form->body,
         ]);
 
         toast()->success('Reply created!')->push();
 
-        $this->reset('body');
+        $this->form->reset();
 
         $this->gotoPage($this->replies()->lastPage());
     }

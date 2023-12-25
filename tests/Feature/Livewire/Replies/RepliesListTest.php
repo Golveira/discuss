@@ -16,13 +16,13 @@ test('thread replies are displayed', function () {
         ->assertSee('Second reply');
 });
 
-test('test user can create a reply', function () {
+test('user can create a reply', function () {
     $thread = Thread::factory()->create();
     $user = User::factory()->create();
 
     Livewire::actingAs($user)
         ->test(RepliesList::class, ['thread' => $thread])
-        ->set('body', 'This is a reply')
+        ->set('form.body', 'This is a reply')
         ->call('create')
         ->assertSee('This is a reply');
 
@@ -39,7 +39,7 @@ test('a reply requires a body', function () {
     Livewire::actingAs(User::factory()->create())
         ->test(RepliesList::class, ['thread' => $thread])
         ->call('create')
-        ->assertHasErrors(['body']);
+        ->assertHasErrors(['form.body']);
 });
 
 test('guests cannot see reply form', function () {
