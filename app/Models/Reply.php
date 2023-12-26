@@ -3,16 +3,15 @@
 namespace App\Models;
 
 use App\Concerns\HasAuthor;
-use App\Models\Like;
+use App\Concerns\HasLikes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reply extends Model
 {
-    use HasFactory, HasAuthor;
+    use HasFactory, HasAuthor, HasLikes;
 
     protected $fillable = [
         'user_id',
@@ -24,18 +23,9 @@ class Reply extends Model
 
     protected $withCount = ['likes'];
 
-    protected $touches = ['thread',];
-
-    protected $perPage = 5;
-
     public function thread(): BelongsTo
     {
         return $this->belongsTo(Thread::class);
-    }
-
-    public function likes(): MorphMany
-    {
-        return $this->morphMany(Like::class, 'likeable');
     }
 
     public function dateForHumans(): Attribute

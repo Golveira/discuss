@@ -3,13 +3,13 @@
         <x-forms.text-area wire:model="form.body" />
     </div>
 
-    <div class="flex gap-3">
-        <x-buttons.primary>
-            {{ __('Save') }}
-        </x-buttons.primary>
-
+    <div class="flex justify-end gap-3">
         <x-buttons.secondary type="button" @click="$wire.isEditing = false">
             {{ __('Cancel') }}
         </x-buttons.secondary>
+
+        <x-buttons.primary>
+            {{ __('Save') }}
+        </x-buttons.primary>
     </div>
 </form>

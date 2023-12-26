@@ -35,7 +35,7 @@
             <x-likes-count :count="$reply->likes_count" />
         @else
             {{-- Like button --}}
-            {{-- <livewire:like-button :model="$discussion" /> --}}
+            <livewire:like-button :likeable="$reply" />
         @endguest
     </x-slot>
 </x-content-card>

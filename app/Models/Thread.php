@@ -2,28 +2,33 @@
 
 namespace App\Models;
 
-use App\Concerns\HasAuthor;
 use App\Concerns\HasSlug;
-use App\Concerns\Replyable;
+use App\Concerns\HasLikes;
+use App\Concerns\HasAuthor;
+use App\Concerns\HasReplies;
 use App\Concerns\SortsByPopularity;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Thread extends Model
 {
-    use HasFactory, HasAuthor, HasSlug, SortsByPopularity, Replyable;
+    use HasFactory;
+    use HasAuthor;
+    use HasReplies;
+    use HasLikes;
+    use HasSlug;
+    use SortsByPopularity;
 
     protected $fillable = [
         'user_id',
         'channel_id',
+        'best_reply_id',
         'title',
         'body',
         'slug',
-        'best_reply_id',
     ];
 
     protected $with = ['author', 'channel'];
@@ -38,11 +43,6 @@ class Thread extends Model
     public function bestReply(): BelongsTo
     {
         return $this->belongsTo(Reply::class, 'best_reply_id');
-    }
-
-    public function likes(): MorphMany
-    {
-        return $this->morphMany(Like::class, 'likeable');
     }
 
     public function dateForHumans(): Attribute

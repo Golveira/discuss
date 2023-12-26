@@ -7,7 +7,7 @@
     </x-slot>
 
     <x-slot name="header">
-        {{-- Username --}}
+        {{-- User --}}
         <x-links.secondary class="flex items-center gap-3" href="#" wire:navigate>
             <x-user-avatar :user="$thread->author" width="sm" />
             {{ $thread->author->username }}
@@ -37,7 +37,7 @@
             <x-likes-count :count="$thread->likes_count" />
         @else
             {{-- Like button --}}
-            {{-- <livewire:like-button :model="$discussion" /> --}}
+            <livewire:like-button :likeable="$thread" />
         @endguest
     </x-slot>
 </x-content-card>

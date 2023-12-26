@@ -1,7 +1,7 @@
 <div class="space-y-8">
     @guest
         <x-card class="text-center">
-            <x-links.secondary class="!text-base" href="{{ route('login') }}" wire:navigate>
+            <x-links.secondary href="{{ route('login') }}" wire:navigate>
                 {{ __('Sign in to participate') }}
             </x-links.secondary>
         </x-card>

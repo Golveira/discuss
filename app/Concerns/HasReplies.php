@@ -5,9 +5,9 @@ namespace App\Concerns;
 use App\Models\Reply;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-trait Replyable
+trait HasReplies
 {
-    public static function bootReplyable(): void
+    public static function bootHasReplies(): void
     {
         static::deleting(function ($model) {
             $model->replies->each->delete();

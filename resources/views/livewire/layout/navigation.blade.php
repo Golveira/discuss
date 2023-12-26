@@ -5,31 +5,25 @@
             {{-- Logo --}}
             <x-logo href="/" />
 
-            <div class="flex items-center lg:order-2">
+            <div class="flex items-center gap-2 lg:order-2">
                 {{-- Dark mode button --}}
-                <div class="me-1">
-                    <x-dark-mode />
-                </div>
+                <x-dark-mode />
 
                 @guest
-                    <div class="flex gap-4">
-                        {{-- Login --}}
-                        <x-links.nav-link href="{{ route('login') }}" wire:navigate>
-                            {{ __('Log In') }}
-                        </x-links.nav-link>
+                    {{-- Login --}}
+                    <x-links.nav-link href="{{ route('login') }}" wire:navigate>
+                        {{ __('Log In') }}
+                    </x-links.nav-link>
 
-                        {{-- Sign Up --}}
-                        <x-links.nav-link class="hidden lg:block" href="{{ route('register') }}" wire:navigate>
-                            {{ __('Sign Up') }}
-                        </x-links.nav-link>
-                    </div>
+                    {{-- Sign Up --}}
+                    <x-links.nav-link class="hidden lg:block" href="{{ route('register') }}" wire:navigate>
+                        {{ __('Sign Up') }}
+                    </x-links.nav-link>
                 @endguest
 
                 @auth
                     {{-- Notifications --}}
-                    <div class="me-3">
-                        <x-buttons.notification-button />
-                    </div>
+                    <x-buttons.notification-button />
 
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">

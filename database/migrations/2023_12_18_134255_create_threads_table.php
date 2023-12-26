@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('threads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('channel_id')->constrained();
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('body');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
