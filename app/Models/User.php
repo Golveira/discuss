@@ -73,6 +73,16 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+
+    public function isBanned(): bool
+    {
+        return !is_null($this->banned_at);
+    }
+
     public function scopeByMostSolutions($query)
     {
         return $query->withCount([
@@ -82,10 +92,5 @@ class User extends Authenticatable implements MustVerifyEmail
                 });
             }
         ])->orderByDesc("solutions_count");
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->is_admin;
     }
 }

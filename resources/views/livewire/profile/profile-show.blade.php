@@ -14,14 +14,14 @@
                 <span class="text-sm font-medium text-gray-900 dark:text-gray-400">
                     {{ __('Joined') }} {{ $user->joined_date }}
                 </span>
-
-                {{-- Actions --}}
-                {{-- @can('ban', $user)
-                    <div class="absolute right-5">
-                        <livewire:ban-button :user="$user" />
-                    </div>
-                @endcan --}}
             </div>
+
+            {{-- Actions --}}
+            @can('ban', $user)
+                <div class="absolute right-0 top-0">
+                    <livewire:ban-button :user="$user" />
+                </div>
+            @endcan
         </div>
     </x-card>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Home\HomeIndex;
 use App\Livewire\Settings\Settings;
 use App\Livewire\Threads\ThreadEdit;
 use App\Livewire\Threads\ThreadShow;
@@ -18,6 +19,8 @@ use App\Livewire\Threads\ThreadCreate;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', HomeIndex::class)->name('home');
 
 // Threads
 Route::get('discussions', ThreadIndex::class)->name('threads.index');
