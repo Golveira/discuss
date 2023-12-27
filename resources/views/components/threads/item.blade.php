@@ -10,7 +10,8 @@
             </a>
 
             <div class="flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <x-links.secondary class="underline" href="#" :value="$thread->author->username" wire:navigate />
+                <x-links.secondary class="underline" href="{{ route('profile.show', $thread->author->username) }}"
+                    :value="$thread->author->username" wire:navigate />
 
                 <span>
                     {{ __('asked') }} {{ $thread->date_for_humans }} {{ __('in') }}

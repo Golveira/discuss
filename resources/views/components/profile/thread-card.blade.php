@@ -1,13 +1,6 @@
 @props(['thread'])
 
 <x-card class="relative">
-    {{-- Actions --}}
-    <x-slot name="actions">
-        @can('update', $thread)
-            <x-threads.actions :thread="$thread" />
-        @endcan
-    </x-slot>
-
     <x-slot name="header">
         {{-- User --}}
         <x-links.secondary class="flex items-center gap-3" href="{{ route('profile.show', $thread->author->username) }}"
@@ -24,23 +17,19 @@
 
     <x-slot name="body">
         {{-- Title --}}
-        <h1 class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
+        <a class="text-lg font-medium text-gray-900 hover:underline dark:text-white lg:text-2xl"
+            href="{{ $thread->path }}" wire:navigate>
             {{ $thread->title }}
-        </h1>
+        </a>
 
         {{-- Body --}}
         <p class="text-base leading-relaxed text-gray-900 dark:text-gray-300">
-            {!! nl2br($thread->body) !!}
+            {!! nl2br($thread->body_excerpt) !!}
         </p>
     </x-slot>
 
     <x-slot name="footer">
-        @guest
-            {{-- Likes count --}}
-            <x-likes-count :count="$thread->likes_count" />
-        @else
-            {{-- Like button --}}
-            <livewire:like-button :likeable="$thread" wire:key="thread-likes-{{ $thread->id }}" />
-        @endguest
+        {{-- Likes count --}}
+        <x-likes-count :count="$thread->likes_count" />
     </x-slot>
 </x-card>

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Concerns\HasSlug;
 use App\Concerns\HasLikes;
 use App\Concerns\HasAuthor;
+use Illuminate\Support\Str;
 use App\Concerns\HasReplies;
 use App\Concerns\SortsByPopularity;
 use Illuminate\Database\Eloquent\Model;
@@ -49,6 +50,13 @@ class Thread extends Model
     {
         return Attribute::make(function ($value) {
             return $this->created_at->diffForHumans();
+        });
+    }
+
+    public function bodyExcerpt(): Attribute
+    {
+        return Attribute::make(function ($value) {
+            return Str::limit($this->body, 400);
         });
     }
 

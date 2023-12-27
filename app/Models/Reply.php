@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Concerns\HasAuthor;
 use App\Concerns\HasLikes;
+use App\Concerns\HasAuthor;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,6 +33,13 @@ class Reply extends Model
     {
         return Attribute::make(function ($value) {
             return $this->created_at->diffForHumans();
+        });
+    }
+
+    public function bodyExcerpt(): Attribute
+    {
+        return Attribute::make(function ($value) {
+            return Str::limit($this->body, 400);
         });
     }
 }

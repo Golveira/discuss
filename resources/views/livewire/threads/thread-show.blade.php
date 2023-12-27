@@ -1,6 +1,6 @@
 <x-section>
     <div class="grid gap-8 lg:grid-cols-4">
-        <div class="lg:col-span-3">
+        <div class="space-y-8 lg:col-span-3">
             {{-- Thread Content --}}
             <x-threads.card :thread="$thread" />
 

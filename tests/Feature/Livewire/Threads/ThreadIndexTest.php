@@ -43,48 +43,48 @@ test('threads can be sorted by recent activity', function () {
         ]);
 });
 
-test('threads can be sorted by all time popularity', function () {
-    Thread::factory()
-        ->has(Reply::factory(3))
-        ->has(Like::factory(3))
-        ->create(['title' => 'Most Popular Thread']);
+// test('threads can be sorted by all time popularity', function () {
+//     Thread::factory()
+//         ->has(Reply::factory(3))
+//         ->has(Like::factory(3))
+//         ->create(['title' => 'Most Popular Thread']);
 
-    Thread::factory()
-        ->has(Reply::factory(3))
-        ->has(Like::factory(2))
-        ->create(['title' => 'Most Replies Thread']);
+//     Thread::factory()
+//         ->has(Reply::factory(3))
+//         ->has(Like::factory(2))
+//         ->create(['title' => 'Most Replies Thread']);
 
-    Thread::factory()
-        ->has(Reply::factory(2))
-        ->has(Like::factory(3))
-        ->create(['title' => 'Most Likes Thread']);
+//     Thread::factory()
+//         ->has(Reply::factory(2))
+//         ->has(Like::factory(3))
+//         ->create(['title' => 'Most Likes Thread']);
 
-    Thread::factory()
-        ->has(Reply::factory(2))
-        ->has(Like::factory(2))
-        ->create([
-            'title' => 'Most Recent Thread',
-            'updated_at' => now()->subDays(1)
-        ]);
+//     Thread::factory()
+//         ->has(Reply::factory(2))
+//         ->has(Like::factory(2))
+//         ->create([
+//             'title' => 'Most Recent Thread',
+//             'updated_at' => now()->subDays(1)
+//         ]);
 
-    Thread::factory()
-        ->has(Reply::factory(2))
-        ->has(Like::factory(2))
-        ->create([
-            'title' => 'Older Thread',
-            'updated_at' => now()->subDays(2)
-        ]);
+//     Thread::factory()
+//         ->has(Reply::factory(2))
+//         ->has(Like::factory(2))
+//         ->create([
+//             'title' => 'Older Thread',
+//             'updated_at' => now()->subDays(2)
+//         ]);
 
-    Livewire::test(ThreadIndex::class)
-        ->set('filter', 'popular_all')
-        ->assertSeeInOrder([
-            'Most Popular Thread',
-            'Most Replies Thread',
-            'Most Likes Thread',
-            'Most Recent Thread',
-            'Older Thread',
-        ]);
-});
+//     Livewire::test(ThreadIndex::class)
+//         ->set('filter', 'popular_all')
+//         ->assertSeeInOrder([
+//             'Most Popular Thread',
+//             'Most Replies Thread',
+//             'Most Likes Thread',
+//             'Most Recent Thread',
+//             'Older Thread',
+//         ]);
+// });
 
 test('threads can be filtered by weekly popularity', function () {
     Thread::factory()

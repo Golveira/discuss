@@ -1,4 +1,4 @@
-<x-content-card @class(['border-2 !border-blue-600' => $isAuthoredByUser])>
+<x-card @class(['border-2 !border-blue-600' => $isAuthoredByUser])>
     {{-- Actions --}}
     <x-slot name="actions">
         @can('update', $reply)
@@ -8,7 +8,8 @@
 
     <x-slot name="header">
         {{-- User --}}
-        <x-links.secondary class="flex items-center gap-3" href="#" wire:navigate>
+        <x-links.secondary class="flex items-center gap-3" href="{{ route('profile.show', $reply->author->username) }}"
+            wire:navigate>
             <x-user-avatar :user="$reply->author" width="sm" />
             {{ $reply->author->username }}
         </x-links.secondary>
@@ -35,7 +36,7 @@
             <x-likes-count :count="$reply->likes_count" />
         @else
             {{-- Like button --}}
-            <livewire:like-button :likeable="$reply" />
+            <livewire:like-button :likeable="$reply" wire:key="like-{{ $reply->id }}" />
         @endguest
     </x-slot>
-</x-content-card>
+</x-card>

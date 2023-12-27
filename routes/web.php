@@ -1,11 +1,12 @@
 <?php
 
 use App\Livewire\Settings\Settings;
+use App\Livewire\Threads\ThreadEdit;
+use App\Livewire\Threads\ThreadShow;
+use App\Livewire\Profile\ProfileShow;
+use App\Livewire\Threads\ThreadIndex;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Threads\ThreadCreate;
-use App\Livewire\Threads\ThreadEdit;
-use App\Livewire\Threads\ThreadIndex;
-use App\Livewire\Threads\ThreadShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::get('discussions/create', ThreadCreate::class)->name('threads.create')->m
 Route::get('discussions/channels/{channel:slug}', ThreadIndex::class)->name('channels');
 Route::get('discussions/{thread:slug}', ThreadShow::class)->name('threads.show');
 Route::get('discussions/{thread:slug}/edit', ThreadEdit::class)->name('threads.edit')->middleware('auth');
+
+// Profile
+Route::get('user/{user:username}', ProfileShow::class)->name('profile.show');
 
 // Settings
 Route::get('settings', Settings::class)->name('settings')->middleware('auth');
