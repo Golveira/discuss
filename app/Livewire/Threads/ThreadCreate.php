@@ -25,6 +25,8 @@ class ThreadCreate extends Component
             'body' => $this->form->body,
         ]);
 
+        $thread->subscribe(Auth::user());
+
         toast()->success('Thread created!')->pushOnNextPage();
 
         return $this->redirect(

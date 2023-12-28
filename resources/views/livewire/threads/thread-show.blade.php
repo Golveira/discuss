@@ -2,41 +2,20 @@
     <div class="grid gap-8 lg:grid-cols-4">
         <div class="space-y-8 lg:col-span-3">
             {{-- Thread Content --}}
-            <x-threads.card :thread="$thread" />
+            <x-threads.card :$thread />
 
             {{-- Replies List --}}
-            <livewire:replies.replies-list :thread="$thread" />
+            <livewire:replies.replies-list :$thread />
         </div>
 
         <div class="space-y-8 lg:col-span-1">
             {{-- User --}}
-            <x-card>
-                <div class="flex flex-col items-center gap-3">
-                    <x-links.secondary class="flex flex-col items-center gap-3" href="#" wire:navigate>
-                        <x-user-avatar :user="$thread->author" width="lg" />
-                        <span class="text-lg">{{ $thread->author->username }}</span>
-                    </x-links.secondary>
+            <x-user.user-card :user="$thread->author" />
 
-                    <span class="text-gray-400">
-                        {{ __('Joined') }} {{ $thread->author->joined_date }}
-                    </span>
-                </div>
-            </x-card>
-
-            {{-- Subscribe --}}
-            <x-card class="space-y-4">
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Notifications') }}
-                </h2>
-
-                <x-buttons.primary class="w-full">
-                    {{ __('Subscribe') }}
-                </x-buttons.primary>
-
-                <p class="text-sm text-gray-400">
-                    {{ __("You're not receiving notifications from this thread.") }}
-                </p>
-            </x-card>
+            @auth
+                {{-- Subscribe --}}
+                <x-threads.subscribe :$thread />
+            @endauth
         </div>
     </div>
 </x-section>

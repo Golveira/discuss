@@ -7,6 +7,7 @@ use App\Concerns\HasLikes;
 use App\Concerns\HasAuthor;
 use Illuminate\Support\Str;
 use App\Concerns\HasReplies;
+use App\Concerns\HasSubscriptions;
 use App\Concerns\SortsByPopularity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,6 +21,7 @@ class Thread extends Model
     use HasAuthor;
     use HasReplies;
     use HasLikes;
+    use HasSubscriptions;
     use HasSlug;
     use SortsByPopularity;
 

@@ -5,6 +5,7 @@ namespace App\Livewire\Threads;
 use App\Models\Thread;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class ThreadShow extends Component
@@ -13,12 +14,17 @@ class ThreadShow extends Component
 
     public Thread $thread;
 
-    public function mount(Thread $thread): void
+    public function subscribe(): void
     {
-        $this->thread = $thread;
+        $this->thread->subscribe(Auth::user());
     }
 
-    public function delete()
+    public function unsubscribe(): void
+    {
+        $this->thread->unsubscribe(Auth::user());
+    }
+
+    public function delete(): void
     {
         $this->authorize('delete', $this->thread);
 
@@ -26,7 +32,7 @@ class ThreadShow extends Component
 
         toast()->success('Thread Deleted!')->pushOnNextPage();
 
-        return $this->redirect(route('threads.index'), navigate: true);
+        $this->redirect(route('threads.index'), navigate: true);
     }
 
     public function render(): View
