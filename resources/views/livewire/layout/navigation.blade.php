@@ -6,7 +6,7 @@
             <x-logo href="/" />
 
             <div class="flex items-center gap-2 lg:order-2">
-                {{-- Dark mode button --}}
+                {{-- Dark mode --}}
                 <x-dark-mode />
 
                 @guest
@@ -23,8 +23,9 @@
 
                 @auth
                     {{-- Notifications --}}
-                    <x-buttons.notification-button />
+                    <livewire:notifications.notification-bell />
 
+                    {{-- Dropdown --}}
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             {{-- Avatar --}}

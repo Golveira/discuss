@@ -8,6 +8,7 @@ use App\Livewire\Profile\ProfileShow;
 use App\Livewire\Threads\ThreadIndex;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Threads\ThreadCreate;
+use App\Livewire\Notifications\NotificationIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,11 @@ use App\Livewire\Threads\ThreadCreate;
 |
 */
 
+// Home
 Route::get('/', HomeIndex::class)->name('home');
+
+// Notifications
+Route::get('notifications', NotificationIndex::class)->name('notifications.index')->middleware('auth');
 
 // Threads
 Route::get('discussions', ThreadIndex::class)->name('threads.index');

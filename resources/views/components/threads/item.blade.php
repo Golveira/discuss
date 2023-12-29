@@ -1,29 +1,32 @@
 @props(['thread'])
 
-<div class="flex gap-3 border-b border-gray-200 p-4 last:border-b-0 dark:border-gray-700">
-    <x-user-avatar :user="$thread->author" />
+<x-list-item>
+    <x-slot name="avatar">
+        <x-user-avatar :user="$thread->author" />
+    </x-slot>
 
-    <div class="flex flex-1 flex-col justify-between gap-4 lg:flex-row lg:items-center">
-        <div class="font-medium dark:text-white">
-            <a class="font-medium text-gray-900 hover:underline dark:text-white" href="{{ $thread->path }}" wire:navigate>
-                {{ $thread->title }}
-            </a>
+    <x-slot name="value">
+        <x-links.default href="{{ $thread->path }}" wire:navigate>
+            {{ $thread->title }}
+        </x-links.default>
+    </x-slot>
 
-            <div class="flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <x-links.secondary class="underline" href="{{ route('profile.show', $thread->author->username) }}"
-                    :value="$thread->author->username" wire:navigate />
+    <x-slot name="subvalue">
+        <x-links.secondary class="underline" href="{{ $thread->author->profile_path }}" wire:navigate>
+            {{ $thread->author->username }}
+        </x-links.secondary>
 
-                <span>
-                    {{ __('asked') }} {{ $thread->date_for_humans }} {{ __('in') }}
-                </span>
+        <span>
+            {{ __('asked') }} {{ $thread->date_for_humans }} {{ __('in') }}
+        </span>
 
-                <x-links.secondary class="underline" :href="$thread->channel->path" :value="$thread->channel->name" wire:navigate />
-            </div>
-        </div>
+        <x-links.secondary class="underline" href="{{ $thread->channel->path }}" wire:navigate>
+            {{ $thread->channel->name }}
+        </x-links.secondary>
+    </x-slot>
 
-        <div class="flex gap-3">
-            <x-likes-count :count="$thread->likes_count" />
-            <x-comments-count :count="$thread->replies_count" />
-        </div>
-    </div>
-</div>
+    <x-slot name="actions">
+        <x-likes-count :count="$thread->likes_count" />
+        <x-comments-count :count="$thread->replies_count" />
+    </x-slot>
+</x-list-item>

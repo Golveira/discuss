@@ -2,16 +2,17 @@
 
 namespace App\Livewire\Replies;
 
+use App\Models\Reply;
 use App\Models\Thread;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Events\ReplyWasCreated;
 use App\Livewire\Forms\ReplyForm;
-use App\Models\Reply;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Usernotnull\Toast\Concerns\WireToast;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RepliesList extends Component
 {
@@ -34,11 +35,13 @@ class RepliesList extends Component
     {
         $this->form->validate();
 
-        Reply::create([
+        $reply = Reply::create([
             'user_id' => Auth::id(),
             'thread_id' => $this->thread->id,
             'body' => $this->form->body,
         ]);
+
+        event(new ReplyWasCreated($reply));
 
         toast()->success('Reply created!')->push();
 

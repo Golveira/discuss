@@ -6,6 +6,7 @@ use App\Models\Like;
 use App\Models\Reply;
 use App\Models\Thread;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\ThreadSubscription;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -52,10 +53,22 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Like::class);
     }
 
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(ThreadSubscription::class);
+    }
+
     public function avatarPath(): Attribute
     {
         return Attribute::make(function () {
             return 'https://i.pravatar.cc/200?u=' . $this->email;
+        });
+    }
+
+    public function profilePath(): Attribute
+    {
+        return Attribute::make(function () {
+            return route('profile.show', $this->username);
         });
     }
 
