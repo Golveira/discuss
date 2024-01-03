@@ -22,24 +22,24 @@ test('threads are displayed', function () {
         ->assertSee('Second Thread');
 });
 
-test('threads can be sorted by recent activity', function () {
+test('threads can be sorted by recent', function () {
     Thread::factory()
         ->create([
-            'title' => 'Recent Active Thread',
-            'updated_at' => now()->subDays(1)
-        ]);
-
-    Thread::factory()
-        ->create([
-            'title' => 'Not Recent Active Thread',
+            'title' => 'Not Recent Thread',
             'updated_at' => now()->subDays(2)
         ]);
 
+    Thread::factory()
+        ->create([
+            'title' => 'Recent Thread',
+            'updated_at' => now()->subDays(1)
+        ]);
+
     Livewire::test(ThreadIndex::class)
-        ->set('filter', 'recent')
+        ->set('sort', 'recent')
         ->assertSeeInOrder([
-            'Recent Active Thread',
-            'Not Recent Active Thread',
+            'Recent Thread',
+            'Not Recent Thread',
         ]);
 });
 
@@ -86,7 +86,7 @@ test('threads can be sorted by recent activity', function () {
 //         ]);
 // });
 
-test('threads can be filtered by weekly popularity', function () {
+test('threads can be sorted by weekly popularity', function () {
     Thread::factory()
         ->has(Reply::factory(3))
         ->has(Like::factory(3))
@@ -103,9 +103,20 @@ test('threads can be filtered by weekly popularity', function () {
             'created_at' => now()->subDays(6)
         ]);
 
+    Thread::factory()
+        ->has(Reply::factory(1))
+        ->has(Like::factory(1))
+        ->create([
+            'title' => 'New Not Popular Thread',
+            'created_at' => now()->subDays(5)
+        ]);
+
     Livewire::test(ThreadIndex::class)
-        ->set('filter', 'popular_week')
-        ->assertSee('New Popular Thread')
+        ->set('sort', 'popular_week')
+        ->assertSeeInOrder([
+            'New Popular Thread',
+            'New Not Popular Thread',
+        ])
         ->assertDontSee('Old Popular Thread');
 });
 

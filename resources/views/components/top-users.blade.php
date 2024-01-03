@@ -1,7 +1,7 @@
 <x-list>
-    <div class="border-b border-gray-200 p-4 last:border-b-0 dark:border-gray-700">
+    <div class="border-b border-gray-200 p-3 last:border-b-0 dark:border-gray-700">
         <div class="flex items-center gap-3">
-            <span class="text-lg font-bold text-gray-900 dark:text-white">
+            <span class="font-bold text-gray-900 dark:text-white">
                 {{ __('Most helpful') }}
             </span>
 
@@ -12,13 +12,13 @@
     </div>
 
     @foreach ($users as $user)
-        <x-list-item>
+        <x-list-item class="!p-3">
             <x-slot name="avatar">
-                <x-user-avatar :user="$user" width="sm" />
+                <x-user-avatar :user="$user" width="xs" />
             </x-slot>
 
             <x-slot name="value">
-                <x-links.secondary href="#" :value="$user->username" />
+                <x-links.default class="!text-sm" href="{{ $user->profile_path }}" :value="$user->username" wire:navigate />
             </x-slot>
 
             <x-slot name="actions">

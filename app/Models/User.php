@@ -96,7 +96,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return !is_null($this->banned_at);
     }
 
-    public function scopeByMostSolutions($query)
+    public function scopeOrderBySolutions($query)
     {
         return $query->withCount([
             "replies as solutions_count" => function ($query) {

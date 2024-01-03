@@ -65,7 +65,7 @@ class Thread extends Model
     public function path(): Attribute
     {
         return Attribute::make(function ($value) {
-            return "/discussions/{$this->slug}";
+            return route('threads.show', $this->slug);
         });
     }
 
@@ -77,16 +77,20 @@ class Thread extends Model
     public function scopeSearch(Builder $query, string $search): void
     {
         $query->when($search, function ($query, $search) {
-            $query->where('title', 'LIKE', "%{$search}%")
-                ->orWhere('body', 'LIKE', "%{$search}%");
+            $query->where('title', 'LIKE', "%{$search}%")->orWhere('body', 'LIKE', "%{$search}%");
         });
     }
 
     public function scopeFilter(Builder $query, string $filter): void
     {
-        $query->when($filter === 'recent', fn ($query) => $query->recent());
+        $query->when($filter === 'all', fn ($query) => $query);
         $query->when($filter === 'resolved', fn ($query) => $query->has('bestReply'));
         $query->when($filter === 'unresolved', fn ($query) => $query->doesntHave('bestReply'));
+    }
+
+    public function scopeSort(Builder $query, string $filter): void
+    {
+        $query->when($filter === 'recent', fn ($query) => $query->recent());
         $query->when($filter === 'popular_all', fn ($query) => $query->popular());
         $query->when($filter === 'popular_week', fn ($query) => $query->popularThisWeek());
     }

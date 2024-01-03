@@ -21,7 +21,10 @@ class ThreadIndex extends Component
     public string $query = '';
 
     #[Url]
-    public string $filter = 'recent';
+    public string $sort = 'recent';
+
+    #[Url]
+    public string $filter = 'all';
 
     #[Computed]
     public function threads(): LengthAwarePaginator
@@ -29,6 +32,7 @@ class ThreadIndex extends Component
         return Thread::query()
             ->search($this->query)
             ->filter($this->filter)
+            ->sort($this->sort)
             ->when($this->channel->exists, function ($query) {
                 $query->whereBelongsTo($this->channel);
             })
