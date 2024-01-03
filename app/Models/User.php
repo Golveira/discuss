@@ -60,9 +60,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function avatarPath(): Attribute
     {
-        return Attribute::make(function () {
-            return 'https://i.pravatar.cc/200?u=' . $this->email;
-        });
+        return Attribute::make(
+            get: fn (?string $value) => $value,
+            set: fn (string $value) => $value
+        );
     }
 
     public function profilePath(): Attribute
@@ -75,7 +76,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function userNameInitials(): Attribute
     {
         return Attribute::make(function () {
-            return strtoupper(substr($this->username, 0, 2));
+            return strtoupper(substr($this->username, 0, 1));
         });
     }
 

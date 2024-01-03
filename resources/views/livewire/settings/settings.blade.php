@@ -2,9 +2,9 @@
     <div class="grid gap-8 lg:grid-cols-4">
         <div class="lg:col-span-1">
             <x-list-group>
-                <x-list-group-item href="#profile" label="Profile" />
-                <x-list-group-item href="#password" label="Password" />
-                <x-list-group-item href="#remove-account" label="Remove Account" />
+                <x-list-group-item href="#profile" value="Profile" />
+                <x-list-group-item href="#password" value="Password" />
+                <x-list-group-item href="#remove-account" value="Remove Account" />
             </x-list-group>
         </div>
 

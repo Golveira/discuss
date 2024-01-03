@@ -1,3 +1,7 @@
 @props(['user' => '', 'width' => 'md'])
 
-<x-avatar :image="$user->avatar_path" :placeholder="$user->username_initials" :width="$width" />
+@if ($user->avatar_path)
+    <x-avatar image='{{ asset("storage/{$user->avatar_path}") }}' :width="$width" />
+@else
+    <x-avatar-placeholder :value="$user->username_initials" :width="$width" />
+@endif

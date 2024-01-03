@@ -7,12 +7,14 @@ use Livewire\Component;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Livewire\WithFileUploads;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class UpdateProfile extends Component
 {
-    use WireToast;
+    use WireToast, WithFileUploads;
 
+    public $avatar;
     public string $name = '';
     public string $username = '';
     public string $email = '';
@@ -29,6 +31,7 @@ class UpdateProfile extends Component
         $user = Auth::user();
 
         $validated = $this->validate([
+            'avatar' => ['nullable', 'image', 'max:2048'],
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'alpha_dash', 'max:40', Rule::unique(User::class)->ignore($user->id)],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
@@ -40,7 +43,13 @@ class UpdateProfile extends Component
             $user->email_verified_at = null;
         }
 
+        if ($this->avatar) {
+            $user->avatar_path = $this->avatar->store('avatars', 'public');
+        }
+
         $user->save();
+
+        $this->dispatch('avatar-updated');
 
         toast()->success('Profile updated successfully')->push();
     }

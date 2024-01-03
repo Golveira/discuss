@@ -2,11 +2,13 @@
 
 use App\Models\User;
 use Livewire\Livewire;
+use Illuminate\Http\UploadedFile;
 use App\Livewire\Settings\Settings;
 use Illuminate\Support\Facades\Hash;
 use App\Livewire\Settings\DeleteAccount;
 use App\Livewire\Settings\UpdateProfile;
 use App\Livewire\Settings\UpdatePassword;
+use Illuminate\Support\Facades\Storage;
 
 test('settings page is displayed', function () {
     $user = User::factory()->create();
@@ -21,11 +23,14 @@ test('settings page is displayed', function () {
 });
 
 test('profile can be updated', function () {
+    Storage::fake('public');
+
     $user = User::factory()->create();
 
     $this->actingAs($user);
 
     $component = Livewire::test(UpdateProfile::class)
+        ->set('avatar', UploadedFile::fake()->image('avatar.jpg'))
         ->set('name', 'Test User')
         ->set('username', 'testuser')
         ->set('email', 'test@example.com')
@@ -37,9 +42,12 @@ test('profile can be updated', function () {
 
     $user->refresh();
 
+    $this->assertNotNull($user->avatar_path);
     $this->assertSame('Test User', $user->name);
     $this->assertSame('test@example.com', $user->email);
     $this->assertNull($user->email_verified_at);
+
+    Storage::disk('public')->assertExists($user->avatar_path);
 });
 
 test('email verification status is unchanged when the email address is unchanged', function () {

@@ -35,6 +35,11 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            {{-- Profile --}}
+                            <x-dropdown-button :href="route('profile.show', auth()->user()->username)" wire:navigate>
+                                {{ __('Profile') }}
+                            </x-dropdown-button>
+
                             {{-- Settings --}}
                             <x-dropdown-button :href="route('settings')" wire:navigate>
                                 {{ __('Settings') }}

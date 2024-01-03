@@ -13,6 +13,11 @@
         <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ $thread->date_for_humans }}
         </p>
+
+        {{-- Channel --}}
+        <x-links.secondary :href="$thread->channel->path" wire:navigate>
+            {{ $thread->channel->name }}
+        </x-links.secondary>
     </x-slot>
 
     <x-slot name="body">

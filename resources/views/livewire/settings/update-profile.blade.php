@@ -11,6 +11,17 @@
 
     <form class="mt-6 space-y-6" wire:submit="updateProfileInformation">
         <div>
+            <x-forms.label for="avatar" value="Avatar" />
+
+            <div class="flex justify-between gap-6">
+                <x-user-avatar :user="auth()->user()" width="md" />
+                <x-forms.file id="avatar" name="avatar" wire:model="avatar" />
+            </div>
+
+            <x-forms.input-error name="avatar" />
+        </div>
+
+        <div>
             <x-forms.input id="name" name="name" type="text" label="Name" wire:model="name" />
         </div>
 

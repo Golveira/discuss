@@ -14,7 +14,7 @@
     @foreach ($users as $user)
         <x-list-item class="!p-3">
             <x-slot name="avatar">
-                <x-user-avatar :user="$user" width="xs" />
+                <x-user-avatar :user="$user" width="sm" />
             </x-slot>
 
             <x-slot name="value">
