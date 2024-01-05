@@ -99,4 +99,19 @@ class Thread extends Model
     {
         $this->update(['best_reply_id' => $reply->id]);
     }
+
+    public function removeBestReply(): void
+    {
+        $this->update(['best_reply_id' => null]);
+    }
+
+    public function hasBestReply(): bool
+    {
+        return !is_null($this->best_reply_id);
+    }
+
+    public function hasAsBestReply(Reply $reply): bool
+    {
+        return $this->bestReply()->is($reply);
+    }
 }

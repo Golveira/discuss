@@ -1,4 +1,4 @@
-@props(['reply'])
+@props(['thread', 'reply'])
 
 <x-content-card class="relative mb-8">
     {{-- Actions --}}

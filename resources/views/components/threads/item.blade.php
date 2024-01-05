@@ -23,6 +23,10 @@
         <x-links.secondary class="underline" href="{{ $thread->channel->path }}" wire:navigate>
             {{ $thread->channel->name }}
         </x-links.secondary>
+
+        @if ($thread->hasBestReply())
+            <x-badge value="Answered" color="success" size="sm" />
+        @endif
     </x-slot>
 
     <x-slot name="actions">

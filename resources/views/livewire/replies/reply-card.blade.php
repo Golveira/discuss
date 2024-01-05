@@ -1,4 +1,7 @@
-<x-card @class(['border-2 !border-blue-600' => $isAuthoredByUser])>
+<x-card @class([
+    'border-2 !border-blue-600' => $isAuthoredByUser,
+    'border-2 !border-green-600' => $isBestReply,
+])>
     {{-- Actions --}}
     <x-slot name="actions">
         @can('update', $reply)
@@ -8,8 +11,7 @@
 
     <x-slot name="header">
         {{-- User --}}
-        <x-links.secondary class="flex items-center gap-3" href="{{ route('profile.show', $reply->author->username) }}"
-            wire:navigate>
+        <x-links.secondary class="flex items-center gap-3" :href="$reply->author->profile_path" wire:navigate>
             <x-user-avatar :user="$reply->author" width="sm" />
             {{ $reply->author->username }}
         </x-links.secondary>
@@ -18,6 +20,11 @@
         <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ $reply->date_for_humans }}
         </p>
+
+        {{-- Best Reply Badge --}}
+        @if ($isBestReply)
+            <x-badge value="Answer" color="success" size="md" />
+        @endif
     </x-slot>
 
     <x-slot name="body">
@@ -31,12 +38,29 @@
     </x-slot>
 
     <x-slot name="footer">
-        @guest
-            {{-- Likes count --}}
-            <x-likes-count :count="$reply->likes_count" />
-        @else
-            {{-- Like button --}}
-            <livewire:like-button :likeable="$reply" wire:key="like-{{ $reply->id }}" />
-        @endguest
+        <div class="flex items-center justify-between">
+            @guest
+                {{-- Likes count --}}
+                <x-likes-count :count="$reply->likes_count" />
+            @else
+                {{-- Like button --}}
+                <livewire:like-button :likeable="$reply" wire:key="like-{{ $reply->id }}" />
+            @endguest
+
+            {{-- Best Reply Button --}}
+            @can('update', $thread)
+                @if ($isBestReply)
+                    <x-buttons.transparent class="flex gap-1" wire:click="removeBestReply">
+                        <x-icons.xmark /> {{ __('Unmark as Answer') }}
+                    </x-buttons.transparent>
+                @endif
+
+                @if (!$bestReplyExists)
+                    <x-buttons.transparent class="flex gap-1" wire:click="markAsBestReply">
+                        <x-icons.check /> {{ __('Mark as Answer') }}
+                    </x-buttons.transparent>
+                @endif
+            @endcan
+        </div>
     </x-slot>
 </x-card>

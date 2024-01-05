@@ -24,7 +24,7 @@ trait HasSlug
         $slug = $originalSlug;
         $suffix = 2;
 
-        while ($this->slugExists($slug)) {
+        while ($this->slugExists($slug, $this->id)) {
             $slug = "{$originalSlug}-{$suffix}";
             $suffix++;
         }
@@ -32,8 +32,14 @@ trait HasSlug
         return $slug;
     }
 
-    public function slugExists($slug): bool
+    public function slugExists(string $slug, ?int $ignoreId = null): bool
     {
-        return static::where('slug', $slug)->exists();
+        $query = $this->where('slug', $slug);
+
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        return $query->exists();
     }
 }

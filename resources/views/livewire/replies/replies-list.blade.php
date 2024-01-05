@@ -12,8 +12,6 @@
 
     {{-- Replies --}}
     @foreach ($this->replies as $reply)
-        <livewire:replies.reply-card :$reply :key="$reply->id" />
-    @endforeach
-
-    {{ $this->replies->links() }}
+        <livewire:replies.reply-card :$thread :$reply wire:key="{{ $reply->id }}" />
+    @endforeach {{ $this->replies->links() }}
 </div>

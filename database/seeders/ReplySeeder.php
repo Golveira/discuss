@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Like;
 use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
@@ -21,7 +20,7 @@ class ReplySeeder extends Seeder
 
         foreach ($threads as $thread) {
             Reply::factory()
-                ->count(rand(1, 10))
+                ->count(rand(1, 20))
                 ->for($thread, 'thread')
                 ->state(new Sequence(function () use ($users) {
                     return [
