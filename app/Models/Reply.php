@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Concerns\HasLikes;
 use App\Concerns\HasAuthor;
+use App\Concerns\HasBody;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reply extends Model
 {
-    use HasFactory, HasAuthor, HasLikes;
+    use HasFactory, HasAuthor, HasLikes, HasBody;
 
     protected $fillable = [
         'user_id',
@@ -33,13 +34,6 @@ class Reply extends Model
     {
         return Attribute::make(function ($value) {
             return $this->created_at->diffForHumans();
-        });
-    }
-
-    public function bodyExcerpt(): Attribute
-    {
-        return Attribute::make(function ($value) {
-            return Str::limit($this->body, 400);
         });
     }
 }

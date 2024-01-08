@@ -1,66 +1,53 @@
-<x-card @class([
-    'border-2 !border-blue-600' => $isAuthoredByUser,
-    'border-2 !border-green-600' => $isBestReply,
-])>
-    {{-- Actions --}}
-    <x-slot name="actions">
-        @can('update', $reply)
-            <x-replies.actions :reply="$reply" />
-        @endcan
-    </x-slot>
+<div x-data="{ isEditing: $wire.entangle('isEditing') }" x-cloak>
+    <x-card @class([
+        'group',
+        'border-2 !border-blue-500 !dark:border-blue-900' => $isAuthoredByUser,
+        'border-2 !border-green-600' => $isBestReply,
+    ])>
+        <x-slot name="header">
+            {{-- User --}}
+            <x-links.secondary class="flex items-center gap-3"
+                href="{{ route('profile.show', $reply->author->username) }}" wire:navigate>
+                <x-user-avatar :user="$reply->author" width="sm" />
+                {{ $reply->author->username }}
+            </x-links.secondary>
 
-    <x-slot name="header">
-        {{-- User --}}
-        <x-links.secondary class="flex items-center gap-3" :href="$reply->author->profile_path" wire:navigate>
-            <x-user-avatar :user="$reply->author" width="sm" />
-            {{ $reply->author->username }}
-        </x-links.secondary>
+            {{-- Date --}}
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+                {{ $reply->date_for_humans }}
+            </p>
 
-        {{-- Date --}}
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-            {{ $reply->date_for_humans }}
-        </p>
+            {{-- Best Reply Badge --}}
+            @if ($isBestReply)
+                <x-badge value="Best Answer" color="success" size="md" />
+            @endif
+        </x-slot>
 
-        {{-- Best Reply Badge --}}
-        @if ($isBestReply)
-            <x-badge value="Answer" color="success" size="md" />
-        @endif
-    </x-slot>
+        <x-slot name="body">
+            {{-- Body --}}
+            <x-content x-show="!isEditing">
+                {!! $reply->body_html !!}
+            </x-content>
 
-    <x-slot name="body">
-        {{-- Edit Form --}}
-        <x-replies.edit />
+            {{-- Edit Form --}}
+            <div x-show="isEditing">
+                <x-replies.edit-form />
+            </div>
+        </x-slot>
 
-        {{-- Body --}}
-        <p class="text-base leading-relaxed text-gray-900 dark:text-gray-300" x-show="!$wire.isEditing">
-            {!! nl2br($reply->body) !!}
-        </p>
-    </x-slot>
+        <x-slot name="footer">
+            <div class="flex items-center justify-between">
+                @guest
+                    {{-- Likes Count --}}
+                    <x-likes-count :count="$reply->likes_count" />
+                @else
+                    {{-- Like Button --}}
+                    <livewire:like-button :likeable="$reply" wire:key="like-{{ $reply->id }}" />
+                @endguest
 
-    <x-slot name="footer">
-        <div class="flex items-center justify-between">
-            @guest
-                {{-- Likes count --}}
-                <x-likes-count :count="$reply->likes_count" />
-            @else
-                {{-- Like button --}}
-                <livewire:like-button :likeable="$reply" wire:key="like-{{ $reply->id }}" />
-            @endguest
-
-            {{-- Best Reply Button --}}
-            @can('update', $thread)
-                @if ($isBestReply)
-                    <x-buttons.transparent class="flex gap-1" wire:click="removeBestReply">
-                        <x-icons.xmark /> {{ __('Unmark as Answer') }}
-                    </x-buttons.transparent>
-                @endif
-
-                @if (!$bestReplyExists)
-                    <x-buttons.transparent class="flex gap-1" wire:click="markAsBestReply">
-                        <x-icons.check /> {{ __('Mark as Answer') }}
-                    </x-buttons.transparent>
-                @endif
-            @endcan
-        </div>
-    </x-slot>
-</x-card>
+                {{-- Actions --}}
+                <x-replies.actions :$thread :$reply :$isBestReply />
+            </div>
+        </x-slot>
+    </x-card>
+</div>

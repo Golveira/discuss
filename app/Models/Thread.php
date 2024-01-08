@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Concerns\HasSlug;
 use App\Concerns\HasLikes;
 use App\Concerns\HasAuthor;
-use Illuminate\Support\Str;
+use App\Concerns\HasBody;
 use App\Concerns\HasReplies;
 use App\Concerns\HasSubscriptions;
 use App\Concerns\SortsByPopularity;
@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Collection;
 
 class Thread extends Model
 {
@@ -23,6 +24,7 @@ class Thread extends Model
     use HasLikes;
     use HasSubscriptions;
     use HasSlug;
+    use HasBody;
     use SortsByPopularity;
 
     protected $fillable = [
@@ -52,13 +54,6 @@ class Thread extends Model
     {
         return Attribute::make(function ($value) {
             return $this->created_at->diffForHumans();
-        });
-    }
-
-    public function bodyExcerpt(): Attribute
-    {
-        return Attribute::make(function ($value) {
-            return Str::limit($this->body, 400);
         });
     }
 
@@ -113,5 +108,13 @@ class Thread extends Model
     public function hasAsBestReply(Reply $reply): bool
     {
         return $this->bestReply()->is($reply);
+    }
+
+    public function participantUsernames(): Collection
+    {
+        return $this->replies
+            ->map(fn ($reply) => $reply->author->username)
+            ->prepend($this->author->username)
+            ->unique();
     }
 }

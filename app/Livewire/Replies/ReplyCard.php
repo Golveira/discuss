@@ -19,8 +19,6 @@ class ReplyCard extends Component
 
     public bool $isAuthoredByUser;
 
-    public bool $bestReplyExists;
-
     public bool $isBestReply;
 
     public bool $isEditing = false;
@@ -34,8 +32,6 @@ class ReplyCard extends Component
         $this->form->setProperties($reply);
 
         $this->isAuthoredByUser = $reply->isAuthoredBy(Auth::user());
-
-        $this->bestReplyExists = $thread->hasBestReply();
 
         $this->isBestReply = $thread->hasAsBestReply($reply);
     }

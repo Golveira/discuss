@@ -29,6 +29,8 @@
         <main class="p-4 pt-24">
             {{ $slot }}
         </main>
+
+        <x-layouts.footer />
     </div>
 
     @stack('modals')

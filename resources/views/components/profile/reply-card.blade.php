@@ -3,8 +3,7 @@
 <x-card>
     <x-slot name="header">
         {{-- User --}}
-        <x-links.secondary class="flex items-center gap-3" href="{{ route('profile.show', $reply->author->username) }}"
-            wire:navigate>
+        <x-links.secondary class="flex items-center gap-3" :href="$reply->author->profile_path" wire:navigate>
             <x-user-avatar :user="$reply->author" width="sm" />
             {{ $reply->author->username }}
         </x-links.secondary>

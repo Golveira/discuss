@@ -5,7 +5,6 @@
 
     @if ($thread->hasSubscriber(auth()->user()))
         <x-buttons.secondary class="flex w-full items-center justify-center gap-1" outline wire:click="unsubscribe">
-            <x-icons.bell-slash />
             {{ __('Unsubscribe') }}
         </x-buttons.secondary>
 
@@ -14,7 +13,6 @@
         </p>
     @else
         <x-buttons.primary class="flex w-full items-center justify-center gap-1" wire:click="subscribe">
-            <x-icons.bell-ring />
             {{ __('Subscribe') }}
         </x-buttons.primary>
 

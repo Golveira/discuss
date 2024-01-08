@@ -11,7 +11,7 @@
 @endphp
 
 <div
-    class="{{ $width }} relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gray-100 dark:bg-gray-600">
+    class="{{ $width }} relative inline-flex items-center justify-center overflow-hidden rounded-full border border-gray-500 bg-gray-100 dark:bg-gray-600">
     <span class="font-medium text-gray-600 dark:text-gray-300">
         {{ $value }}
     </span>

@@ -5,9 +5,7 @@ namespace App\Livewire\Replies;
 use App\Models\Reply;
 use App\Models\Thread;
 use Livewire\Component;
-use Livewire\Attributes\On;
 use Livewire\WithPagination;
-use App\Events\ReplyWasCreated;
 use App\Livewire\Forms\ReplyForm;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
@@ -23,39 +21,25 @@ class RepliesList extends Component
 
     public Thread $thread;
 
-    public bool $isEditing = false;
-
     #[Computed]
     public function replies(): LengthAwarePaginator
     {
-        return $this->thread
-            ->replies()
-            ->oldest()
-            ->paginate();
-    }
-
-    #[On('best-reply-updated')]
-    public function bestReplyUpdated()
-    {
+        return $this->thread->replies()->oldest()->paginate();
     }
 
     public function create(): void
     {
         $this->form->validate();
 
-        $reply = Reply::create([
+        Reply::create([
             'user_id' => Auth::id(),
             'thread_id' => $this->thread->id,
             'body' => $this->form->body,
         ]);
 
-        // event(new ReplyWasCreated($reply));
-
         toast()->success('Reply created!')->push();
 
         $this->form->reset();
-
-        $this->gotoPage($this->replies()->lastPage());
     }
 
     public function delete(Reply $reply): void
