@@ -3,7 +3,6 @@
 namespace App\Livewire\Threads;
 
 use App\Livewire\Forms\ThreadForm;
-use App\Models\Thread;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
@@ -18,21 +17,13 @@ class ThreadCreate extends Component
     {
         $this->form->validate();
 
-        $thread = Thread::create([
-            'user_id' => Auth::id(),
-            'channel_id' => $this->form->channel_id,
-            'title' => $this->form->title,
-            'body' => $this->form->body,
-        ]);
+        $thread = Auth::user()->threads()->create($this->form->all());
 
         $thread->subscribe(Auth::user());
 
         toast()->success('Thread created!')->pushOnNextPage();
 
-        return $this->redirect(
-            route('threads.show', $thread->slug),
-            navigate: true
-        );
+        return $this->redirect(route('threads.show', $thread->slug), navigate: true);
     }
 
     public function render()

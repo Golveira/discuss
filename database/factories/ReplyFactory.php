@@ -21,16 +21,8 @@ class ReplyFactory extends Factory
         return [
             'user_id' => User::factory(),
             'thread_id' => Thread::factory(),
+            'parent_id' => null,
             'body' => fake()->paragraph(),
         ];
-    }
-
-    public function hasExistingUser(): static
-    {
-        $user = User::inRandomOrder()->first();
-
-        return $this->state([
-            'user_id' => $user->id,
-        ]);
     }
 }

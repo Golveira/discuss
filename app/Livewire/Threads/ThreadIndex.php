@@ -30,6 +30,7 @@ class ThreadIndex extends Component
     public function threads(): LengthAwarePaginator
     {
         return Thread::query()
+            ->with(['author', 'channel'])
             ->search($this->query)
             ->filter($this->filter)
             ->sort($this->sort)

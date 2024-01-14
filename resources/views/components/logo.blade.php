@@ -1,6 +1,3 @@
-<a class="flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
-    <x-icons.chat-solid class="mr-2 h-6 w-6" />
-    <span>
-        Discuss
-    </span>
+<a class="">
+    <img class="h-10 w-36" src="{{ asset('assets/images/logo1.png') }}" alt="">
 </a>

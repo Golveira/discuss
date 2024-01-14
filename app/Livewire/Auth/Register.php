@@ -21,7 +21,7 @@ class Register extends Component
     {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'alpha_dash', 'max:40', 'unique:' . User::class],
+            'username' => ['required', 'string', 'alpha_dash', 'max:15', 'unique:' . User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', Rules\Password::defaults()],
         ]);

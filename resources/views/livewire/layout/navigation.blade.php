@@ -1,5 +1,4 @@
-<nav
-    class="fixed left-0 right-0 top-0 z-40 border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
+<nav class="border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
     <div class="container mx-auto">
         <div class="flex flex-wrap items-center justify-between">
             {{-- Logo --}}
@@ -23,7 +22,7 @@
 
                 @auth
                     {{-- Notifications --}}
-                    <livewire:notifications.notification-bell />
+                    {{-- <livewire:notifications.notification-bell /> --}}
 
                     {{-- Dropdown --}}
                     <x-dropdown align="right" width="48">

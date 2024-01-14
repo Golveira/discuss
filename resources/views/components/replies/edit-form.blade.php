@@ -1,5 +1,5 @@
-<form wire:submit="update">
-    <x-editor wire:model="form.body" />
+<form class="space-y-3" wire:submit="update">
+    <livewire:markdown-editor cancelAction="" wire:model="form.body" />
 
     <div class="flex justify-end gap-4">
         <x-buttons.secondary type="button" @click="isEditing = false">

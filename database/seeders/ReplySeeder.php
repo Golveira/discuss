@@ -36,5 +36,17 @@ class ReplySeeder extends Seeder
 
             $thread->markAsBestReply($reply);
         }
+
+        $replies = Reply::all()->random(100);
+
+        foreach ($replies as $reply) {
+            Reply::factory()
+                ->count(rand(1, 5))
+                ->create([
+                    'parent_id' => $reply->id,
+                    'thread_id' => $reply->thread_id,
+                    'user_id' => $users->random()->id,
+                ]);
+        }
     }
 }

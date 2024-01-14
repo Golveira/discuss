@@ -1,13 +1,7 @@
 <div
-    {{ $attributes->merge(['class' => ' relative p-4 sm:p-6 md:p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700']) }}>
-    @if ($actions ?? false)
-        <div class="absolute right-4 top-4 p-2">
-            {{ $actions }}
-        </div>
-    @endif
-
+    {{ $attributes->merge(['class' => ' relative p-4 sm:p-6 md:p-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700']) }}>
     @if ($header ?? false)
-        <div class="mb-6 flex items-center gap-3">
+        <div {{ $header->attributes->class(['mb-6 flex items-center justify-between']) }}>
             {{ $header }}
         </div>
     @endif
@@ -18,11 +12,19 @@
         </div>
     @endif
 
-    @if ($footer ?? false)
-        <div>
-            {{ $footer }}
-        </div>
-    @endif
+    <div class="flex items-center justify-between">
+        @if ($footer ?? false)
+            <div {{ $footer->attributes->class(['flex items-center gap-3']) }}>
+                {{ $footer }}
+            </div>
+        @endif
+
+        @if ($actions ?? false)
+            <div {{ $footer->attributes->class(['flex items-center gap-2']) }}>
+                {{ $actions }}
+            </div>
+        @endif
+    </div>
 
     {{ $slot }}
 </div>

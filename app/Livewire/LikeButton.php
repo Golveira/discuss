@@ -22,6 +22,10 @@ class LikeButton extends Component
 
     public function toggleLike(): void
     {
+        if (!Auth::check()) {
+            return;
+        }
+
         $this->likeable->toggleLike(Auth::user());
 
         $this->isLiked = !$this->isLiked;

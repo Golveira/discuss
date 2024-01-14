@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Concerns\HasBody;
 use App\Concerns\HasLikes;
 use App\Concerns\HasAuthor;
-use App\Concerns\HasBody;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,10 +19,9 @@ class Reply extends Model
     protected $fillable = [
         'user_id',
         'thread_id',
+        'parent_id',
         'body',
     ];
-
-    protected $with = ['author', 'likes'];
 
     protected $withCount = ['likes'];
 
@@ -30,10 +30,30 @@ class Reply extends Model
         return $this->belongsTo(Thread::class);
     }
 
+    public function children(): HasMany
+    {
+        return $this->hasMany(Reply::class, 'parent_id');
+    }
+
     public function dateForHumans(): Attribute
     {
         return Attribute::make(function ($value) {
             return $this->created_at->diffForHumans();
         });
+    }
+
+    public function isParent(): bool
+    {
+        return is_null($this->parent_id);
+    }
+
+    public function hasChildren(): bool
+    {
+        return $this->isParent() && $this->children->isNotEmpty();
+    }
+
+    public function scopeParent(Builder $query): Builder
+    {
+        return $query->whereNull('parent_id');
     }
 }

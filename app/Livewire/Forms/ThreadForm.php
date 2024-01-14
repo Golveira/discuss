@@ -8,11 +8,11 @@ use Livewire\Attributes\Validate;
 
 class ThreadForm extends Form
 {
-    #[Validate('required|min:5|max:100')]
+    #[Validate('required|min:2|max:100')]
     public string $title = '';
 
-    #[Validate('required|min:5|max:5000',)]
-    public string $body = '';
+    #[Validate('required|min:2|max:5000',)]
+    public string $body = 'testing';
 
     #[Validate('required|exists:channels,id', as: 'channel')]
     public string $channel_id = '';

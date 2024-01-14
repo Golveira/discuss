@@ -1,9 +1,6 @@
-<svg viewBox="0 0 16 16" {{ $attributes->merge(['class' => 'w-4 h-4']) }}>
-    <g data-v-2836fdb5-s="" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
-        <g class="fill-current" id="Group" data-v-2836fdb5-s="" transform="translate(0.000000, -336.000000)">
-            <path data-v-2836fdb5-s=""
-                d="M0,344 L6,339 L6,342 C10.5,342 14,343 16,348 C13,345.5 10,345 6,346 L6,349 L0,344 L0,344 Z M0,344">
-            </path>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+    {{ $attributes->merge(['class' => 'w-4 h-4']) }}>
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z"></path>
 </svg>

@@ -5,6 +5,7 @@ namespace App\Livewire\Threads;
 use App\Models\Thread;
 use Livewire\Component;
 use App\Livewire\Forms\ThreadForm;
+use Illuminate\Contracts\View\View;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class ThreadEdit extends Component
@@ -15,7 +16,7 @@ class ThreadEdit extends Component
 
     public ThreadForm $form;
 
-    public function mount(Thread $thread)
+    public function mount(Thread $thread): void
     {
         $this->authorize('update', $thread);
 
@@ -24,7 +25,7 @@ class ThreadEdit extends Component
         $this->form->setProperties($thread);
     }
 
-    public function save()
+    public function save(): void
     {
         $this->form->validate();
 
@@ -32,13 +33,10 @@ class ThreadEdit extends Component
 
         toast()->success('Thread Updated!')->pushOnNextPage();
 
-        return $this->redirect(
-            route('threads.show', $this->thread->slug),
-            navigate: true
-        );
+        $this->redirect(route('threads.show', $this->thread->slug), navigate: true);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.threads.thread-edit');
     }

@@ -21,7 +21,7 @@
 
             {{-- Body --}}
             <div>
-                <x-editor id="form.body" name="form.body" label="Body" height="h-64" wire:model="form.body" />
+                <livewire:markdown-editor title="Write" label="Body" height="h-64" wire:model="form.body" />
             </div>
 
             <div class="flex justify-end gap-4">

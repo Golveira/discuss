@@ -30,8 +30,12 @@ trait HasLikes
         $this->likes()->create(['user_id' => $user->id]);
     }
 
-    public function isLikedBy(User $user): bool
+    public function isLikedBy(?User $user): bool
     {
+        if (!$user) {
+            return false;
+        }
+
         return $this->likes->contains('user_id', $user->id);
     }
 }

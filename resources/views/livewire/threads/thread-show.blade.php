@@ -12,9 +12,9 @@
             {{-- Thread Author --}}
             <x-user.user-card :user="$thread->author" />
 
+            {{-- Subscribe Button --}}
             @auth
-                {{-- Subscribe Button --}}
-                <x-threads.subscribe :$thread />
+                {{-- <x-threads.subscribe :$thread /> --}}
             @endauth
         </div>
     </div>

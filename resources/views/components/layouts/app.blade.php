@@ -23,10 +23,10 @@
 <body class="font-sans antialiased">
     <livewire:toasts />
 
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="min-h-screen space-y-6 bg-gray-100 dark:bg-gray-900">
         <livewire:layout.navigation />
 
-        <main class="p-4 pt-24">
+        <main>
             {{ $slot }}
         </main>
 
