@@ -1,6 +1,6 @@
 <x-section class="space-y-8">
-    <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 xl:grid-cols-6">
-        <div class="col-span-1 xl:col-span-3">
+    <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 xl:grid-cols-7">
+        <div class="col-span-1 xl:col-span-4">
             {{-- Search --}}
             <x-threads.search />
         </div>
@@ -18,17 +18,17 @@
         <div class="col-span-1 flex items-center">
             {{-- Create Thread --}}
             <x-buttons.primary class="w-full text-center" href="{{ route('threads.create') }}" wire:navigate>
-                {{ __('Create Thread') }}
+                {{ __('New Discussion') }}
             </x-buttons.primary>
         </div>
     </div>
 
     <div class="grid gap-8 lg:grid-cols-4">
-        <div class="space-y-8 lg:col-span-1">
-            {{-- Channels --}}
+        <div class="space-y-6 lg:col-span-1">
+            {{-- Channels List --}}
             <x-channels-list />
 
-            {{-- Leaderboard --}}
+            {{-- Most Helpful --}}
             <x-top-users />
         </div>
 
@@ -36,7 +36,7 @@
             {{-- Thread List --}}
             <x-list>
                 @foreach ($this->threads as $thread)
-                    <x-threads.item :$thread />
+                    <x-threads.item :$thread wire:key="{{ $thread->id }}" />
                 @endforeach
             </x-list>
 

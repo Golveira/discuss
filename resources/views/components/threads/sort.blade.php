@@ -1,13 +1,29 @@
 <x-forms.select {{ $attributes->merge(['class' => 'w-full']) }}>
-    <option value="recent">
-        {{ __('Recent') }}
+    <option value="latest_activity">
+        {{ __('Latest activity') }}
     </option>
 
-    <option value="popular_week">
-        {{ __('Popular This Week') }}
+    <option value="date_created">
+        {{ __('Date created') }}
     </option>
 
-    <option value="popular_all">
-        {{ __('Popular All Time') }}
+    <option value="top_day">
+        {{ __('Top: Past day') }}
+    </option>
+
+    <option value="top_week">
+        {{ __('Top: Past week') }}
+    </option>
+
+    <option value="top_month">
+        {{ __('Top: Past month') }}
+    </option>
+
+    <option value="top_year">
+        {{ __('Top: Past year') }}
+    </option>
+
+    <option value="top_all">
+        {{ __('Top: All') }}
     </option>
 </x-forms.select>

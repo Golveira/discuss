@@ -20,17 +20,23 @@ class ThreadIndex extends Component
     #[Url(as: 'q')]
     public string $query = '';
 
-    #[Url]
-    public string $sort = 'recent';
+    #[Url(keep: true)]
+    public string $sort = 'latest_activity';
 
     #[Url]
     public string $filter = 'all';
+
+    public function mount(Channel $channel): void
+    {
+        $this->channel = $channel;
+    }
 
     #[Computed]
     public function threads(): LengthAwarePaginator
     {
         return Thread::query()
-            ->with(['author', 'channel'])
+            ->with(['author', 'channel', 'likes'])
+            ->withCount(['replies', 'likes'])
             ->search($this->query)
             ->filter($this->filter)
             ->sort($this->sort)
@@ -38,11 +44,6 @@ class ThreadIndex extends Component
                 $query->whereBelongsTo($this->channel);
             })
             ->paginate();
-    }
-
-    public function mount(Channel $channel): void
-    {
-        $this->channel = $channel;
     }
 
     public function updatedFilter(): void

@@ -35,8 +35,6 @@ class Thread extends Model
         'slug',
     ];
 
-    protected $withCount = ['replies', 'likes'];
-
     public function channel(): BelongsTo
     {
         return $this->belongsTo(Channel::class);
@@ -61,11 +59,6 @@ class Thread extends Model
         });
     }
 
-    public function scopeRecent($query)
-    {
-        $query->orderBy('updated_at', 'desc');
-    }
-
     public function scopeSearch(Builder $query, string $search): void
     {
         $query->when($search, function ($query, $search) {
@@ -76,15 +69,21 @@ class Thread extends Model
     public function scopeFilter(Builder $query, string $filter): void
     {
         $query->when($filter === 'all', fn ($query) => $query);
-        $query->when($filter === 'resolved', fn ($query) => $query->has('bestReply'));
-        $query->when($filter === 'unresolved', fn ($query) => $query->doesntHave('bestReply'));
+        $query->when($filter === 'open', fn ($query) => $query);
+        $query->when($filter === 'closed', fn ($query) => $query);
+        $query->when($filter === 'answered', fn ($query) => $query->has('bestReply'));
+        $query->when($filter === 'unanswered', fn ($query) => $query->doesntHave('bestReply'));
     }
 
-    public function scopeSort(Builder $query, string $filter): void
+    public function scopeSort(Builder $query, string $sort): void
     {
-        $query->when($filter === 'recent', fn ($query) => $query->recent());
-        $query->when($filter === 'popular_all', fn ($query) => $query->popular());
-        $query->when($filter === 'popular_week', fn ($query) => $query->popularThisWeek());
+        $query->when($sort === 'latest_activity', fn ($query) => $query->recent());
+        $query->when($sort === 'date_created', fn ($query) => $query->latest());
+        $query->when($sort === 'top_day', fn ($query) => $query->popularToday());
+        $query->when($sort === 'top_week', fn ($query) => $query->popularThisWeek());
+        $query->when($sort === 'top_month', fn ($query) => $query->popularThisMonth());
+        $query->when($sort === 'top_year', fn ($query) => $query->popularThisYear());
+        $query->when($sort === 'top_all', fn ($query) => $query->popularAllTime());
     }
 
     public function markAsBestReply(Reply $reply): void

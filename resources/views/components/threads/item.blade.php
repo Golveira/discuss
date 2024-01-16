@@ -1,9 +1,14 @@
 @props(['thread'])
 
-<x-list-item>
+<x-list-item {{ $attributes }}>
     <x-slot name="avatar">
-        {{-- Avatar --}}
-        <x-user-avatar :user="$thread->author" />
+        <div class="flex gap-6">
+            {{-- Like Button --}}
+            <livewire:like-button :likeable="$thread" wire:key="thread-like-{{ $thread->id }}" />
+
+            {{-- Avatar --}}
+            <x-avatar :image="$thread->author->avatar_path" />
+        </div>
     </x-slot>
 
     <x-slot name="value">
@@ -30,12 +35,12 @@
         </x-links.secondary>
 
         @if ($thread->hasBestReply())
-            <x-badge value="Answered" color="success" size="sm" />
+            <span class="text-sm text-green-500">Answered</span>
         @endif
     </x-slot>
 
     <x-slot name="actions">
-        <x-likes-count :count="$thread->likes_count" />
+        {{-- Comments Count --}}
         <x-comments-count :count="$thread->replies_count" />
     </x-slot>
 </x-list-item>

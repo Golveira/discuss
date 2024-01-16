@@ -14,18 +14,12 @@ class Channel extends Model
     protected $fillable = [
         'name',
         'slug',
+        'emoji',
         'description'
     ];
 
     public function threads(): HasMany
     {
         return $this->hasMany(Thread::class);
-    }
-
-    public function path(): Attribute
-    {
-        return Attribute::make(function () {
-            return route('channels', $this->slug);
-        });
     }
 }

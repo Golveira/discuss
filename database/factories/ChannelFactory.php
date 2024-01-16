@@ -22,6 +22,7 @@ class ChannelFactory extends Factory
         return [
             'name' => $name,
             'slug' => Str::slug($name),
+            'emoji' => fake()->emoji(),
             'description' => fake()->sentence(),
         ];
     }

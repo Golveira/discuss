@@ -61,7 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function avatarPath(): Attribute
     {
         return Attribute::make(
-            get: fn (?string $value) => $value,
+            get: fn (?string $value) => $value ? asset("storage/{$value}") : asset('assets/images/avatar.png'),
             set: fn (string $value) => $value
         );
     }

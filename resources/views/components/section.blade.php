@@ -9,6 +9,6 @@
     ][$maxWidth];
 @endphp
 
-<div {{ $attributes->merge(['class' => 'mx-auto lg:px-4 lg:py-2 ' . $maxWidth]) }}>
+<div {{ $attributes->merge(['class' => 'px-2 mx-auto lg:px-4 lg:py-2 ' . $maxWidth]) }}>
     {{ $slot }}
 </div>

@@ -29,7 +29,7 @@
                         <x-slot name="trigger">
                             {{-- Avatar --}}
                             <span class="cursor-pointer">
-                                <x-user-avatar :user="auth()->user()" width="sm" />
+                                <x-avatar :image="auth()->user()->avatar_path" width="sm" />
                             </span>
                         </x-slot>
 

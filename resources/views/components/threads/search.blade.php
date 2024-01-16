@@ -9,8 +9,8 @@
         </div>
 
         <form wire:submit="search">
-            <x-forms.input class="block w-full ps-10" for="default-search" type="search" placeholder="Search all threads"
-                wire:model="query" />
+            <x-forms.input class="block w-full ps-10" for="default-search" type="search"
+                placeholder="Search all discussions" wire:model="query" />
         </form>
     </div>
 </div>

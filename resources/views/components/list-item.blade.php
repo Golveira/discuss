@@ -1,5 +1,5 @@
 <div
-    {{ $attributes->merge(['class' => 'flex gap-3 border-b border-gray-200 p-4 last:border-b-0 dark:border-gray-700']) }}>
+    {{ $attributes->merge(['class' => 'flex gap-3 border-b border-gray-200 p-4 last:border-b-0 dark:border-gray-800']) }}>
     {{ $avatar ?? null }}
 
     <div class="flex flex-1 flex-col justify-between gap-4 lg:flex-row lg:items-center">

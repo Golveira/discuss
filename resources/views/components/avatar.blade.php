@@ -10,5 +10,4 @@
     ][$width];
 @endphp
 
-<img class="{{ $width }} rounded-full object-cover ring-2 ring-gray-300 dark:ring-gray-500"
-    src="{{ $image }}">
+<img class="{{ $width }} rounded-full object-cover " src="{{ $image }}" />

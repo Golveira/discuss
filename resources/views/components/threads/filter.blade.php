@@ -1,13 +1,21 @@
 <x-forms.select {{ $attributes->merge(['class' => 'w-full']) }}>
-    <option value="all">
-        {{ __('All') }}
+    <option value="open">
+        {{ __('Open') }}
+    </option>
+
+    <option value="closed">
+        {{ __('Closed') }}
     </option>
 
     <option value="resolved">
-        {{ __('Resolved') }}
+        {{ __('Answered') }}
     </option>
 
     <option value="unresolved">
-        {{ __('Unresolved') }}
+        {{ __('Unanswered') }}
+    </option>
+
+    <option value="all">
+        {{ __('All') }}
     </option>
 </x-forms.select>
