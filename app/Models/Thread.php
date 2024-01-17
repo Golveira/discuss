@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Collection;
 
 class Thread extends Model
 {
@@ -34,6 +35,8 @@ class Thread extends Model
         'body',
         'slug',
     ];
+
+    protected $withCount = ['likes', 'replies'];
 
     public function channel(): BelongsTo
     {
@@ -106,14 +109,11 @@ class Thread extends Model
         return $this->bestReply()->is($reply);
     }
 
-    public function participantUsernames(): array
+    public function participants(): Collection
     {
-        return $this->replies
-            ->map(fn ($reply) => $reply->author->username)
-            ->collect()
-            ->prepend($this->author->username)
-            ->unique()
-            ->values()
-            ->all();
+        return $this->replyAuthors()
+            ->get()
+            ->prepend($this->author)
+            ->unique();
     }
 }

@@ -1,6 +1,6 @@
 @props(['thread'])
 
-<x-dropdown id="thread-actions" align="right" width="32">
+<x-dropdown id="thread-actions" align="right" width="36">
     <x-slot name="trigger">
         <x-buttons.dots />
     </x-slot>

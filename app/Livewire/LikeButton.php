@@ -22,7 +22,7 @@ class LikeButton extends Component
 
     public function toggleLike(): void
     {
-        if (!Auth::check()) {
+        if (Auth::guest()) {
             return;
         }
 

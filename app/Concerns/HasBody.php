@@ -18,7 +18,7 @@ trait HasBody
     {
         return Attribute::make(function ($value) {
             return Str::of($this->body)->markdown([
-                'html_input' => 'escape',
+                'html_input' => 'strip',
                 'allow_unsafe_links' => false,
                 'max_nesting_level' => 10,
             ]);

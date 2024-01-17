@@ -4,17 +4,24 @@
 @endphp
 
 <div class="space-y-2">
-    <div class="dark:text-white font-bold text-gray-900 ">
+    <div class="font-bold text-gray-900 dark:text-white">
         Categories
     </div>
 
     <ul>
+        <li>
+            <a href="{{ route('threads.index') }}" @class([$class, $activeClass => request()->is('discussions')]) wire:navigate>
+                <span>#️⃣</span>
+                <span>View All Discussions</span>
+            </a>
+        </li>
+
         @foreach ($channels as $channel)
             <li>
-                <a @class([
+                <a href="{{ route('channels', $channel->slug) }}" @class([
                     $class,
                     $activeClass => request()->is("discussions/channels/$channel->slug"),
-                ]) href="{{ route('channels', $channel->slug) }}" wire:navigate>
+                ]) wire:navigate>
                     <span>{{ $channel->emoji }}</span>
                     <span>{{ $channel->name }}</span>
                 </a>

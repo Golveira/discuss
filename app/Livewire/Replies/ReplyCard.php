@@ -5,17 +5,14 @@ namespace App\Livewire\Replies;
 use App\Models\Reply;
 use App\Models\Thread;
 use Livewire\Component;
-use App\Livewire\Forms\ReplyForm;
+use Livewire\Attributes\Validate;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\On;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class ReplyCard extends Component
 {
     use WireToast;
-
-    public ReplyForm $form;
 
     public Reply $reply;
 
@@ -27,11 +24,13 @@ class ReplyCard extends Component
 
     public bool $isEditing = false;
 
-    #[On('child-reply-created.{reply.id}')]
-    #[On('child-reply-deleted.{reply.id}')]
-    public function updateReply(): void
-    {
-    }
+    public bool $isReplying = false;
+
+    #[Validate('required|min:2|max:5000')]
+    public string $editReplyBody = '';
+
+    #[Validate('required|min:2|max:5000')]
+    public string $nestedReplyBody = '';
 
     public function mount(Thread $thread, Reply $reply): void
     {
@@ -39,7 +38,7 @@ class ReplyCard extends Component
 
         $this->reply = $reply;
 
-        $this->form->setProperties($reply);
+        $this->editReplyBody = $reply->body;
 
         $this->isAuthoredByUser = $reply->isAuthoredBy(Auth::user());
 
@@ -64,9 +63,9 @@ class ReplyCard extends Component
     {
         $this->authorize('update', $this->reply);
 
-        $this->form->validate();
+        $this->validate();
 
-        $this->reply->update($this->form->all());
+        $this->reply->update(['body' => $this->editReplyBody]);
 
         toast()->success('Reply updated!')->push();
 

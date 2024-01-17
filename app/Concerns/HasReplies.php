@@ -2,8 +2,10 @@
 
 namespace App\Concerns;
 
+use App\Models\User;
 use App\Models\Reply;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 trait HasReplies
 {
@@ -17,5 +19,17 @@ trait HasReplies
     public function replies(): HasMany
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function replyAuthors(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            User::class,
+            Reply::class,
+            'thread_id',
+            'id',
+            'id',
+            'user_id'
+        );
     }
 }

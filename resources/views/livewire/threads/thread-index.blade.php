@@ -25,14 +25,23 @@
 
     <div class="grid gap-8 lg:grid-cols-4">
         <div class="space-y-6 lg:col-span-1">
-            {{-- Channels List --}}
+            {{-- Categories List --}}
             <x-channels-list />
 
             {{-- Most Helpful --}}
             <x-top-users />
         </div>
 
-        <div class="lg:col-span-3">
+        <div class="space-y-4 lg:col-span-3">
+            {{-- Current channel --}}
+            <div class="font-bold text-gray-900 dark:text-white">
+                {{ $channel->emoji }} {{ $channel->name }}
+            </div>
+
+            <span class="text-sm text-gray-600 dark:text-gray-400">
+                {{ $channel->description }}
+            </span>
+
             {{-- Thread List --}}
             <x-list>
                 @foreach ($this->threads as $thread)
@@ -41,9 +50,7 @@
             </x-list>
 
             {{-- Pagination --}}
-            <div class="mt-6">
-                {{ $this->threads->links() }}
-            </div>
+            {{ $this->threads->links() }}
         </div>
     </div>
 </x-section>

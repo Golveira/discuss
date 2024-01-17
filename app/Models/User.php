@@ -73,13 +73,6 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    public function userNameInitials(): Attribute
-    {
-        return Attribute::make(function () {
-            return strtoupper(substr($this->username, 0, 1));
-        });
-    }
-
     public function joinedDate(): Attribute
     {
         return Attribute::make(function () {

@@ -14,7 +14,7 @@
             <x-forms.label for="avatar" value="Avatar" />
 
             <div class="flex justify-between gap-6">
-                <x-user-avatar :user="auth()->user()" width="md" />
+                <x-avatar :image="auth()->user()->avatar_path" width="xl" />
                 <x-forms.file id="avatar" name="avatar" wire:model="avatar" />
             </div>
 

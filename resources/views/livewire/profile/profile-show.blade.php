@@ -2,7 +2,7 @@
     <x-card>
         <div class="relative flex items-center gap-3">
             {{-- Avatar --}}
-            <x-user-avatar :user="$user" width="xl" />
+            <x-avatar :image="$user->avatar_path" width="xl" />
 
             <div class="flex flex-col gap-2">
                 {{-- Username --}}

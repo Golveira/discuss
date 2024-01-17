@@ -4,7 +4,7 @@
     <div class="flex flex-col items-center gap-3">
         <x-links.secondary class="flex flex-col items-center gap-3" href="{{ route('profile.show', $user->username) }}"
             wire:navigate>
-            <x-user-avatar :$user width="lg" />
+            <x-avatar :image="$user->avatar_path" width="lg" />
             <span class="text-lg">{{ $user->username }}</span>
         </x-links.secondary>
 

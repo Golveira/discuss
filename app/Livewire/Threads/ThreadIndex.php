@@ -36,7 +36,6 @@ class ThreadIndex extends Component
     {
         return Thread::query()
             ->with(['author', 'channel', 'likes'])
-            ->withCount(['replies', 'likes'])
             ->search($this->query)
             ->filter($this->filter)
             ->sort($this->sort)
@@ -44,11 +43,6 @@ class ThreadIndex extends Component
                 $query->whereBelongsTo($this->channel);
             })
             ->paginate();
-    }
-
-    public function updatedFilter(): void
-    {
-        $this->resetPage();
     }
 
     public function search(): void

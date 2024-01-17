@@ -1,13 +1,25 @@
-<form class="space-y-3" wire:submit="update">
-    <livewire:markdown-editor cancelAction="" wire:model="form.body" />
+@props(['reply'])
 
-    <div class="flex justify-end gap-4">
-        <x-buttons.secondary type="button" @click="isEditing = false">
-            {{ __('Cancel') }}
-        </x-buttons.secondary>
+<div @class(['!border-red-600' => $errors->has('editReplyBody')])>
+    <form class="space-y-3" wire:submit="update">
+        <livewire:markdown-editor height="h-32" wire:model="editReplyBody" wire:key="editor-{{ $reply->id }}" />
 
-        <x-buttons.primary type="submit">
-            {{ __('Save') }}
-        </x-buttons.primary>
-    </div>
-</form>
+        <div class="flex justify-between gap-4 px-4 py-2">
+            <div class="mt-2 text-sm text-red-600 dark:text-red-400">
+                @error('editReplyBody')
+                    {{ $message }}
+                @enderror
+            </div>
+
+            <div class="flex gap-3">
+                <x-buttons.secondary type="button" @click="isEditing = false">
+                    Cancel
+                </x-buttons.secondary>
+
+                <x-buttons.primary type="submit">
+                    Update reply
+                </x-buttons.primary>
+            </div>
+        </div>
+    </form>
+</div>
