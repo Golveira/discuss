@@ -20,7 +20,7 @@ test('guests cannot see reply form', function () {
     $thread = Thread::factory()->create();
 
     Livewire::test(RepliesList::class, ['thread' => $thread])
-        ->assertDontSee('Add a Reply');
+        ->assertDontSeeHtml('id="create-reply-form"');
 });
 
 test('user can create a reply', function () {
@@ -29,7 +29,7 @@ test('user can create a reply', function () {
 
     Livewire::actingAs($user)
         ->test(RepliesList::class, ['thread' => $thread])
-        ->set('form.body', 'This is a reply')
+        ->set('body', 'This is a reply')
         ->call('create')
         ->assertSee('This is a reply');
 

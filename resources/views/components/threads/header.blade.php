@@ -1,5 +1,5 @@
 <div class="space-y-3">
-    {{-- Thread title --}}
+    {{-- Title --}}
     <h1 class="text-3xl text-gray-900 dark:text-white">
         <span>{{ $thread->title }}</span>
 

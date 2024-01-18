@@ -52,6 +52,11 @@ class Reply extends Model
         return $this->isParent() && $this->children->isNotEmpty();
     }
 
+    public function isFromSameAuthor(int $author_id): bool
+    {
+        return $this->user_id === $author_id;
+    }
+
     public function scopeParent(Builder $query): Builder
     {
         return $query->whereNull('parent_id');

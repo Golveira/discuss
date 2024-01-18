@@ -21,4 +21,14 @@ class ThreadPolicy
     {
         return $thread->author()->is($user);
     }
+
+    public function pin(User $user, Thread $thread): bool
+    {
+        return $user->isAdmin();
+    }
+
+    public function close(User $user, Thread $thread): bool
+    {
+        return $user->isAdmin();
+    }
 }

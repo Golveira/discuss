@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('channel_id')->constrained();
             $table->string('title');
-            $table->string('slug')->unique();
             $table->text('body');
             $table->timestamps();
         });

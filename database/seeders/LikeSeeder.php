@@ -10,14 +10,12 @@ use Illuminate\Database\Seeder;
 
 class LikeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $threads = Thread::all()->random(100);
         $replies = Reply::all()->random(200);
 
+        // Create likes for random threads
         foreach ($threads as $thread) {
             Like::factory()
                 ->count(rand(1, 10))
@@ -25,6 +23,7 @@ class LikeSeeder extends Seeder
                 ->create();
         }
 
+        // Create likes for random replies
         foreach ($replies as $reply) {
             Like::factory()
                 ->count(rand(1, 10))

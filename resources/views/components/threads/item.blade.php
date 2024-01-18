@@ -13,7 +13,7 @@
 
     <x-slot name="value">
         {{-- Thread title --}}
-        <x-links.default href="{{ $thread->path }}" wire:navigate>
+        <x-links.default href="{{ route('threads.show', $thread->id) }}" wire:navigate>
             {{ $thread->title }}
         </x-links.default>
     </x-slot>

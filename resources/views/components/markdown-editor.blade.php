@@ -1,7 +1,9 @@
+@props(['label' => '', 'id' => '', 'placeholder' => '', 'height' => 'h-32', 'hasBorder' => true])
+
 <div x-data="{
-    mode: $wire.entangle('mode'),
-    content: $wire.entangle('content'),
-    mentionableItems: $wire.entangle('mentionableItems'),
+    mode: 'write',
+    content: @entangle($attributes->wire('model')),
+    mentionableItems: [],
     selectedItem: null,
     activeItem: null,
     dropdownOpen: false,
@@ -37,9 +39,7 @@
         this.insertTextAtCursor(item.value);
         this.closeDropdown();
     },
-    focusTextarea() {
-        $nextTick(() => $refs.textarea.focus());
-    },
+    focusTextarea() {},
     insertTextAtCursor(text) {
         const textBeforeCursor = this.getTextBeforeCursor();
         const textAfterCursor = this.getTextAfterCursor();
@@ -97,7 +97,7 @@
             this.closeDropdown();
         }
     },
-}" @mentionable-items-updated.window="focusTextarea" x-cloak>
+}" x-cloak @focus-markdown-editor.window="focusTextarea()">
     @if ($label)
         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
             {{ $label }}
@@ -110,29 +110,28 @@
             <div class="flex">
                 <button class="p-2 text-sm font-bold" type="button"
                     :class="isWriteMode() ? 'text-blue-600 dark:text-white' : 'text-gray-600 dark:text-gray-400'"
-                    wire:click="$set('mode', 'write')">
+                    @click="mode = 'write'">
                     Write
                 </button>
 
                 <button class="p-2 text-sm font-bold" type="button"
                     :class="isPreviewMode() ? 'text-blue-600 dark:text-white' : 'text-gray-600 dark:text-gray-400'"
-                    wire:click="$set('mode', 'preview')">
+                    @click="mode = 'preview'">
                     Preview
                 </button>
             </div>
         </div>
 
-        <div class="relative px-4 py-2">
+        <div class="relative px-4 py-2" x-id="['textarea']">
             <textarea
                 class="{{ $height }} block w-full border-0 bg-gray-50 px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-900 dark:text-white dark:placeholder-gray-400"
-                id="content" name="content" placeholder="{{ $placeholder }}" required x-ref="textarea" x-model="content"
-                x-show="isWriteMode()" @keydown.debounce.250="searchMentionableItems" @keydown.escape="closeDropdown"
-                @click.away="closeDropdown" @keydown.arrow-up.prevent="highlightPreviousItem"
-                @keydown.arrow-down.prevent="highlightNextItem"></textarea>
+                placeholder="{{ $placeholder }}" required x-model="content" x-show="isWriteMode()"
+                @keydown.debounce.250="searchMentionableItems" @keydown.escape="closeDropdown" @click.away="closeDropdown"
+                @keydown.arrow-up.prevent="highlightPreviousItem" @keydown.arrow-down.prevent="highlightNextItem" x-ref="textarea"></textarea>
 
             <div class="{{ $height }} prose block max-w-full overflow-y-auto border-0 bg-gray-50 px-0 text-sm text-gray-800 dark:prose-invert focus:ring-0 prose-a:text-blue-600 prose-img:rounded-xl dark:bg-gray-900 dark:text-white dark:placeholder-gray-400"
                 x-show="isPreviewMode()">
-                {!! $this->contentPreview !!}
+                <div x-text="content"></div>
             </div>
 
             <ul class="absolute z-10 w-44 rounded-lg bg-white py-2 text-gray-700 shadow dark:bg-gray-800 dark:text-gray-200"

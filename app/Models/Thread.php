@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Concerns\HasSlug;
 use App\Concerns\HasLikes;
 use App\Concerns\HasAuthor;
 use App\Concerns\HasBody;
@@ -23,7 +22,6 @@ class Thread extends Model
     use HasReplies;
     use HasLikes;
     use HasSubscriptions;
-    use HasSlug;
     use HasBody;
     use SortsByPopularity;
 
@@ -33,7 +31,8 @@ class Thread extends Model
         'best_reply_id',
         'title',
         'body',
-        'slug',
+        'is_closed',
+        'is_pinned',
     ];
 
     protected $withCount = ['likes', 'replies'];
@@ -55,11 +54,62 @@ class Thread extends Model
         });
     }
 
-    public function path(): Attribute
+    public function hasBestReply(): bool
     {
-        return Attribute::make(function ($value) {
-            return route('threads.show', $this->slug);
-        });
+        return !is_null($this->best_reply_id);
+    }
+
+    public function hasAsBestReply(Reply $reply): bool
+    {
+        return $this->bestReply()->is($reply);
+    }
+
+    public function markAsBestReply(Reply $reply): void
+    {
+        $this->update(['best_reply_id' => $reply->id]);
+    }
+
+    public function removeBestReply(): void
+    {
+        $this->update(['best_reply_id' => null]);
+    }
+
+    public function isPinned(): bool
+    {
+        return $this->is_pinned;
+    }
+
+    public function pin(): void
+    {
+        $this->update(['is_pinned' => true]);
+    }
+
+    public function unpin(): void
+    {
+        $this->update(['is_pinned' => false]);
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->is_closed;
+    }
+
+    public function open(): void
+    {
+        $this->update(['is_closed' => false]);
+    }
+
+    public function close(): void
+    {
+        $this->update(['is_closed' => true]);
+    }
+
+    public function participants(): Collection
+    {
+        return $this->replyAuthors()
+            ->get()
+            ->prepend($this->author)
+            ->unique();
     }
 
     public function scopeSearch(Builder $query, string $search): void
@@ -87,33 +137,5 @@ class Thread extends Model
         $query->when($sort === 'top_month', fn ($query) => $query->popularThisMonth());
         $query->when($sort === 'top_year', fn ($query) => $query->popularThisYear());
         $query->when($sort === 'top_all', fn ($query) => $query->popularAllTime());
-    }
-
-    public function markAsBestReply(Reply $reply): void
-    {
-        $this->update(['best_reply_id' => $reply->id]);
-    }
-
-    public function removeBestReply(): void
-    {
-        $this->update(['best_reply_id' => null]);
-    }
-
-    public function hasBestReply(): bool
-    {
-        return !is_null($this->best_reply_id);
-    }
-
-    public function hasAsBestReply(Reply $reply): bool
-    {
-        return $this->bestReply()->is($reply);
-    }
-
-    public function participants(): Collection
-    {
-        return $this->replyAuthors()
-            ->get()
-            ->prepend($this->author)
-            ->unique();
     }
 }

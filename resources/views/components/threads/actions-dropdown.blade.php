@@ -6,7 +6,7 @@
     </x-slot>
 
     <x-slot name="content">
-        <x-dropdown-button href="{{ route('threads.edit', $thread->slug) }}" wire:navigate>
+        <x-dropdown-button href="{{ route('threads.edit', $thread->id) }}" wire:navigate>
             {{ __('Edit') }}
         </x-dropdown-button>
 

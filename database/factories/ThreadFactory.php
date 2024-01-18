@@ -29,47 +29,27 @@ class ThreadFactory extends Factory
             'channel_id' => Channel::factory(),
             'best_reply_id' => null,
             'title' => $title,
-            'slug' => Str::slug($title),
             'body' => fake()->paragraph(),
+            'is_closed' => false,
+            'is_pinned' => false,
         ];
     }
 
-    public function hasRandomTimeStamps($startDate = '-1 month', $endDate = 'now'): static
+    public function closed(): Factory
     {
-        $createdAt = fake()->dateTimeBetween($startDate, $endDate);
-
-        return $this->state([
-            'created_at' => $createdAt,
-            'updated_at' => fake()->dateTimeBetween($createdAt, $endDate),
-        ]);
-    }
-
-    public function hasExistingChannel(): static
-    {
-        $channel = Channel::inRandomOrder()->first();
-
-        return $this->state([
-            'channel_id' => $channel->id,
-        ]);
-    }
-
-    public function withRandomReplies(): self
-    {
-        return $this->afterCreating(function (Thread $thread) {
-            Reply::factory()
-                ->count(rand(0, 10))
-                ->for($thread)
-                ->create();
+        return $this->state(function (array $attributes) {
+            return [
+                'is_closed' => true,
+            ];
         });
     }
 
-    public function withRandomLikes($count = 10): self
+    public function pinned(): Factory
     {
-        return $this->afterCreating(function (Thread $thread) {
-            Like::factory()
-                ->count(rand(0, 10))
-                ->for($thread, 'likeable')
-                ->create();
+        return $this->state(function (array $attributes) {
+            return [
+                'is_pinned' => true,
+            ];
         });
     }
 }

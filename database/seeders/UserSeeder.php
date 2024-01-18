@@ -42,8 +42,7 @@ class UserSeeder extends Seeder
                     ->state(new Sequence(function () {
                         return [
                             'channel_id' => Channel::inRandomOrder()->first(),
-                            'created_at' => fake()->dateTimeBetween('-2 week', '-3 days'),
-                            'updated_at' => fake()->dateTimeBetween('-3 days', 'now'),
+                            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
                         ];
                     }))
                     ->create();
