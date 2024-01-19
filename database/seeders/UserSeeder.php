@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Like;
+use App\Models\Category;
 use App\Models\User;
-use App\Models\Reply;
 use App\Models\Thread;
-use App\Models\Channel;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
@@ -41,7 +39,7 @@ class UserSeeder extends Seeder
                     ->for($user, 'author')
                     ->state(new Sequence(function () {
                         return [
-                            'channel_id' => Channel::inRandomOrder()->first(),
+                            'category_id' => Category::inRandomOrder()->first(),
                             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
                         ];
                     }))

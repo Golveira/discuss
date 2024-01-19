@@ -37,9 +37,9 @@ class Thread extends Model
 
     protected $withCount = ['likes', 'replies'];
 
-    public function channel(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Channel::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function bestReply(): BelongsTo
@@ -110,6 +110,11 @@ class Thread extends Model
             ->get()
             ->prepend($this->author)
             ->unique();
+    }
+
+    public function scopePinned(Builder $query): void
+    {
+        $query->where('is_pinned', true);
     }
 
     public function scopeSearch(Builder $query, string $search): void

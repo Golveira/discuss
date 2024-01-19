@@ -24,8 +24,8 @@
                     {{-- Notifications --}}
                     {{-- <livewire:notifications.notification-bell /> --}}
 
-                    {{-- Dropdown --}}
-                    <x-dropdown align="right" width="48">
+                    {{-- dropdowns.dropdown --}}
+                    <x-dropdowns.dropdown align="right" width="32">
                         <x-slot name="trigger">
                             {{-- Avatar --}}
                             <span class="cursor-pointer">
@@ -35,21 +35,21 @@
 
                         <x-slot name="content">
                             {{-- Profile --}}
-                            <x-dropdown-button :href="route('profile.show', auth()->user()->username)" wire:navigate>
+                            <x-dropdowns.dropdown-button :href="route('profile.show', auth()->user()->username)" wire:navigate>
                                 {{ __('Profile') }}
-                            </x-dropdown-button>
+                            </x-dropdowns.dropdown-button>
 
                             {{-- Settings --}}
-                            <x-dropdown-button :href="route('settings')" wire:navigate>
+                            <x-dropdowns.dropdown-button :href="route('settings')" wire:navigate>
                                 {{ __('Settings') }}
-                            </x-dropdown-button>
+                            </x-dropdowns.dropdown-button>
 
                             {{-- Logout --}}
-                            <x-dropdown-button wire:click="logout">
+                            <x-dropdowns.dropdown-button wire:click="logout">
                                 {{ __('Logout') }}
-                            </x-dropdown-button>
+                            </x-dropdowns.dropdown-button>
                         </x-slot>
-                    </x-dropdown>
+                    </x-dropdowns.dropdown>
                 @endauth
             </div>
         </div>

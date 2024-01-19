@@ -7,14 +7,15 @@ use App\Models\Reply;
 use App\Models\Thread;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\ThreadSubscription;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -66,13 +67,6 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
-    public function profilePath(): Attribute
-    {
-        return Attribute::make(function () {
-            return route('profile.show', $this->username);
-        });
-    }
-
     public function joinedDate(): Attribute
     {
         return Attribute::make(function () {
@@ -90,7 +84,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return !is_null($this->banned_at);
     }
 
-    public function scopeOrderBySolutions($query)
+    public function scopeOrderByMostSolutions(Builder $query)
     {
         return $query->withCount([
             "replies as solutions_count" => function ($query) {

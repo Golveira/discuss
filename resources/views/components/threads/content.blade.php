@@ -6,8 +6,8 @@
 ])>
     <div class="mx-4 my-3 flex items-center justify-between">
         <div class="flex items-center gap-2">
-            {{-- Author --}}
-            <x-user-avatar :user="$thread->author" />
+            {{-- Author avatar --}}
+            <x-users.user-avatar :user="$thread->author" />
 
             {{-- Date --}}
             <p class="text-sm text-gray-600 dark:text-gray-400">
@@ -15,7 +15,7 @@
             </p>
 
             {{-- Author badge --}}
-            <x-author-badge value="Author" />
+            <x-users.author-badge value="Author" />
         </div>
 
         {{-- Actions --}}

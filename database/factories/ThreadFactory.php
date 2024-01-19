@@ -2,12 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\User;
-use App\Models\Reply;
-use App\Models\Thread;
-use App\Models\Channel;
-use App\Models\Like;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,13 +18,11 @@ class ThreadFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->sentence();
-
         return [
             'user_id' => User::factory(),
-            'channel_id' => Channel::factory(),
+            'category_id' => Category::factory(),
             'best_reply_id' => null,
-            'title' => $title,
+            'title' => fake()->sentence(),
             'body' => fake()->paragraph(),
             'is_closed' => false,
             'is_pinned' => false,

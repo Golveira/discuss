@@ -9,6 +9,15 @@
     </h1>
 
     <div class="flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400">
+        {{-- Closed badge --}}
+        @if ($thread->isClosed())
+            <div
+                class="flex items-center gap-1 rounded-full bg-gray-300 px-4 text-gray-700 dark:bg-gray-600 dark:text-gray-200">
+                <x-icons.lock-closed />
+                <span>Closed</span>
+            </div>
+        @endif
+
         {{-- Answered by --}}
         @if ($thread->hasBestReply())
             <div class="flex items-center gap-1 rounded-full border border-gray-300 px-3 py-2 dark:border-gray-700">
@@ -28,7 +37,7 @@
             </div>
         @endif
 
-        {{-- Category name --}}
+        {{-- Category --}}
         <div class="flex items-center gap-1">
             <x-links.secondary href="{{ route('profile.show', $thread->author->username) }}">
                 {{ $thread->author->username }}
@@ -36,8 +45,8 @@
 
             <span>asked this question in</span>
 
-            <x-links.secondary href="{{ route('channels', $thread->channel->slug) }}">
-                {{ $thread->channel->name }}
+            <x-links.secondary href="{{ route('categories', $thread->category->slug) }}">
+                {{ $thread->category->name }}
             </x-links.secondary>
         </div>
     </div>

@@ -31,6 +31,8 @@ class ThreadShow extends Component
         $this->thread->pin();
 
         toast()->success('Thread pinned')->push();
+
+        $this->reloadPage();
     }
 
     public function unpinThread(): void
@@ -40,6 +42,8 @@ class ThreadShow extends Component
         $this->thread->unpin();
 
         toast()->success('Thread unpinned')->push();
+
+        $this->reloadPage();
     }
 
     public function closeThread(): void
@@ -49,6 +53,8 @@ class ThreadShow extends Component
         $this->thread->close();
 
         toast()->success('Thread closed')->push();
+
+        $this->reloadPage();
     }
 
     public function openThread(): void
@@ -58,6 +64,14 @@ class ThreadShow extends Component
         $this->thread->open();
 
         toast()->success('Thread opened')->push();
+
+        $this->reloadPage();
+    }
+
+    // don't know about this
+    private function reloadPage(): void
+    {
+        $this->redirect(route('threads.show', $this->thread), navigate: true);
     }
 
     public function render(): View

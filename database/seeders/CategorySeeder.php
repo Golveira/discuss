@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Channel;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
-class ChannelSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,7 +21,7 @@ class ChannelSeeder extends Seeder
         ];
 
         foreach ($channels as $channel) {
-            Channel::create($channel);
+            Category::create($channel);
         }
     }
 }

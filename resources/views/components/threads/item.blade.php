@@ -1,13 +1,13 @@
 @props(['thread'])
 
-<x-list-item {{ $attributes }}>
+<x-lists.list-item {{ $attributes }}>
     <x-slot name="avatar">
         <div class="flex items-center gap-6">
             {{-- Like Button --}}
             <livewire:like-button :likeable="$thread" wire:key="thread-like-{{ $thread->id }}" />
 
             {{-- Category emoji --}}
-            <x-emoji-box :emoji="$thread->channel->emoji" />
+            <x-emoji-box :emoji="$thread->category->emoji" />
         </div>
     </x-slot>
 
@@ -30,8 +30,8 @@
         </span>
 
         {{-- Category name --}}
-        <x-links.secondary class="underline" href="{{ $thread->channel->path }}" wire:navigate>
-            {{ $thread->channel->name }}
+        <x-links.secondary class="underline" href="{{ $thread->category->path }}" wire:navigate>
+            {{ $thread->category->name }}
         </x-links.secondary>
 
         @if ($thread->hasBestReply())
@@ -42,12 +42,14 @@
     </x-slot>
 
     <x-slot name="actions">
-        <div class="flex justify-between gap-3">
+        <div class="flex justify-between gap-8">
             {{-- Avatar --}}
-            <x-avatar :image="$thread->author->avatar_path" width="xs" />
+            <x-tooltip :value="$thread->author->username">
+                <x-avatar :image="$thread->author->avatar_path" width="xs" />
+            </x-tooltip>
 
             {{-- Comments Count --}}
             <x-comments-count :count="$thread->replies_count" />
         </div>
     </x-slot>
-</x-list-item>
+</x-lists.list-item>

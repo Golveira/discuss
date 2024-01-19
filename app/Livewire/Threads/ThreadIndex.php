@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Threads;
 
+use App\Models\Category;
 use App\Models\Thread;
-use App\Models\Channel;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -15,7 +16,7 @@ class ThreadIndex extends Component
 {
     use WithPagination;
 
-    public Channel $channel;
+    public Category $category;
 
     #[Url(as: 'q')]
     public string $query = '';
@@ -26,23 +27,27 @@ class ThreadIndex extends Component
     #[Url]
     public string $filter = 'all';
 
-    public function mount(Channel $channel): void
-    {
-        $this->channel = $channel;
-    }
-
     #[Computed]
     public function threads(): LengthAwarePaginator
     {
         return Thread::query()
-            ->with(['author', 'channel', 'likes'])
+            ->with(['author', 'category', 'likes'])
             ->search($this->query)
             ->filter($this->filter)
             ->sort($this->sort)
-            ->when($this->channel->exists, function ($query) {
-                $query->whereBelongsTo($this->channel);
+            ->when(isset($this->category), function ($query) {
+                $query->whereBelongsTo($this->category);
             })
             ->paginate();
+    }
+
+    #[Computed()]
+    public function pinnedThreads(): Collection
+    {
+        return Thread::pinned()
+            ->with(['author', 'category'])
+            ->limit(4)
+            ->get();
     }
 
     public function search(): void

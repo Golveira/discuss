@@ -22,13 +22,13 @@
 
                     {{-- Thread author badge --}}
                     @if ($reply->isFromSameAuthor($thread->user_id))
-                        <x-author-badge value="Author" />
+                        <x-users.author-badge value="Author" />
                     @endif
                 </div>
 
                 {{-- Actions --}}
                 @can('update', $reply)
-                    <x-replies.actions :$reply />
+                    <x-replies.actions-dropdown :$reply />
                 @endcan
             </div>
 

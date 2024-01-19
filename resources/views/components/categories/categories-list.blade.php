@@ -16,14 +16,14 @@
             </a>
         </li>
 
-        @foreach ($channels as $channel)
+        @foreach ($categories as $category)
             <li>
-                <a href="{{ route('channels', $channel->slug) }}" @class([
+                <a href="{{ route('categories', $category->slug) }}" @class([
                     $class,
-                    $activeClass => request()->is("discussions/channels/$channel->slug"),
+                    $activeClass => request()->is("discussions/categories/$category->slug"),
                 ]) wire:navigate>
-                    <span>{{ $channel->emoji }}</span>
-                    <span>{{ $channel->name }}</span>
+                    <span>{{ $category->emoji }}</span>
+                    <span>{{ $category->name }}</span>
                 </a>
             </li>
         @endforeach

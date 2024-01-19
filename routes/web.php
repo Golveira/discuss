@@ -29,8 +29,8 @@ Route::get('notifications', NotificationIndex::class)->name('notifications.index
 
 // Threads
 Route::get('discussions', ThreadIndex::class)->name('threads.index');
-Route::get('discussions/create', ThreadCreate::class)->name('threads.create')->middleware('auth');
-Route::get('discussions/channels/{channel:slug}', ThreadIndex::class)->name('channels');
+Route::get('discussions/new', ThreadCreate::class)->name('threads.create')->middleware('auth');
+Route::get('discussions/categories/{category:slug}', ThreadIndex::class)->name('categories');
 Route::get('discussions/{thread}', ThreadShow::class)->name('threads.show');
 Route::get('discussions/{thread}/edit', ThreadEdit::class)->name('threads.edit')->middleware('auth');
 

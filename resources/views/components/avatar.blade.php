@@ -10,4 +10,4 @@
     ][$width];
 @endphp
 
-<img class="{{ $width }} rounded-full object-cover" src="{{ $image }}" />
+<img src="{{ $image }}" {{ $attributes->merge(['class' => 'rounded-full object-cover ' . $width]) }} />
