@@ -27,7 +27,7 @@ class Thread extends Model
 
     protected $fillable = [
         'user_id',
-        'channel_id',
+        'category_id',
         'best_reply_id',
         'title',
         'body',
@@ -127,8 +127,8 @@ class Thread extends Model
     public function scopeFilter(Builder $query, string $filter): void
     {
         $query->when($filter === 'all', fn ($query) => $query);
-        $query->when($filter === 'open', fn ($query) => $query);
-        $query->when($filter === 'closed', fn ($query) => $query);
+        $query->when($filter === 'open', fn ($query) => $query->where('is_closed', false));
+        $query->when($filter === 'closed', fn ($query) => $query->where('is_closed', true));
         $query->when($filter === 'answered', fn ($query) => $query->has('bestReply'));
         $query->when($filter === 'unanswered', fn ($query) => $query->doesntHave('bestReply'));
     }

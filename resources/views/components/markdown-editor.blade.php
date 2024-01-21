@@ -1,4 +1,4 @@
-@props(['label' => '', 'id' => '', 'placeholder' => '', 'height' => 'h-32', 'hasBorder' => true])
+@props(['name' => '', 'label' => '', 'id' => '', 'placeholder' => '', 'height' => 'h-32'])
 
 <div x-data="{
     mode: 'write',
@@ -97,15 +97,17 @@
             this.closeDropdown();
         }
     },
-}" x-cloak @focus-markdown-editor.window="focusTextarea()">
+}" x-cloak>
     @if ($label)
         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
             {{ $label }}
         </label>
     @endif
 
-    <div
-        class="{{ $hasBorder ? 'border' : 'border-none' }} group w-full rounded-lg border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-900">
+    <div @class([
+        'group w-full rounded-lg border border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-900',
+        '!border-red-500' => $errors->has($name),
+    ])>
         <div class="flex items-center justify-between border-b border-gray-300 px-4 py-1 dark:border-gray-600">
             <div class="flex">
                 <button class="p-2 text-sm font-bold" type="button"

@@ -7,11 +7,11 @@
         {{ __('Closed') }}
     </option>
 
-    <option value="resolved">
+    <option value="answered">
         {{ __('Answered') }}
     </option>
 
-    <option value="unresolved">
+    <option value="unanswered">
         {{ __('Unanswered') }}
     </option>
 

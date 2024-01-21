@@ -21,6 +21,15 @@ trait HasReplies
         return $this->hasMany(Reply::class);
     }
 
+    public function addReply(string $body, ?int $parent_id = null): Reply
+    {
+        return $this->replies()->create([
+            'user_id' => auth()->id(),
+            'parent_id' => $parent_id,
+            'body' => $body,
+        ]);
+    }
+
     public function replyAuthors(): HasManyThrough
     {
         return $this->hasManyThrough(

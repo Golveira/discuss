@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Layout;
 
-use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Livewire\Actions\Logout;

@@ -19,3 +19,10 @@ if (!function_exists('mentions_to_links')) {
         return preg_replace('/@([\w\-.]+)/', '<a href="/user/$1" wire:navigate>@$1</a>', $markdown);
     }
 }
+
+if (!function_exists('pluralize')) {
+    function pluralize($value, $count)
+    {
+        return Str::plural($value, $count);
+    }
+}

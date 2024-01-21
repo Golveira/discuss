@@ -7,14 +7,14 @@
         </div>
     @else
         <form class="space-y-3" id="create-reply-form" wire:submit="create">
-            <x-markdown-editor height="h-32" placeholder="Add your comment here..." wire:model="body" />
+            <x-markdown-editor height="h-32" placeholder="Add your comment here..." wire:model="replyForm.body" />
 
             <div class="flex justify-between gap-3">
-                @error('body')
-                    <p class="text-sm text-red-600 dark:text-red-400">
+                <p class="text-sm text-red-600 dark:text-red-400">
+                    @error('replyForm.body')
                         {{ $message }}
-                    </p>
-                @enderror
+                    @enderror
+                </p>
 
                 <x-buttons.primary type="submit">
                     Comment

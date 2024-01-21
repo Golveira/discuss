@@ -11,8 +11,7 @@ trait SortsByPopularity
 
     public function scopePopular($query)
     {
-        $query->orderByRaw('(likes_count + replies_count) DESC')
-            ->orderBy('replies_count', 'desc')
+        $query->orderBy('replies_count', 'desc')
             ->orderBy('likes_count', 'desc')
             ->recent();
     }

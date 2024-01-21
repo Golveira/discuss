@@ -8,19 +8,19 @@ use Livewire\Attributes\Validate;
 
 class ThreadForm extends Form
 {
-    #[Validate('required|min:2|max:100')]
+    #[Validate('required|min:1|max:100')]
     public string $title = '';
 
-    #[Validate('required|min:2|max:5000',)]
-    public string $body = 'testing';
+    #[Validate('required|min:1|max:5000',)]
+    public string $body = '';
 
-    #[Validate('required|exists:channels,id', as: 'channel')]
-    public string $channel_id = '';
+    #[Validate('required|exists:categories,id', as: 'category')]
+    public string $category_id = '';
 
     public function setProperties(Thread $thread)
     {
         $this->title = $thread->title;
         $this->body = $thread->body;
-        $this->channel_id = $thread->channel_id;
+        $this->category_id = $thread->category_id;
     }
 }

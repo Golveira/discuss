@@ -61,4 +61,9 @@ class Reply extends Model
     {
         return $query->whereNull('parent_id');
     }
+
+    public function scopeChild(Builder $query): Builder
+    {
+        return $query->whereNotNull('parent_id');
+    }
 }

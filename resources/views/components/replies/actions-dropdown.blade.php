@@ -10,7 +10,7 @@
             {{ __('Edit') }}
         </x-dropdowns.dropdown-button>
 
-        <x-dropdowns.dropdown-button wire:click="delete">
+        <x-dropdowns.dropdown-button wire:click="deleteReply">
             {{ __('Delete') }}
         </x-dropdowns.dropdown-button>
     </x-slot>

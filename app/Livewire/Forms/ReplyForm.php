@@ -8,7 +8,7 @@ use Livewire\Attributes\Validate;
 
 class ReplyForm extends Form
 {
-    #[Validate('required|min:2|max:5000')]
+    #[Validate('required|min:1|max:5000')]
     public string $body = '';
 
     public function setProperties(Reply $reply)
