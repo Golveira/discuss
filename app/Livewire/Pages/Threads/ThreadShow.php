@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class ThreadShow extends Component
@@ -14,6 +15,11 @@ class ThreadShow extends Component
     use WireToast;
 
     public Thread $thread;
+
+    #[On('best-reply-updated')]
+    public function updateThread(): void
+    {
+    }
 
     #[Computed]
     public function threadParticipants(): Collection

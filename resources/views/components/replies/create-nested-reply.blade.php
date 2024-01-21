@@ -1,8 +1,8 @@
 @auth
     @if (!$thread->isClosed())
-        <div class="space-y-3 rounded-b-lg border-t border-gray-300 bg-gray-100 p-3 dark:border-gray-700 dark:bg-gray-800">
+        <div class="space-y-3 rounded-b-lg border-t border-gray-300 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800">
             <button
-                class="block w-full cursor-text rounded-lg border border-gray-300 bg-gray-50 p-2 text-left text-sm text-gray-600 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400"
+                class="block w-full cursor-text rounded-lg border border-gray-300 bg-white p-2 text-left text-sm text-gray-600 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400"
                 x-show="!isReplying" @click="isReplying = true">
                 Write a reply
             </button>

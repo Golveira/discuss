@@ -25,6 +25,10 @@ class ReplyItem extends Component
 
     public bool $isReplying = false;
 
+    public bool $isAnswer;
+
+    public bool $isAuthoredByUser;
+
     public function mount(Thread $thread, Reply $reply): void
     {
         $this->thread = $thread;
@@ -32,6 +36,10 @@ class ReplyItem extends Component
         $this->reply = $reply;
 
         $this->editForm->setProperties($reply);
+
+        $this->isAnswer = $thread->hasAsBestReply($reply);
+
+        $this->isAuthoredByUser = $reply->isAuthoredByUser();
     }
 
     public function editReply(): void
@@ -72,6 +80,32 @@ class ReplyItem extends Component
         $this->replyForm->reset();
 
         $this->dispatch('nested-reply-created');
+    }
+
+    public function markAsAnswer(): void
+    {
+        $this->authorize('markAsAnswer', $this->reply);
+
+        if ($this->thread->hasBestReply()) {
+            return;
+        }
+
+        $this->thread->markAsBestReply($this->reply);
+
+        $this->isAnswer = true;
+
+        $this->dispatch('best-reply-updated');
+    }
+
+    public function unmarkAsAnswer(): void
+    {
+        $this->authorize('markAsAnswer', $this->reply);
+
+        $this->thread->removeBestReply();
+
+        $this->isAnswer = false;
+
+        $this->dispatch('best-reply-updated');
     }
 
     private function getViewName(): string

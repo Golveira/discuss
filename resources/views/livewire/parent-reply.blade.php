@@ -1,14 +1,13 @@
 @props(['reply', 'thread'])
 
-<div x-data="{
+<div id="comment-{{ $reply->id }}" x-data="{
     isEditing: $wire.entangle('isEditing'),
     isReplying: $wire.entangle('isReplying'),
 }" x-cloak>
-    <div id="comment-{{ $reply->id }}" @class([
+    <div @class([
         'rounded-lg border border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-900',
-        '!border-blue-500 dark:!border-blue-800' => $reply->isAuthoredByUser(),
-        '!border-2 border-green-600 dark:border-green-700' => $thread->hasAsBestReply(
-            $reply),
+        '!border-blue-500 dark:!border-blue-800' => $isAuthoredByUser,
+        '!border-2 border-green-600 dark:border-green-700' => $isAnswer,
     ])>
         <div class="mx-4 my-3 flex items-center justify-between" x-show="!isEditing">
             <div class="flex items-center gap-2">
@@ -41,12 +40,17 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     {{-- Best answer badge --}}
-                    @if ($thread->hasAsBestReply($reply))
+                    @if ($isAnswer)
                         <x-replies.best-answer-badge value="Marked as answer" />
                     @endif
 
                     {{-- Like button --}}
                     <livewire:like-button :likeable="$reply" wire:key="like-reply-{{ $reply->id }}" />
+
+                    {{-- Mark as answer button --}}
+                    @can('markAsAnswer', $reply)
+                        <x-replies.mark-answer-button :$isAnswer />
+                    @endcan
                 </div>
 
                 {{-- Nested replies count --}}
@@ -66,7 +70,7 @@
         {{-- Nested replies --}}
         @if ($reply->hasChildren())
             <div
-                class="space-y-3 rounded-b-lg border-t border-gray-200 bg-gray-100 p-3 dark:border-gray-700 dark:bg-black">
+                class="space-y-3 rounded-b-lg border-t border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-black">
                 @foreach ($reply->children as $child)
                     <livewire:reply-item type="nested" @reply-deleted="$refresh" :$thread :reply="$child"
                         :key="$child->id" />

@@ -1,5 +1,5 @@
 <div class="relative flex items-start gap-3 before:absolute before:left-3 before:top-3 before:z-0 before:block before:h-full before:border-l-2 before:border-gray-300 before:dark:border-gray-700"
-    x-data="{ isEditing: $wire.entangle('isEditing') }">
+    id="comment-{{ $reply->id }}" x-data="{ isEditing: $wire.entangle('isEditing') }">
     <div class="z-10 flex-shrink-0">
         {{-- Author avatar --}}
         <x-avatar :image="$reply->author->avatar_path" width="xs" />
@@ -36,6 +36,18 @@
             <x-html-content>
                 {{ $reply->body }}
             </x-html-content>
+
+            <div class="mt-2 flex items-center gap-1">
+                {{-- Best answer badge --}}
+                @if ($isAnswer)
+                    <x-replies.best-answer-badge value="Marked as answer" />
+                @endif
+
+                {{-- Mark as answer button --}}
+                @can('markAsAnswer', $reply)
+                    <x-replies.mark-answer-button :$isAnswer />
+                @endcan
+            </div>
         </div>
 
         {{-- Edit form --}}

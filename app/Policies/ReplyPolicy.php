@@ -27,4 +27,9 @@ class ReplyPolicy
     {
         return $reply->author()->is($user);
     }
+
+    public function markAsAnswer(User $user, Reply $reply): bool
+    {
+        return $reply->thread->author()->is($user);
+    }
 }

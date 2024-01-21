@@ -61,7 +61,7 @@ class Thread extends Model
 
     public function hasAsBestReply(Reply $reply): bool
     {
-        return $this->bestReply()->is($reply);
+        return $this->best_reply_id === $reply->id;
     }
 
     public function markAsBestReply(Reply $reply): void

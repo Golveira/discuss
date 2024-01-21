@@ -1,10 +1,10 @@
 <div class="space-y-8 pb-6">
-    <div class="flex items-center gap-1 text-gray-600 dark:text-white">
+    <div class="flex items-center gap-1 text-gray-900 dark:text-white">
         <span class="font-bold">
-            {{ $commentsCount }} {{ pluralize('comment', $commentsCount) }}
+            {{ $commentsCount }} {{ pluralize('comment', $commentsCount) }} ·
         </span>
 
-        <span class="font-bold">
+        <span>
             {{ $repliesCount }} {{ pluralize('reply', $repliesCount) }}
         </span>
     </div>

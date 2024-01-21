@@ -105,7 +105,7 @@
     @endif
 
     <div @class([
-        'group w-full rounded-lg border border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-900',
+        'group w-full rounded-lg border border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-900',
         '!border-red-500' => $errors->has($name),
     ])>
         <div class="flex items-center justify-between border-b border-gray-300 px-4 py-1 dark:border-gray-600">
@@ -126,12 +126,12 @@
 
         <div class="relative px-4 py-2" x-id="['textarea']">
             <textarea
-                class="{{ $height }} block w-full border-0 bg-gray-50 px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-900 dark:text-white dark:placeholder-gray-400"
+                class="{{ $height }} block w-full border-0 bg-white px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-900 dark:text-white dark:placeholder-gray-400"
                 placeholder="{{ $placeholder }}" required x-model="content" x-show="isWriteMode()"
                 @keydown.debounce.250="searchMentionableItems" @keydown.escape="closeDropdown" @click.away="closeDropdown"
                 @keydown.arrow-up.prevent="highlightPreviousItem" @keydown.arrow-down.prevent="highlightNextItem" x-ref="textarea"></textarea>
 
-            <div class="{{ $height }} prose block max-w-full overflow-y-auto border-0 bg-gray-50 px-0 text-sm text-gray-800 dark:prose-invert focus:ring-0 prose-a:text-blue-600 prose-img:rounded-xl dark:bg-gray-900 dark:text-white dark:placeholder-gray-400"
+            <div class="{{ $height }} prose block max-w-full overflow-y-auto border-0 bg-white px-0 text-sm text-gray-800 dark:prose-invert focus:ring-0 prose-a:text-blue-600 prose-img:rounded-xl dark:bg-gray-900 dark:text-white dark:placeholder-gray-400"
                 x-show="isPreviewMode()">
                 <div x-text="content"></div>
             </div>
