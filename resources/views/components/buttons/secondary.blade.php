@@ -3,7 +3,7 @@
 @endphp
 
 @if ($attributes->has('href'))
-    <a {{ $attributes->merge(['class' => $classes]) }}>
+    <a {{ $attributes->merge(['class' => $classes]) }} wire:navigate>
         {{ $slot }}
     </a>
 @else

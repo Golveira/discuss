@@ -3,7 +3,7 @@
 
     @auth
         <x-buttons.border @class(['h-7 w-12', $activeClass => $isLiked]) wire:click="toggleLike">
-            <x-icons.arrow-up class="h-4 w-4" />
+            <x-icons.arrow-up />
             <span>{{ $likeable->likes_count }}</span>
         </x-buttons.border>
     @else

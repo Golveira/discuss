@@ -30,6 +30,11 @@ class Reply extends Model
         return $this->belongsTo(Thread::class);
     }
 
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Reply::class, 'parent_id');
+    }
+
     public function children(): HasMany
     {
         return $this->hasMany(Reply::class, 'parent_id');

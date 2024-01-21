@@ -84,6 +84,16 @@ class User extends Authenticatable
         return !is_null($this->banned_at);
     }
 
+    public function ban(): void
+    {
+        $this->update(['banned_at' => now()]);
+    }
+
+    public function unban(): void
+    {
+        $this->update(['banned_at' => null]);
+    }
+
     public function scopeOrderByMostSolutions(Builder $query)
     {
         return $query->withCount([
