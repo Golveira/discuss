@@ -4,7 +4,7 @@ use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
 use Livewire\Livewire;
-use App\Livewire\Pages\Profile\ProfileShow;
+use App\Livewire\Pages\ProfileShow;
 
 test('profile page is displayed', function () {
     $user = User::factory()->create();

@@ -5,6 +5,6 @@
 transition duration-150 ease-in-out dark:hover:bg-gray-700 hover:bg-gray-100 p-3 rounded-lg';
 @endphp
 
-<a {{ $attributes->merge(['class' => $classes]) }}>
+<a {{ $attributes->merge(['class' => $classes]) }} wire:navigate>
     {{ $slot }}
 </a>

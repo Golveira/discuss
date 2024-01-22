@@ -10,7 +10,7 @@
     </div>
 
     <div class="mx-4 my-3 space-y-3">
-        <x-links.default href="{{ route('threads.show', $reply->thread->id) }}#comment-{{ $reply->id }}">
+        <x-links.default href="{{ route('threads.show', $reply->thread) }}#comment-{{ $reply->id }}">
             {{ $reply->thread->title }}
         </x-links.default>
 

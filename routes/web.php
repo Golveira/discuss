@@ -1,13 +1,13 @@
 <?php
 
-use App\Livewire\Settings\Settings;
+use Illuminate\Support\Facades\Route;
+use App\Livewire\Pages\NotificationsIndex;
+use App\Livewire\Pages\SettingsIndex;
+use App\Livewire\Pages\ProfileShow;
 use App\Livewire\Pages\Threads\ThreadEdit;
 use App\Livewire\Pages\Threads\ThreadShow;
-use App\Livewire\Pages\Profile\ProfileShow;
 use App\Livewire\Pages\Threads\ThreadIndex;
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Pages\Threads\ThreadCreate;
-use App\Livewire\Pages\Notifications\NotificationIndex;
 
 // Threads
 Route::permanentRedirect('/', '/discussions');
@@ -21,9 +21,9 @@ Route::get('discussions/{thread}/edit', ThreadEdit::class)->name('threads.edit')
 Route::get('user/{user:username}', ProfileShow::class)->name('profile.show');
 
 // Notifications
-Route::get('notifications', NotificationIndex::class)->name('notifications.index')->middleware('auth');
+Route::get('notifications', NotificationsIndex::class)->name('notifications.index')->middleware('auth');
 
 // Settings
-Route::get('settings', Settings::class)->name('settings')->middleware('auth');
+Route::get('settings', SettingsIndex::class)->name('settings.index')->middleware('auth');
 
 require __DIR__ . '/auth.php';

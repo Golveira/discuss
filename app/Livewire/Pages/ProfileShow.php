@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages\Profile;
+namespace App\Livewire\Pages;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -64,6 +64,6 @@ class ProfileShow extends Component
 
     public function render(): View
     {
-        return view('livewire.pages.profile.profile-show');
+        return view('livewire.pages.profile-show');
     }
 }

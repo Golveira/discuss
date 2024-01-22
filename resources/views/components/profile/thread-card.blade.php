@@ -11,7 +11,7 @@
 
     <div class="mx-4 my-3 space-y-3">
         <h2 class="text-lg">
-            <x-links.default href="{{ route('threads.show', $thread->id) }}">
+            <x-links.default href="{{ route('threads.show', $thread) }}">
                 {{ $thread->title }}
             </x-links.default>
         </h2>

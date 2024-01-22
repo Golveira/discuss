@@ -10,7 +10,7 @@ use App\Providers\RouteServiceProvider;
 class Navigation extends Component
 {
     #[On('avatar-updated')]
-    public function updatedAvatar(): void
+    public function updateNavbar(): void
     {
     }
 

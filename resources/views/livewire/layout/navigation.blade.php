@@ -10,12 +10,12 @@
 
                 @guest
                     {{-- Login --}}
-                    <x-links.nav-link href="{{ route('login') }}" wire:navigate>
+                    <x-links.nav-link href="{{ route('login') }}">
                         {{ __('Log In') }}
                     </x-links.nav-link>
 
                     {{-- Sign Up --}}
-                    <x-links.nav-link class="hidden lg:block" href="{{ route('register') }}" wire:navigate>
+                    <x-links.nav-link class="hidden lg:block" href="{{ route('register') }}">
                         {{ __('Sign Up') }}
                     </x-links.nav-link>
                 @endguest
@@ -24,12 +24,14 @@
                     {{-- Notifications --}}
                     {{-- <livewire:notifications.notification-bell /> --}}
 
-                    {{-- dropdowns.dropdown --}}
+                    {{-- Dropdown --}}
                     <x-dropdowns.dropdown align="right" width="32">
                         <x-slot name="trigger">
                             {{-- Avatar --}}
                             <span class="cursor-pointer">
-                                <x-avatar :image="auth()->user()->avatar_path" width="sm" />
+                                <x-avatar :image="auth()
+                                    ->user()
+                                    ->avatarFullPath()" width="sm" />
                             </span>
                         </x-slot>
 
@@ -40,7 +42,7 @@
                             </x-dropdowns.dropdown-button>
 
                             {{-- Settings --}}
-                            <x-dropdowns.dropdown-button :href="route('settings')" wire:navigate>
+                            <x-dropdowns.dropdown-button :href="route('settings.index')" wire:navigate>
                                 {{ __('Settings') }}
                             </x-dropdowns.dropdown-button>
 

@@ -11,7 +11,7 @@
             </div>
 
             <div class="absolute left-4 top-4">
-                <x-avatar class="border-2 border-gray-300" :image="$thread->author->avatar_path" width="sm" />
+                <x-avatar class="border-2 border-gray-300" :image="$thread->author->avatarFullPath()" width="sm" />
             </div>
 
             <div class="mb-4 space-y-1 px-4 py-6">

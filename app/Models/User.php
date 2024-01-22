@@ -59,19 +59,18 @@ class User extends Authenticatable
         return $this->hasMany(ThreadSubscription::class);
     }
 
-    public function avatarPath(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?string $value) => $value ? asset("storage/{$value}") : asset('assets/images/avatar.png'),
-            set: fn (string $value) => $value
-        );
-    }
-
     public function joinedDate(): Attribute
     {
         return Attribute::make(function () {
             return $this->created_at->format('M Y');
         });
+    }
+
+    public function avatarFullPath(): string
+    {
+        return $this->avatar_path
+            ? asset("storage/{$this->avatar_path}")
+            : asset('assets/images/avatar.png');
     }
 
     public function isAdmin(): bool

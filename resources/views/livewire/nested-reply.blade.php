@@ -2,7 +2,7 @@
     id="comment-{{ $reply->id }}" x-data="{ isEditing: $wire.entangle('isEditing') }">
     <div class="z-10 flex-shrink-0">
         {{-- Author avatar --}}
-        <x-avatar :image="$reply->author->avatar_path" width="xs" />
+        <x-avatar :image="$reply->author->avatarFullPath()" width="xs" />
     </div>
 
     <div class="flex-1 space-y-3">
@@ -11,7 +11,7 @@
                 <div class="flex items-center gap-3">
                     {{-- Author username --}}
                     <x-links.default class="flex items-center gap-3"
-                        href="{{ route('profile.show', $reply->author->username) }}" wire:navigate>
+                        href="{{ route('profile.show', $reply->author->username) }}">
                         <span>{{ $reply->author->username }}</span>
                     </x-links.default>
 

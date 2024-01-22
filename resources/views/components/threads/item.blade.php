@@ -12,28 +12,29 @@
     </x-slot>
 
     <x-slot name="value">
-        {{-- Thread title --}}
-        <x-links.default href="{{ route('threads.show', $thread->id) }}" wire:navigate>
+        {{-- Title --}}
+        <x-links.default href="{{ route('threads.show', $thread) }}">
             {{ $thread->title }}
         </x-links.default>
     </x-slot>
 
     <x-slot name="subvalue">
         {{-- Username --}}
-        <x-links.secondary class="underline" href="{{ $thread->author->profile_path }}" wire:navigate>
+        <x-links.secondary class="underline" href="{{ route('profile.show', $thread->author->username) }}">
             {{ $thread->author->username }}
         </x-links.secondary>
 
-        {{-- Thread date --}}
+        {{-- Date --}}
         <span>
             {{ __('asked') }} {{ $thread->date_for_humans }} {{ __('in') }}
         </span>
 
         {{-- Category name --}}
-        <x-links.secondary class="underline" href="{{ $thread->category->path }}" wire:navigate>
+        <x-links.secondary class="underline" href="{{ route('categories', $thread->category) }}">
             {{ $thread->category->name }}
         </x-links.secondary>
 
+        {{-- Answered --}}
         @if ($thread->hasBestReply())
             <span class="text-sm text-green-600 dark:text-green-500">
                 Answered
@@ -45,7 +46,7 @@
         <div class="flex justify-between gap-8">
             {{-- Avatar --}}
             <x-tooltip :value="$thread->author->username">
-                <x-avatar :image="$thread->author->avatar_path" width="xs" />
+                <x-avatar :image="$thread->author->avatarFullPath()" width="xs" />
             </x-tooltip>
 
             {{-- Comments Count --}}

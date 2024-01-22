@@ -9,7 +9,7 @@
         @foreach ($participants as $participant)
             <x-tooltip value="{{ $participant->username }}">
                 <a href="{{ route('profile.show', $participant->username) }}" wire:navigate>
-                    <x-avatar :image="$participant->avatar_path" width="xs" />
+                    <x-avatar :image="$participant->avatarFullPath()" width="xs" />
                 </a>
             </x-tooltip>
         @endforeach

@@ -13,7 +13,7 @@
 
     @foreach ($users as $user)
         <div class="flex gap-3 border-b border-gray-200 p-2 last:border-b-0 dark:border-gray-800">
-            <x-avatar :image="$user->avatar_path" width="xs" />
+            <x-avatar :image="$user->avatarFullPath()" width="xs" />
 
             <div class="flex flex-1 justify-between gap-4 lg:items-center">
                 <div class="font-medium dark:text-white">

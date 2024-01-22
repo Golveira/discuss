@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pages\Notifications;
+namespace App\Livewire\Pages;
 
 use Livewire\Component;
 use Livewire\Attributes\Computed;
@@ -9,7 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
-class NotificationIndex extends Component
+class NotificationsIndex extends Component
 {
     use WithPagination;
 
@@ -28,6 +28,6 @@ class NotificationIndex extends Component
 
     public function render(): View
     {
-        return view('livewire.pages.notifications.notification-index');
+        return view('livewire.pages.notifications-index');
     }
 }

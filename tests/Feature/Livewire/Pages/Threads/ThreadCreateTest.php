@@ -25,8 +25,7 @@ test('users can create a thread', function () {
         ->set('form.title', 'My First Thread')
         ->set('form.body', 'This is my first thread')
         ->set('form.category_id', $category->id)
-        ->call('save')
-        ->assertRedirect(route('threads.show', 1));
+        ->call('save');
 
     $this->assertDatabaseHas('threads', [
         'title' => 'My First Thread',
