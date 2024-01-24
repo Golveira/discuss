@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -18,7 +19,7 @@ class NotificationsIndex extends Component
     #[Computed]
     public function notifications(): LengthAwarePaginator
     {
-        return Auth::user()->unreadNotifications()->paginate(2);
+        return Auth::user()->unreadNotifications()->paginate();
     }
 
     public function markAllAsRead(): void
@@ -32,9 +33,11 @@ class NotificationsIndex extends Component
 
     public function markAsRead(string $notificationId): void
     {
-        Auth::user()->unreadNotifications
-            ->where('id', $notificationId)
-            ->markAsRead();
+        $notification = DatabaseNotification::findOrFail($notificationId);
+
+        $this->authorize('markAsRead', $notification);
+
+        $notification->markAsRead();
 
         $this->resetPage();
 

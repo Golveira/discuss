@@ -71,10 +71,11 @@ class ReplyItem extends Component
 
         $this->replyForm->validate();
 
-        $reply = $this->thread->addReply(
-            $this->replyForm->body,
-            $this->reply->id
-        );
+        $reply = $this->thread->replies()->create([
+            'user_id' => Auth::id(),
+            'parent_id' => $this->reply->id,
+            'body' => $this->replyForm->body,
+        ]);
 
         event(new ReplyWasCreated($reply));
 

@@ -1,10 +1,13 @@
 <?php
 
+use App\Models\User;
+use App\Models\Reply;
 use App\Models\Thread;
 use Livewire\Livewire;
 use App\Livewire\RepliesList;
-use App\Models\Reply;
-use App\Models\User;
+use App\Notifications\NewReplyNotification;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\DatabaseNotification;
 
 test('replies of a thread are displayed', function () {
     $thread = Thread::factory()->create();
@@ -65,4 +68,20 @@ test('guests cannot reply to a thread', function () {
         ->set('replyForm.body', 'This is a reply')
         ->call('create')
         ->assertForbidden();
+});
+
+test('users are notified when a new reply is created', function () {
+    Notification::fake();
+
+    $thread = Thread::factory()->create();
+    $user = User::factory()->create();
+    $thread->subscribe($user);
+
+    Livewire::actingAs(User::factory()->create())
+        ->test(RepliesList::class, ['thread' => $thread])
+        ->set('replyForm.body', 'This is a reply')
+        ->call('create')
+        ->assertSee('This is a reply');
+
+    Notification::assertSentTo([$user], NewReplyNotification::class);
 });

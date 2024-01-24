@@ -1,4 +1,4 @@
-<div class="flex">
+<div class="flex" wire:poll.15s>
     <x-buttons.transparent class="relative mr-4" :href="route('notifications.index')" wire:navigate>
         <x-icons.bell class="h-5 w-5" />
         <div

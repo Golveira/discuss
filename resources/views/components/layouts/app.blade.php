@@ -26,14 +26,11 @@
     <div class="flex min-h-screen flex-col space-y-6">
         <livewire:layout.navigation />
 
-        <main class="grow">
+        <main>
             {{ $slot }}
         </main>
-
-        <x-layouts.footer />
     </div>
 
-    @stack('modals')
     @stack('scripts')
     @livewireScriptConfig
 </body>

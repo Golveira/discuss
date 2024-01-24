@@ -33,7 +33,7 @@ class RepliesList extends Component
     {
         return $this->thread
             ->replies()
-            ->parent()
+            ->parentReply()
             ->with(['author', 'likes'])
             ->with(['children.author', 'children.likes'])
             ->oldest()
@@ -48,7 +48,10 @@ class RepliesList extends Component
 
         $this->replyForm->validate();
 
-        $reply = $this->thread->addReply($this->replyForm->body);
+        $reply = $this->thread->replies()->create([
+            'body' => $this->replyForm->body,
+            'user_id' => Auth::id(),
+        ]);
 
         $reply->toggleLike(Auth::user());
 
@@ -61,7 +64,7 @@ class RepliesList extends Component
     {
         return view('livewire.replies-list', [
             'commentsCount' =>  $this->replies->total(),
-            'repliesCount' => $this->thread->replies()->child()->count(),
+            'repliesCount' => $this->thread->replies()->childReply()->count(),
         ]);
     }
 }

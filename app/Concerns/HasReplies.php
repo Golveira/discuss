@@ -32,13 +32,4 @@ trait HasReplies
             'user_id'
         );
     }
-
-    public function addReply(string $body, ?int $parent_id = null): Reply
-    {
-        return $this->replies()->create([
-            'user_id' => auth()->id(),
-            'parent_id' => $parent_id,
-            'body' => $body,
-        ]);
-    }
 }

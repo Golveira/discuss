@@ -3,8 +3,14 @@
 <x-lists.list-item {{ $attributes }}>
     <x-slot name="avatar">
         <div class="flex items-center gap-6">
-            {{-- Like Button --}}
-            <livewire:like-button :likeable="$thread" wire:key="thread-like-{{ $thread->id }}" />
+            @if ($thread->isClosed())
+                <x-buttons.border class="flex h-7 w-12 cursor-default justify-center">
+                    <x-icons.lock-closed />
+                </x-buttons.border>
+            @else
+                {{-- Like Button --}}
+                <livewire:like-button :likeable="$thread" wire:key="thread-like-{{ $thread->id }}" />
+            @endif
 
             {{-- Category emoji --}}
             <x-emoji-box :emoji="$thread->category->emoji" />

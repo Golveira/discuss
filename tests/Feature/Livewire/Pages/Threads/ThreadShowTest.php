@@ -59,41 +59,41 @@ test('guests cannot delete a thread', function () {
     $this->assertDatabaseHas('threads', ['id' => $thread->id]);
 });
 
-// test('a user can subscribe to a thread', function () {
-//     $user = User::factory()->create();
-//     $thread = Thread::factory()->create();
+test('a user can subscribe to a thread', function () {
+    $user = User::factory()->create();
+    $thread = Thread::factory()->create();
 
-//     Livewire::actingAs($user)
-//         ->test(ThreadShow::class, ['thread' => $thread])
-//         ->assertSee('Subscribe')
-//         ->call('subscribe')
-//         ->assertSee('Unsubscribe');
+    Livewire::actingAs($user)
+        ->test(ThreadShow::class, ['thread' => $thread])
+        ->assertSee('Subscribe')
+        ->call('subscribe')
+        ->assertSee('Unsubscribe');
 
-//     $this->assertTrue($thread->hasSubscriber($user));
-// });
+    $this->assertTrue($thread->hasSubscriber($user));
+});
 
-// test('a user can unsubscribe from a thread', function () {
-//     $user = User::factory()->create();
-//     $thread = Thread::factory()->create();
+test('a user can unsubscribe from a thread', function () {
+    $user = User::factory()->create();
+    $thread = Thread::factory()->create();
 
-//     $thread->subscribe($user);
+    $thread->subscribe($user);
 
-//     Livewire::actingAs($user)
-//         ->test(ThreadShow::class, ['thread' => $thread])
-//         ->assertSee('Unsubscribe')
-//         ->call('unsubscribe')
-//         ->assertSee('Subscribe');
+    Livewire::actingAs($user)
+        ->test(ThreadShow::class, ['thread' => $thread])
+        ->assertSee('Unsubscribe')
+        ->call('unsubscribe')
+        ->assertSee('Subscribe');
 
-//     $this->assertFalse($thread->hasSubscriber($user));
-// });
+    $this->assertFalse($thread->hasSubscriber($user));
+});
 
-// test('a guest cannot subscribe to a thread', function () {
-//     $thread = Thread::factory()->create();
+test('a guest cannot subscribe to a thread', function () {
+    $thread = Thread::factory()->create();
 
-//     Livewire::test(ThreadShow::class, ['thread' => $thread])
-//         ->assertDontSee('Subscribe')
-//         ->assertDontSee('Unsubscribe');
-// });
+    Livewire::test(ThreadShow::class, ['thread' => $thread])
+        ->assertDontSee('Subscribe')
+        ->assertDontSee('Unsubscribe');
+});
 
 test('admins can pin a thread', function () {
     $admin = User::factory()->admin()->create();

@@ -67,6 +67,6 @@
 </div>
 
 @pushOnce('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.12/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.6/dist/purify.min.js"></script>
+    <script src="{{ asset('assets/js/marked.min.js') }}"></script>
+    <script src="{{ asset('assets/js/purify.min.js') }}"></script>
 @endpushOnce

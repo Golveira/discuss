@@ -62,12 +62,12 @@ class Reply extends Model
         return $this->user_id === $author_id;
     }
 
-    public function scopeParent(Builder $query): Builder
+    public function scopeParentReply(Builder $query): Builder
     {
         return $query->whereNull('parent_id');
     }
 
-    public function scopeChild(Builder $query): Builder
+    public function scopeChildReply(Builder $query): Builder
     {
         return $query->whereNotNull('parent_id');
     }

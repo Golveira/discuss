@@ -27,9 +27,9 @@
 
                 <span>Answered by</span>
 
-                <x-links.secondary href="{{ route('profile.show', $thread->bestReply->author->username) }}">
+                <x-links.default href="{{ route('profile.show', $thread->bestReply->author->username) }}">
                     {{ $thread->bestReply->author->username }}
-                </x-links.secondary>
+                </x-links.default>
             </div>
         @else
             <div class="flex items-center gap-1 rounded-full border border-gray-300 px-3 py-2 dark:border-gray-700">
@@ -39,15 +39,15 @@
 
         {{-- Category --}}
         <div class="flex items-center gap-1">
-            <x-links.secondary href="{{ route('profile.show', $thread->author->username) }}">
+            <x-links.default href="{{ route('profile.show', $thread->author->username) }}">
                 {{ $thread->author->username }}
-            </x-links.secondary>
+            </x-links.default>
 
             <span>asked this question in</span>
 
-            <x-links.secondary href="{{ route('categories', $thread->category->slug) }}">
+            <x-links.default href="{{ route('categories', $thread->category->slug) }}">
                 {{ $thread->category->name }}
-            </x-links.secondary>
+            </x-links.default>
         </div>
     </div>
 </div>

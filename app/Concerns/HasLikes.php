@@ -20,14 +20,19 @@ trait HasLikes
         return $this->morphMany(Like::class, 'likeable');
     }
 
+    public function like(User $user): void
+    {
+        $this->likes()->create(['user_id' => $user->id]);
+    }
+
+    public function unlike(User $user): void
+    {
+        $this->likes()->where('user_id', $user->id)->delete();
+    }
+
     public function toggleLike(User $user): void
     {
-        if ($this->isLikedBy($user)) {
-            $this->likes()->where('user_id', $user->id)->delete();
-            return;
-        }
-
-        $this->likes()->create(['user_id' => $user->id]);
+        $this->isLikedBy($user) ? $this->unlike($user) : $this->like($user);
     }
 
     public function isLikedBy(?User $user): bool

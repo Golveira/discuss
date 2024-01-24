@@ -14,7 +14,6 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/scout": "^10.6",
-        "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "usernotnull/tall-toasts": "^2.0"

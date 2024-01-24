@@ -2,16 +2,19 @@
 
 namespace App\View\Components\Categories;
 
-use App\Models\Category;
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Category;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Cache;
 
 class CategorySelect extends Component
 {
     public function render(): View|Closure|string
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Cache::remember('category-select', now()->addWeek(), function () {
+            return Category::orderBy('name')->get();
+        });
 
         return view('components.categories.category-select', compact('categories'));
     }
