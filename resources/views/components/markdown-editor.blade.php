@@ -1,7 +1,7 @@
 @props([
+    'id' => '',
     'name' => '',
     'label' => '',
-    'id' => '',
     'placeholder' => '',
     'height' => 'h-32',
 ])
@@ -19,7 +19,14 @@
     convertContent() {
         this.convertedContent = DOMPurify.sanitize(marked.parse(this.content));
     },
-}" x-cloak>
+    focusTextArea(event) {
+        if (event.detail == '{{ $id }}') {
+            this.$nextTick(() => {
+                document.getElementById('{{ $id }}').focus()
+            });
+        }
+    }
+}" @focus-markdown-editor.window="focusTextArea" x-cloak>
     @if ($label)
         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
             {{ $label }}
@@ -49,7 +56,7 @@
         <div class="relative px-4 py-2">
             <textarea
                 class="{{ $height }} block w-full border-0 bg-white px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-900 dark:text-white dark:placeholder-gray-400"
-                placeholder="{{ $placeholder }}" required x-model="content" x-show="isWriteMode()" x-ref="textarea"></textarea>
+                id="{{ $id }}" placeholder="{{ $placeholder }}" required x-model="content" x-show="isWriteMode()"></textarea>
 
             <div class="{{ $height }} prose block max-w-full overflow-y-auto border-0 bg-white px-0 text-sm text-gray-800 dark:prose-invert focus:ring-0 prose-a:text-blue-600 prose-img:rounded-xl dark:bg-gray-900 dark:text-white dark:placeholder-gray-400"
                 x-show="isPreviewMode()">

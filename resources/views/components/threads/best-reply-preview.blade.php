@@ -10,9 +10,7 @@
         </a>
     </div>
 
-    <x-html-content>
-        {{ $thread->bestReply->body_excerpt }}
-    </x-html-content>
+    <x-markdown-content :content="$thread->bestReply->body_excerpt" />
 
     <div>
         <a class="flex items-center gap-1 font-bold text-green-700 first:text-sm hover:underline dark:text-blue-500"

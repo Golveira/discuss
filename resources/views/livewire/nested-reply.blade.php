@@ -33,9 +33,7 @@
             </div>
 
             {{-- Body --}}
-            <x-html-content>
-                {{ $reply->body }}
-            </x-html-content>
+            <x-markdown-content :content="$reply->body" />
 
             <div class="mt-2 flex items-center gap-1">
                 {{-- Best answer badge --}}
