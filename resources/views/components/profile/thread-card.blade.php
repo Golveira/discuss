@@ -16,9 +16,7 @@
             </x-links.default>
         </h2>
 
-        <x-html-content>
-            {{ $thread->body_excerpt }}
-        </x-html-content>
+        <x-markdown-content :content="$thread->body_excerpt" />
 
         <x-buttons.border class="h-7 w-12 cursor-default" type="button">
             <x-icons.arrow-up />

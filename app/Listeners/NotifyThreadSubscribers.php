@@ -9,14 +9,10 @@ class NotifyThreadSubscribers
 {
     public function handle(ReplyWasCreated $event): void
     {
-        $subscriptions = $event->reply->thread
-            ->subscriptions()
-            ->where('user_id', '!=', $event->reply->user_id)
-            ->with('user')
-            ->get();
-
-        foreach ($subscriptions as $subscription) {
-            $subscription->user->notify(new NewReplyNotification($event->reply));
-        }
+        $event->reply->thread
+            ->subscribedUsers()
+            ->where('id', '!==', $event->reply->user_id)
+            ->each
+            ->notify(new NewReplyNotification($event->reply));
     }
 }

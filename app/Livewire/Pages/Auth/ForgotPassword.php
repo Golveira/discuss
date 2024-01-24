@@ -3,9 +3,11 @@
 namespace App\Livewire\Pages\Auth;
 
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Password;
 use Usernotnull\Toast\Concerns\WireToast;
 
+#[Title('Forgot Password')]
 class ForgotPassword extends Component
 {
     use WireToast;

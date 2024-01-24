@@ -10,13 +10,15 @@
     </script>
 @endpush
 
-<button
-    class="rounded-lg p-2.5 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-    id="theme-toggle" type="button">
-    <x-icons.night class="hidden h-5 w-5" id="theme-toggle-dark-icon" />
+<div wire:ignore>
+    <button
+        class="rounded-lg p-2.5 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+        id="theme-toggle" type="button">
+        <x-icons.night class="hidden h-5 w-5" id="theme-toggle-dark-icon" />
 
-    <x-icons.day class="hidden h-5 w-5" id="theme-toggle-light-icon" />
-</button>
+        <x-icons.day class="hidden h-5 w-5" id="theme-toggle-light-icon" />
+    </button>
+</div>
 
 @push('scripts')
     <script>

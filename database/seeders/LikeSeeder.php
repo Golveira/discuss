@@ -12,10 +12,8 @@ class LikeSeeder extends Seeder
 {
     public function run(): void
     {
-        $threads = Thread::all()->random(100);
-        $replies = Reply::all()->random(200);
-
         // Create likes for random threads
+        $threads = Thread::all()->random(100);
         foreach ($threads as $thread) {
             Like::factory()
                 ->count(rand(1, 10))
@@ -24,6 +22,7 @@ class LikeSeeder extends Seeder
         }
 
         // Create likes for random replies
+        $replies = Reply::all()->random(200);
         foreach ($replies as $reply) {
             Like::factory()
                 ->count(rand(1, 10))

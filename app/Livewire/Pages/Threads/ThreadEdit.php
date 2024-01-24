@@ -4,10 +4,12 @@ namespace App\Livewire\Pages\Threads;
 
 use App\Models\Thread;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use App\Livewire\Forms\ThreadForm;
 use Illuminate\Contracts\View\View;
 use Usernotnull\Toast\Concerns\WireToast;
 
+#[Title('Edit Discussion')]
 class ThreadEdit extends Component
 {
     use WireToast;

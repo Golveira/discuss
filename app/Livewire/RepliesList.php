@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\ReplyWasCreated;
 use App\Livewire\Forms\ReplyForm;
 use App\Models\Thread;
 use Livewire\Component;
@@ -50,6 +51,8 @@ class RepliesList extends Component
         $reply = $this->thread->addReply($this->replyForm->body);
 
         $reply->toggleLike(Auth::user());
+
+        event(new ReplyWasCreated($reply));
 
         $this->replyForm->reset();
     }

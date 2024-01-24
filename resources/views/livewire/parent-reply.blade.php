@@ -33,9 +33,7 @@
 
         <div class="mx-4 my-3 space-y-3" x-show="!isEditing">
             {{-- Body --}}
-            <x-html-content>
-                {{ $reply->body }}
-            </x-html-content>
+            <x-markdown-content :content="$reply->body" />
 
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -70,7 +68,7 @@
         {{-- Nested replies --}}
         @if ($reply->hasChildren())
             <div
-                class="space-y-3 rounded-b-lg border-t border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-black">
+                class="space-y-3 rounded-b-lg border-t border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-950">
                 @foreach ($reply->children as $child)
                     <livewire:reply-item type="nested" @reply-deleted="$refresh" :$thread :reply="$child"
                         :key="$child->id" />

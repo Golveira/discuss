@@ -3,11 +3,15 @@
 namespace App\Notifications;
 
 use App\Models\Reply;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewReplyNotification extends Notification
+class NewReplyNotification extends Notification implements ShouldQueue
 {
+    use Queueable;
+
     /**
      * Create a new notification instance.
      */
@@ -44,15 +48,9 @@ class NewReplyNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => $this->message(),
-            'avatar' => $this->reply->author->avatar_path,
-            'placeholder' => $this->reply->author->username_initials,
+            "title" => $this->reply->thread->title,
+            'message' => "A new reply was added to",
             'link' => route('threads.show', $this->reply->thread),
         ];
-    }
-
-    private function message()
-    {
-        return $this->reply->author->username . ' replied to ' . $this->reply->thread->title;
     }
 }

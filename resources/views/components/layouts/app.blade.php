@@ -20,13 +20,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased dark:bg-gray-900">
     <livewire:toasts />
 
-    <div class="min-h-screen space-y-6 dark:bg-gray-900">
+    <div class="flex min-h-screen flex-col space-y-6">
         <livewire:layout.navigation />
 
-        <main>
+        <main class="grow">
             {{ $slot }}
         </main>
 

@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Usernotnull\Toast\Concerns\WireToast;
 
@@ -36,6 +37,16 @@ class ThreadShow extends Component
         toast()->success('Thread deleted')->pushOnNextPage();
 
         $this->redirect(route('threads.index'), navigate: true);
+    }
+
+    public function subscribe(): void
+    {
+        $this->thread->subscribe(Auth::user());
+    }
+
+    public function unsubscribe(): void
+    {
+        $this->thread->unsubscribe(Auth::user());
     }
 
     public function pinThread(): void
@@ -86,6 +97,7 @@ class ThreadShow extends Component
 
     public function render(): View
     {
-        return view('livewire.pages.threads.thread-show');
+        return view('livewire.pages.threads.thread-show')
+            ->title($this->thread->title);
     }
 }

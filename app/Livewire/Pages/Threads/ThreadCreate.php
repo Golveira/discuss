@@ -3,10 +3,12 @@
 namespace App\Livewire\Pages\Threads;
 
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use App\Livewire\Forms\ThreadForm;
 use Illuminate\Support\Facades\Auth;
 use Usernotnull\Toast\Concerns\WireToast;
 
+#[Title('New Discussion')]
 class ThreadCreate extends Component
 {
     use WireToast;
@@ -17,7 +19,9 @@ class ThreadCreate extends Component
     {
         $this->form->validate();
 
-        $thread = Auth::user()->threads()->create($this->form->all());
+        $thread = Auth::user()
+            ->threads()
+            ->create($this->form->all());
 
         $thread->subscribe(Auth::user());
 

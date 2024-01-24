@@ -4,14 +4,16 @@ namespace App\Livewire\Pages\Auth;
 
 use Livewire\Component;
 
-use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Locked;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules;
-use Livewire\Attributes\Locked;
+use Illuminate\Auth\Events\PasswordReset;
 use Usernotnull\Toast\Concerns\WireToast;
 
+#[Title('Reset Password')]
 class ResetPassword extends Component
 {
     use WireToast;

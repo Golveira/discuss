@@ -27,9 +27,7 @@
     <div class="mx-4 my-3">
         <div class="space-y-3">
             {{-- Body --}}
-            <x-html-content>
-                {{ $thread->body }}
-            </x-html-content>
+            <x-markdown-content :content="$thread->body" />
 
             {{-- Like button --}}
             <livewire:like-button :likeable="$thread" wire:key="thread-like-{{ $thread->id }}" />

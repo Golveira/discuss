@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Reply;
 use App\Models\Thread;
 use Livewire\Component;
+use App\Events\ReplyWasCreated;
 use App\Livewire\Forms\ReplyForm;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -70,10 +71,12 @@ class ReplyItem extends Component
 
         $this->replyForm->validate();
 
-        $this->thread->addReply(
+        $reply = $this->thread->addReply(
             $this->replyForm->body,
             $this->reply->id
         );
+
+        event(new ReplyWasCreated($reply));
 
         $this->isReplying = false;
 
@@ -84,11 +87,11 @@ class ReplyItem extends Component
 
     public function markAsAnswer(): void
     {
-        $this->authorize('markAsAnswer', $this->reply);
-
         if ($this->thread->hasBestReply()) {
             return;
         }
+
+        $this->authorize('markAsAnswer', $this->reply);
 
         $this->thread->markAsBestReply($this->reply);
 

@@ -22,16 +22,14 @@
 
                 @auth
                     {{-- Notifications --}}
-                    {{-- <livewire:notifications.notification-bell /> --}}
+                    <livewire:notification-bell />
 
                     {{-- Dropdown --}}
                     <x-dropdowns.dropdown align="right" width="32">
                         <x-slot name="trigger">
                             {{-- Avatar --}}
                             <span class="cursor-pointer">
-                                <x-avatar :image="auth()
-                                    ->user()
-                                    ->avatarFullPath()" width="sm" />
+                                <x-avatar image="{{ auth()->user()->avatarFullPath() }}" width="sm" />
                             </span>
                         </x-slot>
 

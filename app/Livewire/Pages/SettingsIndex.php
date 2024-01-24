@@ -4,14 +4,16 @@ namespace App\Livewire\Pages;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use App\Livewire\Actions\Logout;
-use App\Livewire\Forms\PasswordForm;
 use App\Livewire\Forms\ProfileForm;
+use App\Livewire\Forms\PasswordForm;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Usernotnull\Toast\Concerns\WireToast;
 
+#[Title('Settings')]
 class SettingsIndex extends Component
 {
     use WireToast;

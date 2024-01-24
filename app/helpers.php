@@ -13,13 +13,6 @@ if (!function_exists('md_to_html')) {
     }
 }
 
-if (!function_exists('mentions_to_links')) {
-    function mentions_to_links($markdown)
-    {
-        return preg_replace('/@([\w\-.]+)/', '<a href="/user/$1" wire:navigate>@$1</a>', $markdown);
-    }
-}
-
 if (!function_exists('pluralize')) {
     function pluralize($value, $count)
     {

@@ -2,17 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use App\Models\User;
-use App\Models\Thread;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         User::create([
@@ -30,20 +24,6 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        User::factory()
-            ->count(100)
-            ->create()
-            ->each(function (User $user) {
-                Thread::factory()
-                    ->count(2)
-                    ->for($user, 'author')
-                    ->state(new Sequence(function () {
-                        return [
-                            'category_id' => Category::inRandomOrder()->first(),
-                            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
-                        ];
-                    }))
-                    ->create();
-            });
+        User::factory()->count(100)->create();
     }
 }

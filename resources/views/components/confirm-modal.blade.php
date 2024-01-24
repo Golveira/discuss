@@ -12,13 +12,13 @@
     <template x-teleport="body">
         <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen"
             x-cloak>
-            <div class="absolute inset-0 h-full w-full bg-gray-900 bg-opacity-50 backdrop-blur-sm" x-show="modalOpen"
+            <div class="absolute inset-0 h-full w-full bg-gray-700 bg-opacity-80" x-show="modalOpen"
                 x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
                 x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
             </div>
 
-            <div class="relative w-full border bg-white bg-opacity-90 px-7 py-6 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-800 sm:max-w-lg sm:rounded-lg"
+            <div class="relative w-full border bg-white bg-opacity-90 px-7 py-6 backdrop-blur-sm dark:border-gray-600 dark:bg-gray-900 sm:max-w-lg sm:rounded-lg"
                 x-show="modalOpen" x-trap.inert.noscroll="modalOpen" x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                 x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
@@ -43,7 +43,7 @@
                 </div>
 
                 <form wire:submit={{ $action }} @submit.prevent="modalOpen = false">
-                    <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                    <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:space-x-2">
                         <x-buttons.secondary type="button" @click="modalOpen=false">
                             Cancel
                         </x-buttons.secondary>

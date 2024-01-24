@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use Livewire\Component;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
+use Livewire\Component;
+use Livewire\Attributes\Title;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
+#[Title('Register')]
 class Register extends Component
 {
     public string $name = '';
@@ -31,7 +33,6 @@ class Register extends Component
         event(new Registered($user = User::create($validated)));
 
         Auth::login($user);
-
 
         $this->redirect(RouteServiceProvider::HOME, navigate: true);
     }

@@ -64,6 +64,7 @@ class ProfileShow extends Component
 
     public function render(): View
     {
-        return view('livewire.pages.profile-show');
+        return view('livewire.pages.profile-show')
+            ->title($this->user->username);
     }
 }

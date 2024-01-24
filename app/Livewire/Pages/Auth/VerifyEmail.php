@@ -4,11 +4,13 @@ namespace App\Livewire\Pages\Auth;
 
 use Livewire\Component;
 
+use Livewire\Attributes\Title;
 use App\Livewire\Actions\Logout;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 
+#[Title('Verify Email')]
 class VerifyEmail extends Component
 {
     public function sendVerification(): void

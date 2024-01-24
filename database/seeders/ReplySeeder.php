@@ -12,9 +12,8 @@ class ReplySeeder extends Seeder
 {
     public function run(): void
     {
-        $threads = Thread::all()->random(100);
-
         // Create replies for random threads
+        $threads = Thread::all()->random(100);
         foreach ($threads as $thread) {
             Reply::factory()
                 ->count(rand(1, 20))
@@ -23,6 +22,8 @@ class ReplySeeder extends Seeder
                     return ['user_id' => User::inRandomOrder()->first()];
                 }))
                 ->create();
+
+            $thread->participants()->each(fn ($user) => $thread->subscribe($user));
         }
 
         // Give random threads a best reply
@@ -32,9 +33,8 @@ class ReplySeeder extends Seeder
             $thread->markAsBestReply($reply);
         }
 
-        $replies = Reply::all()->random(100);
-
         // Create nested replies for random replies
+        $replies = Reply::all()->random(100);
         foreach ($replies as $reply) {
             Reply::factory()
                 ->count(rand(1, 5))
