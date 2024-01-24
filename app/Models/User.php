@@ -2,18 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Like;
-use App\Models\Reply;
-use App\Models\Thread;
-use Laravel\Sanctum\HasApiTokens;
-use App\Models\ThreadSubscription;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Notifications\Notifiable;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -80,7 +76,7 @@ class User extends Authenticatable
 
     public function isBanned(): bool
     {
-        return !is_null($this->banned_at);
+        return ! is_null($this->banned_at);
     }
 
     public function ban(): void
@@ -96,11 +92,11 @@ class User extends Authenticatable
     public function scopeOrderByMostSolutions(Builder $query)
     {
         return $query->withCount([
-            "replies as solutions_count" => function ($query) {
-                $query->whereHas("thread", function ($query) {
-                    $query->whereColumn("best_reply_id", "replies.id");
+            'replies as solutions_count' => function ($query) {
+                $query->whereHas('thread', function ($query) {
+                    $query->whereColumn('best_reply_id', 'replies.id');
                 });
-            }
-        ])->orderByDesc("solutions_count");
+            },
+        ])->orderByDesc('solutions_count');
     }
 }

@@ -2,27 +2,27 @@
 
 namespace App\Models;
 
-use App\Concerns\HasLikes;
 use App\Concerns\HasAuthor;
 use App\Concerns\HasBody;
+use App\Concerns\HasLikes;
 use App\Concerns\HasReplies;
 use App\Concerns\HasSubscriptions;
 use App\Concerns\SortsByPopularity;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 
 class Thread extends Model
 {
-    use HasFactory;
     use HasAuthor;
-    use HasReplies;
-    use HasLikes;
-    use HasSubscriptions;
     use HasBody;
+    use HasFactory;
+    use HasLikes;
+    use HasReplies;
+    use HasSubscriptions;
     use SortsByPopularity;
 
     protected $fillable = [
@@ -56,7 +56,7 @@ class Thread extends Model
 
     public function hasBestReply(): bool
     {
-        return !is_null($this->best_reply_id);
+        return ! is_null($this->best_reply_id);
     }
 
     public function hasAsBestReply(Reply $reply): bool

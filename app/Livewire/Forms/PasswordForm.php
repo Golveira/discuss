@@ -8,7 +8,9 @@ use Livewire\Form;
 class PasswordForm extends Form
 {
     public string $current_password = '';
+
     public string $password = '';
+
     public string $password_confirmation = '';
 
     public function rules()

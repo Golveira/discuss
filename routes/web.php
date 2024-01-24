@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Pages\NotificationsIndex;
-use App\Livewire\Pages\SettingsIndex;
 use App\Livewire\Pages\ProfileShow;
-use App\Livewire\Pages\Threads\ThreadEdit;
-use App\Livewire\Pages\Threads\ThreadShow;
-use App\Livewire\Pages\Threads\ThreadIndex;
+use App\Livewire\Pages\SettingsIndex;
 use App\Livewire\Pages\Threads\ThreadCreate;
+use App\Livewire\Pages\Threads\ThreadEdit;
+use App\Livewire\Pages\Threads\ThreadIndex;
+use App\Livewire\Pages\Threads\ThreadShow;
+use Illuminate\Support\Facades\Route;
 
 // Threads
 Route::permanentRedirect('/', '/discussions');
@@ -26,4 +26,4 @@ Route::get('notifications', NotificationsIndex::class)->name('notifications.inde
 // Settings
 Route::get('settings', SettingsIndex::class)->name('settings.index')->middleware('auth');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

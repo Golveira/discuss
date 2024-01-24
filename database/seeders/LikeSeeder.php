@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Like;
-use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Database\Seeder;

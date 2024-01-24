@@ -25,7 +25,7 @@ trait HasSubscriptions
     public function subscribe(User $user): void
     {
         $this->subscriptions()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
     }
 

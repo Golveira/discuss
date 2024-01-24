@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
 use App\Models\Reply;
 use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class ReplyForm extends Form
 {

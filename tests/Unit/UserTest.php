@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
+use App\Models\User;
 
 it('can be banned', function () {
     $user = User::factory()->create();
@@ -33,7 +33,7 @@ it('can order users by most solutions', function () {
     expect($users->last()->id)->toEqual($user2->id);
 });
 
-function createSolutionForUser(User $replyAuthor, User $threadAuthor,): void
+function createSolutionForUser(User $replyAuthor, User $threadAuthor): void
 {
     $thread = Thread::factory()->create(['user_id' => $threadAuthor->id]);
     $reply = Reply::factory()->create(['user_id' => $replyAuthor->id, 'thread_id' => $thread->id]);

@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
-use App\Models\Thread;
 use App\Livewire\LikeButton;
+use App\Models\Thread;
+use App\Models\User;
 use Livewire\Livewire;
 
 test('users can like a thread', function () {

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-if (!function_exists('md_to_html')) {
+if (! function_exists('md_to_html')) {
     function md_to_html($markdown)
     {
         return Str::of($markdown)->markdown([
@@ -13,7 +13,7 @@ if (!function_exists('md_to_html')) {
     }
 }
 
-if (!function_exists('pluralize')) {
+if (! function_exists('pluralize')) {
     function pluralize($value, $count)
     {
         return Str::plural($value, $count);

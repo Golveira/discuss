@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use App\Concerns\HasAuthor;
 use App\Concerns\HasBody;
 use App\Concerns\HasLikes;
-use App\Concerns\HasAuthor;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Reply extends Model
 {
-    use HasFactory, HasAuthor, HasLikes, HasBody;
+    use HasAuthor, HasBody, HasFactory, HasLikes;
 
     protected $fillable = [
         'user_id',

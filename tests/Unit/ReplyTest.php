@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\User;
 use App\Models\Reply;
-use App\Models\Thread;
 
 test('returns parent replies', function () {
     $parentReply = Reply::factory()->create();

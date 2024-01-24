@@ -1,8 +1,8 @@
 <?php
 
 use App\Livewire\Pages\Auth\Register;
-use Livewire\Livewire;
 use App\Providers\RouteServiceProvider;
+use Livewire\Livewire;
 
 test('registration screen can be rendered', function () {
     $response = $this->get('/register');

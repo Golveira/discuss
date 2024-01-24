@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\User;
-use App\Models\Thread;
-use Livewire\Livewire;
-use Illuminate\Support\Str;
-use App\Notifications\NewReplyNotification;
 use App\Livewire\Pages\NotificationsIndex;
+use App\Models\Thread;
+use App\Models\User;
+use App\Notifications\NewReplyNotification;
+use Illuminate\Support\Str;
+use Livewire\Livewire;
 
 test('guests cannot see notifications page', function () {
     $this->get(route('notifications.index'))
@@ -20,8 +20,8 @@ test('users can see notifications page', function () {
         'id' => Str::random(),
         'type' => NewReplyNotification::class,
         'data' => [
-            "title" => $thread->title,
-            'message' => "A new reply was added to",
+            'title' => $thread->title,
+            'message' => 'A new reply was added to',
             'link' => route('threads.show', $thread),
         ],
     ]);
@@ -40,8 +40,8 @@ test('users can mark notifications as read', function () {
         'id' => Str::random(),
         'type' => NewReplyNotification::class,
         'data' => [
-            "title" => $thread->title,
-            'message' => "A new reply was added to",
+            'title' => $thread->title,
+            'message' => 'A new reply was added to',
             'link' => route('threads.show', $thread),
         ],
     ]);
@@ -63,8 +63,8 @@ test('users can mark all notifications as read', function () {
         'id' => Str::random(),
         'type' => NewReplyNotification::class,
         'data' => [
-            "title" => $thread->title,
-            'message' => "A new reply was added to",
+            'title' => $thread->title,
+            'message' => 'A new reply was added to',
             'link' => route('threads.show', $thread),
         ],
     ]);
@@ -87,8 +87,8 @@ test('users cannot mark other users notifications as read', function () {
         'id' => Str::random(),
         'type' => NewReplyNotification::class,
         'data' => [
-            "title" => $thread->title,
-            'message' => "A new reply was added to",
+            'title' => $thread->title,
+            'message' => 'A new reply was added to',
             'link' => route('threads.show', $thread),
         ],
     ]);

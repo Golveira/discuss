@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use Livewire\Component;
-use Livewire\Attributes\Title;
 use App\Livewire\Forms\LoginForm;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 
 #[Title('Login')]
 class Login extends Component

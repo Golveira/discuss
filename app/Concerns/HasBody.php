@@ -2,8 +2,8 @@
 
 namespace App\Concerns;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Str;
 
 trait HasBody
 {

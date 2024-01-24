@@ -5,18 +5,18 @@ namespace App\Livewire;
 use App\Events\ReplyWasCreated;
 use App\Livewire\Forms\ReplyForm;
 use App\Models\Thread;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
-use Usernotnull\Toast\Concerns\WireToast;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class RepliesList extends Component
 {
-    use WithPagination, WireToast;
+    use WireToast, WithPagination;
 
     public Thread $thread;
 
@@ -63,7 +63,7 @@ class RepliesList extends Component
     public function render(): View
     {
         return view('livewire.replies-list', [
-            'commentsCount' =>  $this->replies->total(),
+            'commentsCount' => $this->replies->total(),
             'repliesCount' => $this->thread->replies()->childReply()->count(),
         ]);
     }

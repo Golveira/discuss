@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\User;
-use App\Models\Thread;
-use Livewire\Livewire;
-use App\Models\category;
 use App\Livewire\Pages\Threads\ThreadEdit;
+use App\Models\category;
+use App\Models\Thread;
+use App\Models\User;
+use Livewire\Livewire;
 
 test('edit thread page is not displayed for guests', function () {
     $thread = Thread::factory()->create();

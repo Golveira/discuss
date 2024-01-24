@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
-use Illuminate\Database\Seeder;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Database\Seeder;
 
 class ReplySeeder extends Seeder
 {

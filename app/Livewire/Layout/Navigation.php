@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Layout;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Livewire\Actions\Logout;
 use App\Providers\RouteServiceProvider;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class Navigation extends Component
 {

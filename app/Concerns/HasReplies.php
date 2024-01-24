@@ -2,8 +2,8 @@
 
 namespace App\Concerns;
 
-use App\Models\User;
 use App\Models\Reply;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 

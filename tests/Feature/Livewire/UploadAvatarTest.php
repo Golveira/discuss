@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\User;
-use Livewire\Livewire;
 use App\Livewire\UploadAvatar;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Livewire;
 
 test('avatar can be uploaded', function () {
     Storage::fake('public');

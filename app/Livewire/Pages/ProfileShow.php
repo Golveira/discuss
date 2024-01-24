@@ -13,7 +13,7 @@ use Usernotnull\Toast\Concerns\WireToast;
 
 class ProfileShow extends Component
 {
-    use WithPagination, WireToast;
+    use WireToast, WithPagination;
 
     public User $user;
 

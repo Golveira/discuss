@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Pages;
 
-use App\Models\User;
-use Livewire\Component;
-use Livewire\Attributes\Title;
 use App\Livewire\Actions\Logout;
-use App\Livewire\Forms\ProfileForm;
 use App\Livewire\Forms\PasswordForm;
+use App\Livewire\Forms\ProfileForm;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Providers\RouteServiceProvider;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 #[Title('Settings')]

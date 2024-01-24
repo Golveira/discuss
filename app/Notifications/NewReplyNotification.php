@@ -5,8 +5,8 @@ namespace App\Notifications;
 use App\Models\Reply;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class NewReplyNotification extends Notification implements ShouldQueue
 {
@@ -48,8 +48,8 @@ class NewReplyNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            "title" => $this->reply->thread->title,
-            'message' => "A new reply was added to",
+            'title' => $this->reply->thread->title,
+            'message' => 'A new reply was added to',
             'link' => route('threads.show', $this->reply->thread),
         ];
     }

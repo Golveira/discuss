@@ -2,11 +2,11 @@
 
 namespace App\View\Components\Categories;
 
-use Closure;
 use App\Models\Category;
-use Illuminate\View\Component;
+use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\View\Component;
 
 class CategoriesList extends Component
 {

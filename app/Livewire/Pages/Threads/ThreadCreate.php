@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Pages\Threads;
 
-use Livewire\Component;
-use Livewire\Attributes\Title;
 use App\Livewire\Forms\ThreadForm;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 #[Title('New Discussion')]

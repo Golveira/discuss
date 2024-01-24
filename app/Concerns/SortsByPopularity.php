@@ -16,27 +16,27 @@ trait SortsByPopularity
             ->recent();
     }
 
-    function scopePopularToday($query)
+    public function scopePopularToday($query)
     {
         $query->popular()->whereBetween('created_at', [now()->subDay(), now()]);
     }
 
-    function scopePopularThisWeek($query)
+    public function scopePopularThisWeek($query)
     {
         $query->popular()->whereBetween('created_at', [now()->subWeek(), now()]);
     }
 
-    function scopePopularThisMonth($query)
+    public function scopePopularThisMonth($query)
     {
         $query->popular()->whereBetween('created_at', [now()->subMonth(), now()]);
     }
 
-    function scopePopularThisYear($query)
+    public function scopePopularThisYear($query)
     {
         $query->popular()->whereBetween('created_at', [now()->subYear(), now()]);
     }
 
-    function scopePopularAllTime($query)
+    public function scopePopularAllTime($query)
     {
         $query->popular();
     }

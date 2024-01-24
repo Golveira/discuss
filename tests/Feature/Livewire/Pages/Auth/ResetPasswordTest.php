@@ -2,10 +2,10 @@
 
 use App\Livewire\Pages\Auth\ForgotPassword;
 use App\Livewire\Pages\Auth\ResetPassword as ResetPasswordComponent;
-use Livewire\Livewire;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
+use Livewire\Livewire;
 
 test('reset password screen can be rendered', function () {
     Notification::fake();
@@ -17,7 +17,7 @@ test('reset password screen can be rendered', function () {
         ->call('sendPasswordResetLink');
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-        $response = $this->get('/reset-password/' . $notification->token);
+        $response = $this->get('/reset-password/'.$notification->token);
 
         $response
             ->assertSeeLivewire(ResetPasswordComponent::class)

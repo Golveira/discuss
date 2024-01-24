@@ -2,13 +2,12 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use Livewire\Component;
-
-use Livewire\Attributes\Title;
 use App\Livewire\Actions\Logout;
-use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 
 #[Title('Verify Email')]
 class VerifyEmail extends Component
@@ -40,4 +39,4 @@ class VerifyEmail extends Component
     {
         return view('livewire.pages.auth.verify-email');
     }
-};
+}

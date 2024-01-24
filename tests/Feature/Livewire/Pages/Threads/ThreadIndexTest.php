@@ -1,10 +1,8 @@
 <?php
 
-use App\Models\Like;
-use App\Models\Reply;
+use App\Livewire\Pages\Threads\ThreadIndex;
 use App\Models\Thread;
 use Livewire\Livewire;
-use App\Livewire\Pages\Threads\ThreadIndex;
 
 test('threads are displayed', function () {
     $firstThread = Thread::factory()->create();
@@ -23,7 +21,7 @@ test('threads can be sorted by latest activity', function () {
         ->set('sort', 'latest_activity')
         ->assertSeeInOrder([
             $recentThread->title,
-            $notRecentThread->title
+            $notRecentThread->title,
         ]);
 });
 
@@ -35,7 +33,7 @@ test('threads can be sorted by creation date in desc order', function () {
         ->set('sort', 'date_created')
         ->assertSeeInOrder([
             $newThread->title,
-            $oldThread->title
+            $oldThread->title,
         ]);
 });
 
@@ -45,7 +43,7 @@ test('threads can be sorted by top in the past day', function () {
         ->hasLikes(1)
         ->create();
 
-    $secondMostPopularToday =  Thread::factory()
+    $secondMostPopularToday = Thread::factory()
         ->hasReplies(1)
         ->hasLikes(1)
         ->create();
@@ -70,7 +68,7 @@ test('threads can be sorted by top in the past week', function () {
         ->hasLikes(1)
         ->create(['created_at' => now()->subDays(5)]);
 
-    $secondMostPopularThisWeek =  Thread::factory()
+    $secondMostPopularThisWeek = Thread::factory()
         ->hasReplies(1)
         ->hasLikes(1)
         ->create(['created_at' => now()->subDays(4)]);
@@ -95,7 +93,7 @@ test('threads can be sorted by top in the past month', function () {
         ->hasLikes(1)
         ->create(['created_at' => now()->subDays(29)]);
 
-    $secondMostPopularThisMonth =  Thread::factory()
+    $secondMostPopularThisMonth = Thread::factory()
         ->hasReplies(1)
         ->hasLikes(1)
         ->create(['created_at' => now()->subDays(28)]);
@@ -120,7 +118,7 @@ test('threads can be sorted by top in the past year', function () {
         ->hasLikes(1)
         ->create(['created_at' => now()->subMonths(11)]);
 
-    $secondMostPopularThisYear =  Thread::factory()
+    $secondMostPopularThisYear = Thread::factory()
         ->hasReplies(1)
         ->hasLikes(1)
         ->create(['created_at' => now()->subMonths(10)]);
@@ -150,7 +148,7 @@ test('threads can be sorted by top all time', function () {
         ->hasLikes(1)
         ->create(['created_at' => now()->subDays(6)]);
 
-    $MostPopularThisMonth =  Thread::factory()
+    $MostPopularThisMonth = Thread::factory()
         ->hasReplies(4)
         ->hasLikes(0)
         ->create(['created_at' => now()->subDays(30)]);
@@ -173,17 +171,17 @@ test('threads can be sorted by top all time', function () {
 test('threads can be searched', function () {
     Thread::factory()->create([
         'title' => 'First thread title',
-        'body' => 'First thread body'
+        'body' => 'First thread body',
     ]);
 
     Thread::factory()->create([
         'title' => 'Second thread title is short',
-        'body' => 'The second thread body'
+        'body' => 'The second thread body',
     ]);
 
     Thread::factory()->create([
         'title' => 'Third thread title',
-        'body' => 'Third thread body is short'
+        'body' => 'Third thread body is short',
     ]);
 
     Livewire::test(ThreadIndex::class)

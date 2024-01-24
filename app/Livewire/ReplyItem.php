@@ -2,13 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Models\Reply;
-use App\Models\Thread;
-use Livewire\Component;
 use App\Events\ReplyWasCreated;
 use App\Livewire\Forms\ReplyForm;
+use App\Models\Reply;
+use App\Models\Thread;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class ReplyItem extends Component
 {

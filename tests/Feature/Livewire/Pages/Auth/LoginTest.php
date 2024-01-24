@@ -1,10 +1,10 @@
 <?php
 
-use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Layout\Navigation;
-use Livewire\Livewire;
+use App\Livewire\Pages\Auth\Login;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Livewire\Livewire;
 
 test('login screen can be rendered', function () {
     $response = $this->get('/login');

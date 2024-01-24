@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use Livewire\Component;
-use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Password;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 #[Title('Forgot Password')]

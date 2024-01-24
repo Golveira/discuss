@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Pages;
 
-use Livewire\Component;
-use Livewire\WithPagination;
-use Livewire\Attributes\Title;
-use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use Illuminate\Notifications\DatabaseNotification;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\Title;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Title('Notifications')]
 class NotificationsIndex extends Component

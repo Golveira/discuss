@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\User;
+use App\Livewire\Pages\ProfileShow;
 use App\Models\Reply;
 use App\Models\Thread;
+use App\Models\User;
 use Livewire\Livewire;
-use App\Livewire\Pages\ProfileShow;
 
 test('profile page is displayed', function () {
     $user = User::factory()->create();

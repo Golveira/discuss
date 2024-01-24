@@ -3,15 +3,17 @@
 namespace App\Livewire\Forms;
 
 use App\Models\User;
-use Livewire\Form;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
+use Livewire\Form;
 
 class ProfileForm extends Form
 {
     public User $user;
+
     public string $name = '';
+
     public string $username = '';
+
     public string $email = '';
 
     public function rules()

@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\User;
-use App\Models\Thread;
-use Livewire\Livewire;
 use App\Livewire\Pages\Threads\ThreadShow;
+use App\Models\Thread;
+use App\Models\User;
+use Livewire\Livewire;
 
 test('thread is displayed', function () {
     $thread = Thread::factory()->create();

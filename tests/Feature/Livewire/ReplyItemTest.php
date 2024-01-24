@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\User;
+use App\Livewire\ReplyItem;
 use App\Models\Reply;
 use App\Models\Thread;
+use App\Models\User;
 use Livewire\Livewire;
-use App\Livewire\ReplyItem;
 
 test('create reply form is not displayed for guests', function () {
     $thread = Thread::factory()->create();
@@ -54,7 +54,7 @@ test('users can edit they own reply', function () {
     $reply = Reply::factory()->create([
         'user_id' => $user->id,
         'thread_id' => $thread->id,
-        'body' => 'Original reply'
+        'body' => 'Original reply',
     ]);
 
     Livewire::actingAs($user)
@@ -71,7 +71,7 @@ test('admins can edit any reply', function () {
     $thread = Thread::factory()->create();
     $reply = Reply::factory()->create([
         'thread_id' => $thread->id,
-        'body' => 'Original reply'
+        'body' => 'Original reply',
     ]);
 
     Livewire::actingAs($admin)
@@ -100,7 +100,7 @@ test('users can delete they own reply', function () {
     $thread = Thread::factory()->create();
     $reply = Reply::factory()->create([
         'user_id' => $user->id,
-        'thread_id' => $thread->id
+        'thread_id' => $thread->id,
     ]);
 
     Livewire::actingAs($user)

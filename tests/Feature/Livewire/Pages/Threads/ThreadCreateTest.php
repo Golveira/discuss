@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\User;
-use Livewire\Livewire;
 use App\Livewire\Pages\Threads\ThreadCreate;
 use App\Models\Category;
+use App\Models\User;
+use Livewire\Livewire;
 
 test('create thread page is displayed for authenticated users', function () {
     $this->actingAs(User::factory()->create())

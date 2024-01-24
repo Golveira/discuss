@@ -2,15 +2,14 @@
 
 namespace App\Livewire\Pages\Auth;
 
-use Livewire\Component;
-
-use Illuminate\Support\Str;
-use Livewire\Attributes\Title;
-use Livewire\Attributes\Locked;
-use Illuminate\Validation\Rules;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rules;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 #[Title('Reset Password')]
@@ -20,8 +19,11 @@ class ResetPassword extends Component
 
     #[Locked]
     public string $token = '';
+
     public string $email = '';
+
     public string $password = '';
+
     public string $password_confirmation = '';
 
     public function mount(string $token): void

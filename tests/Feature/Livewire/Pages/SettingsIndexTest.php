@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\User;
-use Livewire\Livewire;
-use Illuminate\Support\Facades\Hash;
 use App\Livewire\Pages\SettingsIndex;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Hash;
+use Livewire\Livewire;
 
 test('settings page is displayed for authenticated users', function () {
     $this->actingAs(User::factory()->create());

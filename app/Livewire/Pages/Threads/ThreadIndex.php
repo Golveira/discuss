@@ -6,11 +6,11 @@ use App\Models\Category;
 use App\Models\Thread;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
-use Livewire\Component;
-use Livewire\Attributes\Url;
-use Livewire\WithPagination;
-use Livewire\Attributes\Computed;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\Url;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class ThreadIndex extends Component
 {

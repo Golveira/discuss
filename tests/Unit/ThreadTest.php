@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
 use App\Models\Reply;
 use App\Models\Thread;
+use App\Models\User;
 
 it('can mark a reply as best reply', function () {
     $thread = Thread::factory()->create();

@@ -2,11 +2,11 @@
 
 namespace App\View\Components\Users;
 
-use Closure;
 use App\Models\User;
-use Illuminate\View\Component;
+use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\View\Component;
 
 class MostHelpfulUsers extends Component
 {

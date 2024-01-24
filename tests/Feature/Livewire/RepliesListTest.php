@@ -1,13 +1,12 @@
 <?php
 
-use App\Models\User;
+use App\Livewire\RepliesList;
 use App\Models\Reply;
 use App\Models\Thread;
-use Livewire\Livewire;
-use App\Livewire\RepliesList;
+use App\Models\User;
 use App\Notifications\NewReplyNotification;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Notifications\DatabaseNotification;
+use Livewire\Livewire;
 
 test('replies of a thread are displayed', function () {
     $thread = Thread::factory()->create();

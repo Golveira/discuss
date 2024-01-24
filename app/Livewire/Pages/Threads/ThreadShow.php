@@ -3,12 +3,12 @@
 namespace App\Livewire\Pages\Threads;
 
 use App\Models\Thread;
-use Livewire\Component;
-use Livewire\Attributes\Computed;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
+use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class ThreadShow extends Component

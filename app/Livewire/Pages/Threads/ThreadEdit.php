@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Pages\Threads;
 
-use App\Models\Thread;
-use Livewire\Component;
-use Livewire\Attributes\Title;
 use App\Livewire\Forms\ThreadForm;
+use App\Models\Thread;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 use Usernotnull\Toast\Concerns\WireToast;
 
 #[Title('Edit Discussion')]

@@ -3,10 +3,10 @@
 namespace App\Livewire;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Auth;
 
 class UploadAvatar extends Component
 {

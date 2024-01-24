@@ -1,10 +1,10 @@
 <?php
 
 use App\Livewire\Pages\Auth\ForgotPassword;
-use Livewire\Livewire;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
+use Livewire\Livewire;
 
 test('forgot password screen can be rendered', function () {
     $response = $this->get('/forgot-password');
