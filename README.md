@@ -2,7 +2,7 @@
 # Discuss
 
 Simple forum based on Github Discussions built with the [TALL stack](https://tallstack.dev).\
-![Click here](https://discuss.golveiradev.tech) to see the demo.
+[Click here](https://discuss.golveiradev.tech) to see the demo.
 
 ![discuss forum](https://github.com/Golveira/discuss/assets/30783517/f51ef37a-7a69-4961-bef5-9e8400a6ee27)
 
